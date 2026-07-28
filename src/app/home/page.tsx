@@ -152,13 +152,6 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* QR link */}
-        <motion.div className="text-center pb-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-          <Link href="/qr" className="inline-block px-6 py-3 sm:px-8 sm:py-3 bg-white/5 text-white rounded-full font-semibold hover:bg-white/10 active:bg-white/15 transition-colors border border-white/10 min-h-[48px] flex items-center justify-center w-fit mx-auto">
-            📱 Genera QR Code per la stampa
-          </Link>
-        </motion.div>
-
         {/* Reset */}
         {progress.completedSteps.length > 0 && (
           <div className="text-center pb-8">
