@@ -10,7 +10,7 @@ const QR_KEY = "macass2026";
 
 const QR_URLS = STEPS.map((step) => ({
   ...step,
-  url: `https://macass-psy-workshop.adelant.workers.dev/tappa/${step.id}`,
+  url: `https://voce.adelant.tech/tappa/${step.id}`,
 }));
 
 export default function QRPage() {
@@ -55,7 +55,7 @@ export default function QRPage() {
 
   return (
     <main className="min-h-dvh bg-[#0f0a1a] pb-24 safe-inset">
-      <div className="relative py-8 sm:py-10 px-4 sm:px-6 text-center border-b border-white/5">
+      <div className="relative py-8 sm:py-10 layout-padding text-center border-b border-white/5">
         <Link href="/home" className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8b85a0] hover:text-white transition-colors text-sm min-h-[44px] flex items-center justify-center">← Home</Link>
         <h1 className="text-xl sm:text-3xl md:text-4xl font-bold">📱 QR Code — Stampa per il Festival</h1>
         <p className="text-[#8b85a0] text-sm mt-1">Stampali e posizionali nelle 6 tappe del percorso</p>

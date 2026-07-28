@@ -28,7 +28,7 @@ export default function HomePage() {
           <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1a]/30 to-[#0f0a1a]" />
         </div>
-        <div className="relative z-10 flex flex-col items-center text-center px-6 sm:px-8 gap-3">
+        <div className="relative z-10 flex flex-col items-center text-center layout-padding gap-3">
           <motion.h1
             className="font-display text-3xl sm:text-5xl md:text-6xl font-bold"
             style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
@@ -70,7 +70,7 @@ export default function HomePage() {
       </header>
 
       {/* ── Content — macro-spacing: gap-24 between sections ── */}
-      <div className="flex flex-col items-center gap-24 sm:gap-32 px-6 sm:px-8">
+      <div className="flex flex-col items-center gap-24 sm:gap-32 layout-padding">
         {/* ── Mappa — macro-spacing ── */}
         <motion.section
           className="w-full max-w-4xl"

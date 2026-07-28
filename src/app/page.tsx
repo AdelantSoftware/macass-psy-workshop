@@ -15,7 +15,7 @@ export default function WelcomePage() {
   };
 
   return (
-    <main className="relative min-h-[100dvh] overflow-hidden">
+    <main className="relative min-h-[100dvh] overflow-hidden safe-inset">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover" priority />
@@ -26,7 +26,7 @@ export default function WelcomePage() {
       <AnimatePresence>
         {!exiting && (
           <motion.div
-            className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] px-8 sm:px-12 gap-4"
+            className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] layout-padding gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20 }}
