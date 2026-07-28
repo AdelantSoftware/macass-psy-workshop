@@ -23,12 +23,12 @@ export default function HomePage() {
   return (
     <main className="min-h-dvh bg-[#0f0a1a] pb-28 safe-inset">
       {/* ── Header ── */}
-      <header className="relative py-20 sm:py-28 px-8 sm:px-12 text-center">
+      <header className="relative py-20 sm:py-28 px-6 sm:px-8">
         <div className="absolute inset-0 z-0">
           <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1a]/30 to-[#0f0a1a]" />
         </div>
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col items-center text-center">
           <motion.h1
             className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-5"
             style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
@@ -46,9 +46,9 @@ export default function HomePage() {
           >
             Esplora il festival, trova i QR Code, scopri le parole
           </motion.p>
-          {/* Progress bar */}
+          {/* Progress bar — centered */}
           <motion.div
-            className="max-w-xs mx-auto"
+            className="w-full max-w-xs"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
