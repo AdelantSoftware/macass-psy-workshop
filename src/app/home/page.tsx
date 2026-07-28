@@ -23,7 +23,7 @@ export default function HomePage() {
   return (
     <main className="min-h-dvh bg-[#0f0a1a] pb-28 safe-inset">
       {/* ── Header ── */}
-      <header className="relative py-20 sm:py-28 px-6 sm:px-8">
+      <header className="relative py-20 sm:py-28 layout-padding">
         <div className="absolute inset-0 z-0">
           <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1a]/30 to-[#0f0a1a]" />
@@ -70,7 +70,7 @@ export default function HomePage() {
       </header>
 
       {/* ── Content ── */}
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 space-y-20 sm:space-y-24">
+      <div className="max-w-4xl mx-auto layout-padding space-y-20 sm:space-y-24">
 
         {/* ── Mappa ── */}
         <motion.section

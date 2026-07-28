@@ -10,7 +10,7 @@ export default function FinalePage() {
 
   if (!allCompleted) {
     return (
-      <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] px-8 safe-inset">
+      <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] layout-padding safe-inset">
         <div className="text-center max-w-sm">
           <p className="text-xl sm:text-2xl mb-4">🔒 Non ancora!</p>
           <p className="text-[#8b85a0] text-sm mb-6">Completa tutte le 6 tappe per sbloccare la schermata finale.</p>

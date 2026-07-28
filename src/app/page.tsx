@@ -26,7 +26,7 @@ export default function WelcomePage() {
       <AnimatePresence>
         {!exiting && (
           <motion.div
-            className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] px-6 py-20"
+            className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] layout-padding py-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20 }}

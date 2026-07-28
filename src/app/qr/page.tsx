@@ -19,7 +19,7 @@ export default function QRPage() {
 
   if (!authorized) {
     return (
-      <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] px-5 safe-inset">
+      <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] layout-padding safe-inset">
         <motion.div
           className="text-center max-w-sm w-full"
           initial={{ opacity: 0, y: 20 }}
@@ -61,7 +61,7 @@ export default function QRPage() {
         <p className="text-[#8b85a0] text-sm mt-1">Stampali e posizionali nelle 6 tappe del percorso</p>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-6 sm:mt-8">
+      <div className="max-w-6xl mx-auto layout-padding mt-6 sm:mt-8">
         <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8" initial="hidden" animate="show" variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } }}>
           {QR_URLS.map((step) => (
             <motion.div key={step.id} variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }} className="bg-[#1a1230] border border-white/5 rounded-2xl p-4 sm:p-6 text-center">

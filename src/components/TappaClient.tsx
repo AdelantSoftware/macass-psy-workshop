@@ -288,7 +288,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
   const handleNext = () => stepId < 6 ? router.push(`/tappa/${stepId + 1}`) : router.push("/finale");
 
   if (!unlocked) return (
-    <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] px-5 safe-inset">
+    <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] layout-padding safe-inset">
       <div className="text-center max-w-sm w-full animate-fade-in-up">
         <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-5 sm:mb-6 rounded-full bg-white/5 flex items-center justify-center text-3xl sm:text-4xl">🔒</div>
         <h1 className="text-xl sm:text-2xl font-bold mb-3">{step.title}</h1>
@@ -339,7 +339,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
         <p className="text-[#8b85a0] text-sm mt-1">📍 {step.location}</p>
       </div>
 
-      <div className="max-w-lg mx-auto px-4 sm:px-6">
+      <div className="max-w-lg mx-auto layout-padding">
         {!revealed ? (
           <>
             <p className="text-center text-[#a09ab5] mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">{step.description}</p>
