@@ -8,10 +8,7 @@ import { useProgress } from "@/hooks/useProgress";
 
 const container = {
   hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
-  },
+  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
 } as const;
 
 const item = {
@@ -26,14 +23,15 @@ export default function HomePage() {
   return (
     <main className="min-h-dvh bg-[#0f0a1a] pb-24 safe-inset">
       {/* Header */}
-      <header className="relative py-12 sm:py-16 px-4 sm:px-6 text-center">
+      <header className="relative py-14 sm:py-20 px-5 sm:px-6 text-center">
         <div className="absolute inset-0 z-0">
-          <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-25" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1a]/30 to-[#0f0a1a]" />
+          <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1a]/40 to-[#0f0a1a]" />
         </div>
         <div className="relative z-10">
           <motion.h1
-            className="text-2xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3"
+            className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-3"
+            style={{ textShadow: "0 2px 16px rgba(0,0,0,0.4)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -41,20 +39,21 @@ export default function HomePage() {
             Il Percorso delle <span className="gradient-text">Sei Parole</span>
           </motion.h1>
           <motion.p
-            className="text-[#8b85a0] text-sm sm:text-lg"
+            className="text-[#c8c0d8] text-sm sm:text-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             Esplora il festival, trova i QR Code, scopri le parole
           </motion.p>
+          {/* Progress bar */}
           <motion.div
-            className="mt-4 sm:mt-6 max-w-xs mx-auto"
+            className="mt-5 sm:mt-6 max-w-xs mx-auto"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <div className="flex justify-between text-xs text-[#8b85a0] mb-1">
+            <div className="flex justify-between text-xs text-[#a09ab5] mb-1">
               <span>Progresso</span>
               <span>{progress.completedSteps.length}/6 tappe</span>
             </div>
@@ -70,23 +69,23 @@ export default function HomePage() {
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6 space-y-12 sm:space-y-16">
         {/* Mappa */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
+          <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
             <span className="text-[#5ae8c8]">📍</span> Esplora la Mappa
           </h2>
           <Link href="/mappa" className="block group">
             <div className="relative rounded-2xl overflow-hidden h-52 sm:h-64 md:h-80">
               <Image src="/images/map-bg.jpg" alt="Mappa del festival" fill className="object-cover group-hover:scale-105 group-active:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a1a] via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                <p className="text-lg sm:text-xl font-semibold mb-1">Mappa del Festival</p>
-                <p className="text-[#8b85a0] text-sm">Trova le 6 posizioni dei QR Code nascosti</p>
+              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                <p className="font-display text-xl sm:text-2xl font-semibold mb-1 text-shadow">Mappa del Festival</p>
+                <p className="text-[#c8c0d8] text-sm">Trova le 6 posizioni dei QR Code nascosti</p>
                 <span className="inline-block mt-2 sm:mt-3 px-4 sm:px-5 py-2 bg-[#5ae8c8]/20 text-[#5ae8c8] rounded-full text-xs sm:text-sm font-medium group-hover:bg-[#5ae8c8]/30 transition-colors min-h-[40px] flex items-center justify-center w-fit">
                   Vedi la mappa →
                 </span>
@@ -98,7 +97,7 @@ export default function HomePage() {
         {/* Le Sei Tappe */}
         <section>
           <div className="flex items-center justify-between mb-4 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold flex items-center gap-2 sm:gap-3">
+            <h2 className="font-display text-2xl sm:text-3xl font-bold flex items-center gap-2 sm:gap-3">
               <span className="text-[#e85a8f]">✦</span> Le Sei Tappe
             </h2>
             {allCompleted && (
@@ -135,14 +134,14 @@ export default function HomePage() {
                       )}
                     </div>
                     <div className="p-3 sm:p-5">
-                      <h3 className="font-bold text-base sm:text-lg mb-1">{unlocked ? step.title : "Tappa bloccata"}</h3>
-                      <p className="text-[#8b85a0] text-xs sm:text-sm mb-2 sm:mb-3">📍 {step.location}</p>
+                      <h3 className="font-display font-bold text-lg sm:text-xl mb-1">{unlocked ? step.title : "Tappa bloccata"}</h3>
+                      <p className="text-[#a09ab5] text-xs sm:text-sm mb-2 sm:mb-3">📍 {step.location}</p>
                       <p className="text-xs sm:text-sm text-[#a09ab5] leading-relaxed">{unlocked ? step.description : "Scansiona il QR Code per sbloccare"}</p>
                       <div className="mt-3 sm:mt-4 flex items-center justify-between">
                         <span className="text-[10px] sm:text-xs font-mono tracking-wider px-2 sm:px-3 py-1 rounded-full" style={{ backgroundColor: unlocked ? `${step.color}20` : "rgba(255,255,255,0.05)", color: unlocked ? step.color : "#8b85a0" }}>
                           {unlocked ? step.word : "???"}
                         </span>
-                        <span className="text-[10px] sm:text-xs text-[#8b85a0]">{step.id}/6</span>
+                        <span className="text-[10px] sm:text-xs text-[#a09ab5]">{step.id}/6</span>
                       </div>
                     </div>
                   </Link>
@@ -156,7 +155,7 @@ export default function HomePage() {
         {progress.completedSteps.length > 0 && (
           <div className="text-center pb-8">
             <button onClick={() => { if (confirm("Vuoi davvero ripristinare i progressi?")) resetProgress(); }}
-              className="text-xs text-[#8b85a0] hover:text-red-400 transition-colors cursor-pointer min-h-[44px] px-4 py-2">
+              className="text-xs text-[#a09ab5] hover:text-red-400 transition-colors cursor-pointer min-h-[44px] px-4 py-2">
               ↻ Ripristina progressi
             </button>
           </div>

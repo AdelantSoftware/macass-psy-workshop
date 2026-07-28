@@ -323,7 +323,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
         <div className="inline-block w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white font-bold text-sm mb-2" style={{ backgroundColor: step.color }}>
           {step.id}
         </div>
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">{step.title}</h1>
+        <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold">{step.title}</h1>
         <p className="text-[#8b85a0] text-sm mt-1">📍 {step.location}</p>
       </div>
 
@@ -350,7 +350,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
             >
               <p className="text-xs sm:text-sm text-[#8b85a0] mb-3 sm:mb-4">Hai scoperto la parola:</p>
               <motion.h2
-                className="text-4xl sm:text-5xl md:text-6xl font-black tracking-wider mb-3 sm:mb-4"
+                className="font-display text-5xl sm:text-6xl md:text-7xl font-bold tracking-wider mb-3 sm:mb-4"
                 style={{ color: step.color }}
                 initial={{ scale: 0, rotate: -10 }}
                 animate={{ scale: 1, rotate: 0 }}

@@ -37,7 +37,7 @@ export default function FinalePage() {
         </motion.div>
 
         <motion.h1
-          className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4"
+          className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -93,7 +93,7 @@ export default function FinalePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.5 }}
         >
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 gradient-text">Workshop di Psicologia</h2>
+          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3 gradient-text">Workshop di Psicologia</h2>
           <p className="text-[#8b85a0] text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">
             Ti aspetto al <span className="text-white font-semibold">WORKSHOP DI PSICOLOGIA</span> per il <span className="text-[#e85a8f]">Muro della consapevolezza</span>.
           </p>
