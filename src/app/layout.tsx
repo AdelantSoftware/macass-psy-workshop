@@ -10,8 +10,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Il Percorso delle Sei Parole — MACASS Psy Workshop",
   description:
-    "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza. Scansiona i QR Code, affronta le sfide e scopri la frase completa.",
+    "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -48,7 +52,8 @@ export default function RootLayout({
   return (
     <html lang="it">
       <head>
-        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         {children}
