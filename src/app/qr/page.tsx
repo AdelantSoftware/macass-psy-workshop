@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const QR_URLS = STEPS.map((step) => ({
   ...step,
-  url: `https://macass.workshop.it/tappa/${step.id}`,
+  url: `https://macass-workshop.pages.dev/tappa/${step.id}`,
 }));
 
 export default function QRCodePage() {
