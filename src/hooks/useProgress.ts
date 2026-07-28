@@ -11,7 +11,7 @@ export interface Progress {
 }
 
 const DEFAULT_PROGRESS: Progress = {
-  unlockedSteps: [1], // First step is always unlocked
+  unlockedSteps: [1],
   completedSteps: [],
   currentStep: 1,
 };
@@ -43,6 +43,13 @@ export function useProgress() {
 
   const unlockStep = useCallback(
     (stepId: number) => {
+      // Step 1 is always unlocked by default
+      if (stepId === 1) return;
+
+      // Can only unlock if previous step is completed
+      const prevCompleted = progress.completedSteps.includes(stepId - 1);
+      if (!prevCompleted) return;
+
       const updated = {
         ...progress,
         unlockedSteps: progress.unlockedSteps.includes(stepId)
@@ -80,6 +87,15 @@ export function useProgress() {
 
   const allCompleted = progress.completedSteps.length >= 6;
 
+  // Check if a step is the next available step to scan
+  const canScan = useCallback(
+    (stepId: number) => {
+      if (stepId === 1) return true; // Step 1 is always scannable (already unlocked)
+      return progress.completedSteps.includes(stepId - 1);
+    },
+    [progress.completedSteps]
+  );
+
   const resetProgress = useCallback(() => {
     save(DEFAULT_PROGRESS);
   }, [save]);
@@ -91,6 +107,7 @@ export function useProgress() {
     completeStep,
     isUnlocked,
     isCompleted,
+    canScan,
     allCompleted,
     resetProgress,
   };

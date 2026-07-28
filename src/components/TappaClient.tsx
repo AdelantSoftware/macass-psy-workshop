@@ -222,13 +222,18 @@ const INTERACTIONS: Record<number, React.FC<{ onReveal: () => void }>> = {
   1: EmotionWheel, 2: AgendaGame, 3: HugGame, 4: MemoryGame, 5: ShipsGame, 6: ScaleGame,
 };
 
-function ManualCodeFallback({ stepId, onUnlock }: { stepId: number; onUnlock: (id: number) => void }) {
+function ManualCodeFallback({ stepId, onUnlock, canScan }: { stepId: number; onUnlock: (id: number) => void; canScan: (id: number) => boolean }) {
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
   const handleSubmit = () => {
     const num = Number(code);
-    if (num >= 1 && num <= 6 && num === stepId) { onUnlock(stepId); setShow(false); }
-    else alert("Codice non valido.");
+    if (num >= 1 && num <= 6 && num === stepId) {
+      if (!canScan(stepId)) {
+        alert("Devi prima completare la tappa precedente.");
+        return;
+      }
+      onUnlock(stepId); setShow(false);
+    } else alert("Codice non valido.");
   };
   if (!show) return (
     <button onClick={() => setShow(true)} className="text-xs text-[#8b85a0] hover:text-white transition-colors cursor-pointer mt-2 min-h-[44px] px-2 py-2">
@@ -253,7 +258,7 @@ function ManualCodeFallback({ stepId, onUnlock }: { stepId: number; onUnlock: (i
 export default function TappaClient({ stepId }: { stepId: number }) {
   const step = STEPS.find(s => s.id === stepId);
   const router = useRouter();
-  const { isUnlocked, isCompleted, unlockStep, completeStep } = useProgress();
+  const { isUnlocked, isCompleted, unlockStep, completeStep, canScan } = useProgress();
   const [revealed, setRevealed] = useState(false);
   const [showScanner, setShowScanner] = useState(false);
 
@@ -261,10 +266,14 @@ export default function TappaClient({ stepId }: { stepId: number }) {
   const handleReveal = useCallback(() => { setRevealed(true); completeStep(stepId); }, [stepId, completeStep]);
   const handleScan = useCallback((data: string) => {
     setShowScanner(false);
+    if (!canScan(stepId)) {
+      alert("Devi prima completare la tappa precedente.");
+      return;
+    }
     const match = data.match(/\/tappa\/(\d)/);
     if (match && Number(match[1]) === stepId) unlockStep(stepId);
     else alert("QR Code non valido.");
-  }, [stepId, unlockStep]);
+  }, [stepId, unlockStep, canScan]);
 
   if (!step) return (
     <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] px-4">
@@ -284,13 +293,16 @@ export default function TappaClient({ stepId }: { stepId: number }) {
         <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-5 sm:mb-6 rounded-full bg-white/5 flex items-center justify-center text-3xl sm:text-4xl">🔒</div>
         <h1 className="text-xl sm:text-2xl font-bold mb-3">{step.title}</h1>
         <p className="text-[#8b85a0] mb-5 sm:mb-6 text-sm sm:text-base">
-          Scansiona il QR Code a <strong>{step.location}</strong> per sbloccare questa tappa.
+          {!canScan(stepId)
+            ? `Prima completa la tappa ${stepId - 1} (${STEPS[stepId - 2].location}).`
+            : `Scansiona il QR Code a ${step.location} per sbloccare questa tappa.`
+          }
         </p>
         <button onClick={() => setShowScanner(true)}
           className="px-5 py-3 sm:px-6 sm:py-3 bg-gradient-to-r from-[#e85a8f] to-[#c84a7a] text-white rounded-full font-semibold hover:scale-105 active:scale-95 transition-transform cursor-pointer mb-3 min-h-[48px] text-sm sm:text-base">
           📷 Scansiona QR Code
         </button>
-        <ManualCodeFallback stepId={stepId} onUnlock={unlockStep} />
+        <ManualCodeFallback stepId={stepId} onUnlock={unlockStep} canScan={canScan} />
         <div className="mt-4">
           <Link href="/home" className="text-sm text-[#8b85a0] hover:text-white transition-colors min-h-[44px] inline-flex items-center">
             ← Torna alla Home
