@@ -10,7 +10,7 @@ const QR_KEY = "macass2026";
 
 const QR_URLS = STEPS.map((step) => ({
   ...step,
-  url: `https://macass-workshop.pages.dev/tappa/${step.id}`,
+  url: `https://macass-psy-workshop.adelant.workers.dev/tappa/${step.id}`,
 }));
 
 export default function QRPage() {
