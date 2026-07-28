@@ -8,7 +8,7 @@ export default function MappaPage() {
   return (
     <main className="min-h-dvh bg-[#0f0a1a] pb-24 safe-inset">
       {/* Header */}
-      <div className="relative py-8 sm:py-12 layout-padding text-center border-b border-white/5">
+      <div className="relative py-8 sm:py-16 layout-padding text-center border-b border-white/5">
         <Link
           href="/home"
           className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8b85a0] hover:text-white transition-colors text-sm min-h-[44px] min-w-[44px] flex items-center justify-center"

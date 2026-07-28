@@ -327,7 +327,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
 
   return (
     <main className="min-h-dvh bg-[#0f0a1a] pb-24 safe-inset">
-      <div className="relative py-8 sm:py-10 px-4 sm:px-6 text-center">
+      <div className="relative py-8 sm:py-10 layout-padding text-center">
         <Link href="/home"
           className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 text-[#8b85a0] hover:text-white transition-colors text-sm min-h-[44px] min-w-[44px] flex items-center justify-center">
           ← Home
