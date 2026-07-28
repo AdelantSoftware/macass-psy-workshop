@@ -28,7 +28,7 @@ export default function HomePage() {
           <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1a]/30 to-[#0f0a1a]" />
         </div>
-        <div className="relative z-10 flex flex-col items-center text-center layout-padding gap-3">
+        <div className="relative z-10 flex flex-col items-center text-center layout-padding gap-6">
           <motion.h1
             className="font-display text-3xl sm:text-5xl md:text-6xl font-bold"
             style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
@@ -46,9 +46,9 @@ export default function HomePage() {
           >
             Esplora il festival, trova i QR Code, scopri le parole
           </motion.p>
-          {/* Progress bar — gap-4 below subtitle */}
+          {/* Progress bar — macro-spacing below subtitle */}
           <motion.div
-            className="w-full max-w-xs"
+            className="w-full max-w-xs mt-4"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}

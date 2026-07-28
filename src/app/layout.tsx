@@ -65,10 +65,13 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
       </head>
       <body
-        className={`${cormorant.variable} ${outfit.variable} antialiased`}
+        className={`${cormorant.variable} ${outfit.variable} antialiased min-h-[105vh] flex flex-col`}
         style={{ fontFamily: "var(--font-body)" }}
       >
         {children}
+        <footer className="app-footer">
+          <p className="text-xs text-[#8b85a0]">Made with love by Adelant</p>
+        </footer>
       </body>
     </html>
   );
