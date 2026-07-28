@@ -55,13 +55,13 @@ export default function QRPage() {
 
   return (
     <main className="min-h-dvh bg-[#0f0a1a] pb-24 safe-inset">
-      <div className="relative py-8 sm:py-10 layout-padding text-center border-b border-white/5">
+      <div className="relative py-12 sm:py-16 layout-padding text-center border-b border-white/5">
         <Link href="/home" className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8b85a0] hover:text-white transition-colors text-sm min-h-[44px] flex items-center justify-center">← Home</Link>
         <h1 className="text-xl sm:text-3xl md:text-4xl font-bold">📱 QR Code — Stampa per il Festival</h1>
         <p className="text-[#8b85a0] text-sm mt-1">Stampali e posizionali nelle 6 tappe del percorso</p>
       </div>
 
-      <div className="max-w-6xl mx-auto layout-padding mt-6 sm:mt-8">
+      <div className="max-w-6xl mx-auto layout-padding mt-12 sm:mt-16">
         <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8" initial="hidden" animate="show" variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } }}>
           {QR_URLS.map((step) => (
             <motion.div key={step.id} variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }} className="bg-[#1a1230] border border-white/5 rounded-2xl p-4 sm:p-6 text-center">

@@ -48,7 +48,7 @@ export default function HomePage() {
           </motion.p>
           {/* Progress bar — macro-spacing below subtitle */}
           <motion.div
-            className="w-full max-w-xs mt-4"
+            className="w-full max-w-xs mt-12"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -140,8 +140,8 @@ export default function HomePage() {
                       <p className="text-[#a09ab5] text-xs sm:text-sm">📍 {step.location}</p>
                       <p className="text-xs sm:text-sm text-[#a09ab5] leading-relaxed">{unlocked ? step.description : "Scansiona il QR Code per sbloccare"}</p>
                       <div className="flex items-center justify-between mt-2">
-                        <span className="text-[10px] sm:text-xs font-mono tracking-wider px-2 sm:px-3 py-1 rounded-full" style={{ backgroundColor: unlocked ? `${step.color}20` : "rgba(255,255,255,0.05)", color: unlocked ? step.color : "#8b85a0" }}>
-                          {unlocked ? step.word : "???"}
+                        <span className="text-[10px] sm:text-xs font-mono tracking-wider px-2 sm:px-3 py-1 rounded-full" style={{ backgroundColor: unlocked ? `${step.color}20` : "rgba(255,255,255,0.05)", color: unlocked ? (completed ? step.color : "#8b85a0") : "#8b85a0" }}>
+                          {completed ? step.word : "???"}
                         </span>
                         <span className="text-[10px] sm:text-xs text-[#a09ab5]">{step.id}/6</span>
                       </div>

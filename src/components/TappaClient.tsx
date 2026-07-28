@@ -339,7 +339,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
         <p className="text-[#8b85a0] text-sm mt-1">📍 {step.location}</p>
       </div>
 
-      <div className="max-w-lg mx-auto layout-padding">
+      <div className="max-w-lg mx-auto layout-padding mt-8 sm:mt-10">
         {!revealed ? (
           <>
             <p className="text-center text-[#a09ab5] mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">{step.description}</p>
