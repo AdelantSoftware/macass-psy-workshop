@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { STEPS } from "@/data/steps";
 import { useProgress } from "@/hooks/useProgress";
 
@@ -335,18 +336,48 @@ export default function TappaClient({ stepId }: { stepId: number }) {
             </div>
           </>
         ) : (
-          <div className="text-center animate-fade-in-up">
-            <div className="p-6 sm:p-10 rounded-2xl bg-gradient-to-br from-[#1a1230] to-[#2d1b69] border border-white/10">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <motion.div
+              className="p-6 sm:p-10 rounded-2xl bg-gradient-to-br from-[#1a1230] to-[#2d1b69] border border-white/10"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
+            >
               <p className="text-xs sm:text-sm text-[#8b85a0] mb-3 sm:mb-4">Hai scoperto la parola:</p>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-wider mb-3 sm:mb-4" style={{ color: step.color }}>{step.word}</h2>
-              <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4 sm:my-6" />
+              <motion.h2
+                className="text-4xl sm:text-5xl md:text-6xl font-black tracking-wider mb-3 sm:mb-4"
+                style={{ color: step.color }}
+                initial={{ scale: 0, rotate: -10 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.3 }}
+              >
+                {step.word}
+              </motion.h2>
+              <motion.div
+                className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4 sm:my-6"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              />
               <p className="text-xs sm:text-sm text-[#8b85a0]">Tappa {step.id} di 6 completata ✓</p>
-            </div>
-            <button onClick={handleNext}
-              className="mt-6 sm:mt-8 px-6 py-3 sm:px-8 sm:py-3 bg-gradient-to-r from-[#e85a8f] to-[#c84a7a] text-white rounded-full font-semibold hover:scale-105 active:scale-95 transition-transform cursor-pointer min-h-[48px] text-sm sm:text-base">
+            </motion.div>
+            <motion.button
+              onClick={handleNext}
+              className="mt-6 sm:mt-8 px-6 py-3 sm:px-8 sm:py-3 bg-gradient-to-r from-[#e85a8f] to-[#c84a7a] text-white rounded-full font-semibold cursor-pointer min-h-[48px] text-sm sm:text-base"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               {stepId < 6 ? "Prossima tappa →" : "Scopri il significato →"}
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         )}
       </div>
     </main>
