@@ -365,6 +365,65 @@ const INTERACTIONS: Record<number, React.FC<{ onReveal: () => void }>> = {
   6: ScaleGame,
 };
 
+// Manual code fallback for browsers without camera access
+function ManualCodeFallback({
+  stepId,
+  onUnlock,
+}: {
+  stepId: number;
+  onUnlock: (id: number) => void;
+}) {
+  const [show, setShow] = useState(false);
+  const [code, setCode] = useState("");
+
+  const handleSubmit = () => {
+    // Accept any number 1-6 to unlock that step
+    const num = Number(code);
+    if (num >= 1 && num <= 6 && num === stepId) {
+      onUnlock(stepId);
+      setShow(false);
+    } else {
+      alert("Codice non valido. Inserisci il numero della tappa.");
+    }
+  };
+
+  if (!show) {
+    return (
+      <button
+        onClick={() => setShow(true)}
+        className="text-xs text-[#8b85a0] hover:text-white transition-colors cursor-pointer mt-2"
+      >
+        📱 Non hai la camera? Inserisci codice manualmente
+      </button>
+    );
+  }
+
+  return (
+    <div className="mt-3 p-4 bg-white/5 rounded-xl border border-white/10">
+      <p className="text-xs text-[#8b85a0] mb-2">
+        Inserisci il numero della tappa (1-6):
+      </p>
+      <div className="flex gap-2">
+        <input
+          type="number"
+          min={1}
+          max={6}
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          className="flex-1 px-3 py-2 bg-[#1a1230] border border-white/10 rounded-lg text-white text-center text-lg font-bold focus:outline-none focus:border-[#e85a8f]"
+          placeholder="?"
+        />
+        <button
+          onClick={handleSubmit}
+          className="px-4 py-2 bg-[#e85a8f] text-white rounded-lg font-semibold hover:scale-105 transition-transform cursor-pointer"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function TappaPage({
   params,
 }: {
@@ -438,11 +497,12 @@ export default function TappaPage({
           </p>
           <button
             onClick={() => setShowScanner(true)}
-            className="px-6 py-3 bg-gradient-to-r from-[#e85a8f] to-[#c84a7a] text-white rounded-full font-semibold hover:scale-105 transition-transform cursor-pointer mb-4"
+            className="px-6 py-3 bg-gradient-to-r from-[#e85a8f] to-[#c84a7a] text-white rounded-full font-semibold hover:scale-105 transition-transform cursor-pointer mb-3"
           >
             📷 Scansiona QR Code
           </button>
-          <div>
+          <ManualCodeFallback stepId={stepId} onUnlock={unlockStep} />
+          <div className="mt-4">
             <Link
               href="/home"
               className="text-sm text-[#8b85a0] hover:text-white transition-colors"
