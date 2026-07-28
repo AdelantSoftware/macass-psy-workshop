@@ -24,7 +24,7 @@ export default function MappaPage() {
       </div>
 
       {/* Map */}
-      <div className="max-w-4xl mx-auto layout-padding mt-6 sm:mt-8">
+      <div className="layout-padding mt-6 sm:mt-8">
         <div className="relative rounded-2xl overflow-hidden h-[45vh] sm:h-[50vh] md:h-[60vh]">
           <Image
             src="/images/map-bg.jpg"
