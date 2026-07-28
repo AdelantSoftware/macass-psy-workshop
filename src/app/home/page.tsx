@@ -22,7 +22,7 @@ export default function HomePage() {
 
   return (
     <main className="min-h-dvh bg-[#0f0a1a] pb-28 safe-inset">
-      {/* Header */}
+      {/* ── Header ── */}
       <header className="relative py-14 sm:py-20 px-6 sm:px-8 text-center">
         <div className="absolute inset-0 z-0">
           <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-20" />
@@ -30,7 +30,7 @@ export default function HomePage() {
         </div>
         <div className="relative z-10">
           <motion.h1
-            className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-3"
+            className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4"
             style={{ textShadow: "0 2px 16px rgba(0,0,0,0.4)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -39,14 +39,14 @@ export default function HomePage() {
             Il Percorso delle <span className="gradient-text">Sei Parole</span>
           </motion.h1>
           <motion.p
-            className="text-[#c8c0d8] text-sm sm:text-lg mb-5 sm:mb-6"
+            className="text-[#c8c0d8] text-sm sm:text-lg mb-6 sm:mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             Esplora il festival, trova i QR Code, scopri le parole
           </motion.p>
-          {/* Progress bar — centered, visible */}
+          {/* Progress bar — centered */}
           <motion.div
             className="max-w-xs mx-auto"
             initial={{ opacity: 0, scaleX: 0 }}
@@ -69,24 +69,26 @@ export default function HomePage() {
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-5 sm:px-6 space-y-14 sm:space-y-16">
+      {/* ── Content ── */}
+      <div className="max-w-5xl mx-auto px-6 sm:px-8 space-y-16 sm:space-y-20">
+
         {/* ── Mappa ── */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h2 className="font-display text-2xl sm:text-3xl font-bold mb-5">
+          <h2 className="font-display text-2xl sm:text-3xl font-bold mb-5 sm:mb-6 text-center">
             Esplora la Mappa
           </h2>
           <Link href="/mappa" className="block group">
             <div className="relative rounded-2xl overflow-hidden h-56 sm:h-64 md:h-80 shadow-lg shadow-black/20">
               <Image src="/images/map-bg.jpg" alt="Mappa del festival" fill className="object-cover group-hover:scale-105 group-active:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a1a]/80 via-[#0f0a1a]/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-center">
                 <p className="font-display text-xl sm:text-2xl font-semibold text-shadow mb-1">Mappa del Festival</p>
                 <p className="text-[#c8c0d8] text-sm text-shadow-soft">Trova le 6 posizioni dei QR Code nascosti</p>
-                <span className="inline-block mt-3 px-5 py-2 bg-[#5ae8c8]/20 text-[#5ae8c8] rounded-full text-sm font-medium group-hover:bg-[#5ae8c8]/30 transition-colors min-h-[40px] flex items-center justify-center w-fit">
+                <span className="inline-block mt-3 px-5 py-2 bg-[#5ae8c8]/20 text-[#5ae8c8] rounded-full text-sm font-medium group-hover:bg-[#5ae8c8]/30 transition-colors min-h-[40px]">
                   Vedi la mappa →
                 </span>
               </div>
