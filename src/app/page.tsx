@@ -26,27 +26,27 @@ export default function WelcomePage() {
       <AnimatePresence>
         {!exiting && (
           <motion.div
-            className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] px-6 py-16"
+            className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] px-6 py-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
           >
-            {/* Logo icon — truly centered */}
+            {/* Logo icon */}
             <motion.div
-              className="mb-8"
+              className="mb-10"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#e85a8f] to-[#5ae8c8] flex items-center justify-center shadow-lg shadow-[#e85a8f]/20">
-                <span className="text-2xl sm:text-3xl">✦</span>
+              <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#e85a8f] to-[#5ae8c8] flex items-center justify-center shadow-lg shadow-[#e85a8f]/25">
+                <span className="text-3xl sm:text-4xl">✦</span>
               </div>
             </motion.div>
 
-            {/* Title — centered, high contrast */}
+            {/* Title */}
             <motion.h1
-              className="font-display text-center text-[2.2rem] leading-[1.15] sm:text-5xl md:text-6xl font-bold mb-5 sm:mb-6"
+              className="font-display text-center text-[2.2rem] leading-[1.15] sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -55,28 +55,26 @@ export default function WelcomePage() {
               <span className="gradient-text">Sei Parole</span>
             </motion.h1>
 
-            {/* Body text — readable, contrasted, warm tone */}
+            {/* Body text */}
             <motion.p
-              className="font-body text-center text-[0.95rem] sm:text-lg text-[#c8c0d8] mb-8 sm:mb-10 leading-relaxed max-w-sm"
+              className="font-body text-center text-[0.95rem] sm:text-lg text-[#c8c0d8] mb-10 sm:mb-12 leading-relaxed max-w-xs sm:max-w-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
               style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}
             >
               Ogni esperienza rappresenta una tappa del tuo viaggio.
-              <br className="hidden sm:block" />
               Durante questo percorso incontrerai sei parole.
-              <br className="hidden sm:block" />
               Per scoprirle dovrai esplorare il festival, trovare i sei QR Code
               nascosti e affrontare le sfide che ti accompagneranno verso una
               maggiore{" "}
               <span className="text-[#e85a8f] font-medium">consapevolezza</span>.
             </motion.p>
 
-            {/* CTA button — warm, visible */}
+            {/* CTA button */}
             <motion.button
               onClick={handleStart}
-              className="font-display px-10 py-4 bg-gradient-to-r from-[#e85a8f] to-[#c84a7a] text-white text-lg font-semibold rounded-full cursor-pointer min-h-[50px] shadow-lg shadow-[#e85a8f]/25"
+              className="font-display px-12 py-5 bg-gradient-to-r from-[#e85a8f] to-[#c84a7a] text-white text-lg font-semibold rounded-full cursor-pointer min-h-[52px] shadow-lg shadow-[#e85a8f]/25"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.7 }}

@@ -10,7 +10,7 @@ export default function FinalePage() {
 
   if (!allCompleted) {
     return (
-      <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] px-5 safe-inset">
+      <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] px-8 safe-inset">
         <div className="text-center max-w-sm">
           <p className="text-xl sm:text-2xl mb-4">🔒 Non ancora!</p>
           <p className="text-[#8b85a0] text-sm mb-6">Completa tutte le 6 tappe per sbloccare la schermata finale.</p>
@@ -46,7 +46,7 @@ export default function FinalePage() {
         </motion.h1>
 
         <motion.p
-          className="text-[#8b85a0] text-base sm:text-lg mb-6 sm:mb-8"
+          className="text-[#c8c0d8] text-base sm:text-lg mb-8 sm:mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -55,7 +55,7 @@ export default function FinalePage() {
         </motion.p>
 
         <motion.div
-          className="p-5 sm:p-8 rounded-2xl bg-gradient-to-br from-[#1a1230] to-[#2d1b69] border border-white/10 mb-6 sm:mb-8"
+          className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#1a1230] to-[#2d1b69] border border-white/10 mb-6 sm:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -88,7 +88,7 @@ export default function FinalePage() {
         </motion.div>
 
         <motion.div
-          className="p-5 sm:p-8 rounded-2xl bg-[#1a1230] border border-[#e85a8f]/20"
+          className="p-6 sm:p-8 rounded-2xl bg-[#1a1230] border border-[#e85a8f]/20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.5 }}
