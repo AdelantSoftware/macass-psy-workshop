@@ -22,19 +22,18 @@ export default function WelcomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1a]/80 via-[#0f0a1a]/60 to-[#0f0a1a]/90" />
       </div>
 
-      {/* Content */}
+      {/* Content — flex column with gap, centered */}
       <AnimatePresence>
         {!exiting && (
           <motion.div
-            className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] px-8 sm:px-12"
+            className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] px-8 sm:px-12 gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
           >
-            {/* Icon */}
+            {/* Icon — micro-spacing: gap-2 to title */}
             <motion.div
-              className="mb-12"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
@@ -44,9 +43,9 @@ export default function WelcomePage() {
               </div>
             </motion.div>
 
-            {/* Title */}
+            {/* Title — space above > space below (2x rule) */}
             <motion.h1
-              className="font-display text-center text-[2.5rem] sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-8 leading-tight max-w-sm sm:max-w-md"
+              className="font-display text-center text-[2.5rem] sm:text-5xl md:text-6xl font-bold leading-tight max-w-sm sm:max-w-md"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -55,9 +54,9 @@ export default function WelcomePage() {
               <span className="gradient-text">Sei Parole</span>
             </motion.h1>
 
-            {/* Body text */}
+            {/* Body text — gap-3 below title, gap-6 to button */}
             <motion.p
-              className="font-body text-center text-[0.95rem] sm:text-lg text-[#c8c0d8] mb-12 sm:mb-14 leading-relaxed max-w-xs sm:max-w-sm"
+              className="font-body text-center text-[0.95rem] sm:text-lg text-[#c8c0d8] leading-relaxed max-w-xs sm:max-w-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
@@ -69,10 +68,10 @@ export default function WelcomePage() {
               <span className="text-[#e85a8f] font-medium">consapevolezza</span>.
             </motion.p>
 
-            {/* Button — BIG, unmissable CTA */}
+            {/* Button — macro-spacing: gap-8 from text */}
             <motion.button
               onClick={handleStart}
-              className="font-display text-2xl sm:text-3xl font-bold text-white rounded-full cursor-pointer min-h-[60px] px-14 py-5 w-full max-w-[280px]"
+              className="font-display text-xl sm:text-2xl font-bold text-white rounded-full cursor-pointer min-h-[56px] px-12 py-5 w-full max-w-[280px]"
               style={{
                 background: "linear-gradient(135deg, #e85a8f 0%, #c84a7a 50%, #a83a6a 100%)",
                 boxShadow: "0 8px 32px rgba(232, 90, 143, 0.5), 0 2px 8px rgba(0,0,0,0.3)",

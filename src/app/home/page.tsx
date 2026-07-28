@@ -21,16 +21,16 @@ export default function HomePage() {
     useProgress();
 
   return (
-    <main className="min-h-dvh bg-[#0f0a1a] pb-28 safe-inset">
-      {/* ── Header ── */}
-      <header className="relative py-20 sm:py-28 layout-padding">
+    <main className="min-h-dvh bg-[#0f0a1a] pb-32 safe-inset">
+      {/* ── Header — macro-spacing: py-24 ── */}
+      <header className="relative py-20 sm:py-28">
         <div className="absolute inset-0 z-0">
           <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1a]/30 to-[#0f0a1a]" />
         </div>
-        <div className="relative z-10 flex flex-col items-center text-center">
+        <div className="relative z-10 flex flex-col items-center text-center px-6 sm:px-8 gap-3">
           <motion.h1
-            className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-5"
+            className="font-display text-3xl sm:text-5xl md:text-6xl font-bold"
             style={{ textShadow: "0 2px 16px rgba(0,0,0,0.5)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -39,14 +39,14 @@ export default function HomePage() {
             Il Percorso delle <span className="gradient-text">Sei Parole</span>
           </motion.h1>
           <motion.p
-            className="text-[#c8c0d8] text-sm sm:text-lg mb-8 sm:mb-10"
+            className="text-[#c8c0d8] text-sm sm:text-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             Esplora il festival, trova i QR Code, scopri le parole
           </motion.p>
-          {/* Progress bar — centered */}
+          {/* Progress bar — gap-4 below subtitle */}
           <motion.div
             className="w-full max-w-xs"
             initial={{ opacity: 0, scaleX: 0 }}
@@ -69,11 +69,11 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* ── Content ── */}
-      <div className="max-w-4xl mx-auto layout-padding space-y-20 sm:space-y-24">
-
-        {/* ── Mappa ── */}
+      {/* ── Content — macro-spacing: gap-24 between sections ── */}
+      <div className="flex flex-col items-center gap-24 sm:gap-32 px-6 sm:px-8">
+        {/* ── Mappa — macro-spacing ── */}
         <motion.section
+          className="w-full max-w-4xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -85,10 +85,10 @@ export default function HomePage() {
             <div className="relative rounded-2xl overflow-hidden h-56 sm:h-64 md:h-80 shadow-lg shadow-black/20">
               <Image src="/images/map-bg.jpg" alt="Mappa del festival" fill className="object-cover group-hover:scale-105 group-active:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a1a]/80 via-[#0f0a1a]/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-center">
-                <p className="font-display text-xl sm:text-2xl font-semibold text-shadow mb-2">Mappa del Festival</p>
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-center flex flex-col gap-1">
+                <p className="font-display text-xl sm:text-2xl font-semibold text-shadow">Mappa del Festival</p>
                 <p className="text-[#c8c0d8] text-sm text-shadow-soft">Trova le 6 posizioni dei QR Code nascosti</p>
-                <span className="inline-block mt-3 px-5 py-2 bg-[#5ae8c8]/20 text-[#5ae8c8] rounded-full text-sm font-medium group-hover:bg-[#5ae8c8]/30 transition-colors min-h-[40px]">
+                <span className="inline-block mt-2 px-5 py-2 bg-[#5ae8c8]/20 text-[#5ae8c8] rounded-full text-sm font-medium group-hover:bg-[#5ae8c8]/30 transition-colors">
                   Vedi la mappa →
                 </span>
               </div>
@@ -96,8 +96,8 @@ export default function HomePage() {
           </Link>
         </motion.section>
 
-        {/* ── Le Sei Tappe ── */}
-        <section>
+        {/* ── Le Sei Tappe — macro-spacing ── */}
+        <section className="w-full max-w-4xl">
           <div className="flex items-center justify-between mb-6 sm:mb-8">
             <h2 className="font-display text-2xl sm:text-3xl font-bold">
               Le Sei Tappe
@@ -135,11 +135,11 @@ export default function HomePage() {
                         <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-[#5ae8c8] flex items-center justify-center text-xs">✓</div>
                       )}
                     </div>
-                    <div className="p-4 sm:p-5">
-                      <h3 className="font-display font-bold text-lg sm:text-xl mb-2">{unlocked ? step.title : "Tappa bloccata"}</h3>
-                      <p className="text-[#a09ab5] text-xs sm:text-sm mb-2">📍 {step.location}</p>
+                    <div className="p-4 sm:p-5 flex flex-col gap-1">
+                      <h3 className="font-display font-bold text-lg sm:text-xl">{unlocked ? step.title : "Tappa bloccata"}</h3>
+                      <p className="text-[#a09ab5] text-xs sm:text-sm">📍 {step.location}</p>
                       <p className="text-xs sm:text-sm text-[#a09ab5] leading-relaxed">{unlocked ? step.description : "Scansiona il QR Code per sbloccare"}</p>
-                      <div className="mt-3 flex items-center justify-between">
+                      <div className="flex items-center justify-between mt-2">
                         <span className="text-[10px] sm:text-xs font-mono tracking-wider px-2 sm:px-3 py-1 rounded-full" style={{ backgroundColor: unlocked ? `${step.color}20` : "rgba(255,255,255,0.05)", color: unlocked ? step.color : "#8b85a0" }}>
                           {unlocked ? step.word : "???"}
                         </span>
@@ -155,7 +155,7 @@ export default function HomePage() {
 
         {/* Reset */}
         {progress.completedSteps.length > 0 && (
-          <div className="text-center pb-8">
+          <div className="text-center">
             <button onClick={() => { if (confirm("Vuoi davvero ripristinare i progressi?")) resetProgress(); }}
               className="text-xs text-[#a09ab5] hover:text-red-400 transition-colors cursor-pointer min-h-[44px] px-4 py-2">
               ↻ Ripristina progressi

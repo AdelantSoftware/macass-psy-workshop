@@ -11,9 +11,9 @@ export default function FinalePage() {
   if (!allCompleted) {
     return (
       <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] layout-padding safe-inset">
-        <div className="text-center max-w-sm">
-          <p className="text-xl sm:text-2xl mb-4">🔒 Non ancora!</p>
-          <p className="text-[#8b85a0] text-sm mb-6">Completa tutte le 6 tappe per sbloccare la schermata finale.</p>
+        <div className="text-center flex flex-col items-center gap-4">
+          <p className="text-xl sm:text-2xl font-bold">🔒 Non ancora!</p>
+          <p className="text-[#c8c0d8] text-sm">Completa tutte le 6 tappe per sbloccare la schermata finale.</p>
           <Link href="/home" className="text-[#e85a8f] hover:text-[#c84a7a] transition-colors min-h-[44px] inline-flex items-center">
             ← Torna alla Home
           </Link>
@@ -23,21 +23,22 @@ export default function FinalePage() {
   }
 
   return (
-    <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] px-5 sm:px-6 py-12 safe-inset">
-      <div className="max-w-lg mx-auto text-center">
+    <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] layout-padding safe-inset py-16 sm:py-24">
+      <div className="max-w-lg mx-auto text-center flex flex-col items-center gap-8 sm:gap-10">
+        {/* Icon */}
         <motion.div
-          className="mb-6 sm:mb-8"
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
-          <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-to-br from-[#e85a8f] to-[#5ae8c8] flex items-center justify-center">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[#e85a8f] to-[#5ae8c8] flex items-center justify-center">
             <span className="text-xl sm:text-2xl">✦</span>
           </div>
         </motion.div>
 
+        {/* Title — space above > space below (2x) */}
         <motion.h1
-          className="font-display text-3xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4"
+          className="font-display text-3xl sm:text-5xl md:text-6xl font-bold"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -45,8 +46,9 @@ export default function FinalePage() {
           Complimenti! 🎉
         </motion.h1>
 
+        {/* Subtitle */}
         <motion.p
-          className="text-[#c8c0d8] text-base sm:text-lg mb-8 sm:mb-8"
+          className="text-[#c8c0d8] text-base sm:text-lg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -54,13 +56,14 @@ export default function FinalePage() {
           Hai completato tutte e sei le tappe del percorso.
         </motion.p>
 
+        {/* Words block */}
         <motion.div
-          className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#1a1230] to-[#2d1b69] border border-white/10 mb-6 sm:mb-8"
+          className="w-full p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#1a1230] to-[#2d1b69] border border-white/10 flex flex-col items-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <p className="text-xs sm:text-sm text-[#8b85a0] mb-3 sm:mb-4">Le sei parole:</p>
+          <p className="text-xs sm:text-sm text-[#8b85a0]">Le sei parole:</p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {STEPS.map((step, i) => (
               <motion.span
@@ -76,25 +79,25 @@ export default function FinalePage() {
             ))}
           </div>
           <motion.div
-            className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-          >
-            <p className="text-base sm:text-xl md:text-2xl font-light italic text-[#a09ab5] leading-relaxed">
-              “{FULL_PHRASE}”
-            </p>
-          </motion.div>
+            className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 1.0, duration: 0.6 }}
+          />
+          <p className="text-base sm:text-xl md:text-2xl font-light italic text-[#a09ab5] leading-relaxed">
+            "{FULL_PHRASE}"
+          </p>
         </motion.div>
 
+        {/* CTA */}
         <motion.div
-          className="p-6 sm:p-8 rounded-2xl bg-[#1a1230] border border-[#e85a8f]/20"
+          className="w-full p-6 sm:p-8 rounded-2xl bg-[#1a1230] border border-[#e85a8f]/20 flex flex-col items-center gap-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.5 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
         >
-          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3 gradient-text">Workshop di Psicologia</h2>
-          <p className="text-[#8b85a0] text-sm sm:text-base mb-4 sm:mb-6 leading-relaxed">
+          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold gradient-text">Workshop di Psicologia</h2>
+          <p className="text-[#c8c0d8] text-sm sm:text-base leading-relaxed">
             Ti aspetto al <span className="text-white font-semibold">WORKSHOP DI PSICOLOGIA</span> per il <span className="text-[#e85a8f]">Muro della consapevolezza</span>.
           </p>
           <div className="inline-block px-5 py-2.5 sm:px-6 sm:py-3 bg-[#e85a8f]/10 text-[#e85a8f] rounded-full font-medium border border-[#e85a8f]/20 text-sm">
@@ -102,12 +105,13 @@ export default function FinalePage() {
           </div>
         </motion.div>
 
+        {/* Back link */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.6 }}
+          transition={{ delay: 1.4 }}
         >
-          <Link href="/" className="inline-block mt-6 sm:mt-8 text-sm text-[#8b85a0] hover:text-white transition-colors min-h-[44px] py-2">
+          <Link href="/" className="text-sm text-[#a09ab5] hover:text-white transition-colors min-h-[44px] py-2 inline-flex items-center">
             ↻ Ricominciare il percorso
           </Link>
         </motion.div>
