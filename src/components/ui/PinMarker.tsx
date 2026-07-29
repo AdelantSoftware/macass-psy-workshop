@@ -1,3 +1,4 @@
+/* refactored: tokens */
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { IconBadge } from "@/components/ui/IconBadge";
@@ -35,10 +36,10 @@ export function PinMarker({ step, position, delay = 0 }: PinMarkerProps) {
         </IconBadge>
       </motion.div>
       <span
-        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-[#1a1230] rounded-lg shadow-xl opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20"
+        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-[var(--color-surface)] rounded-lg shadow-xl opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20"
       >
         <p className="font-semibold text-xs sm:text-sm">{step.title}</p>
-        <p className="text-[10px] sm:text-xs text-[#8b85a0]">📍 {step.location}</p>
+        <p className="text-[10px] sm:text-xs text-[var(--color-muted-strong)]">📍 {step.location}</p>
       </span>
     </Link>
   );

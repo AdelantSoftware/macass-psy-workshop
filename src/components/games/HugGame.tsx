@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -5,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GameShell } from "./shared";
 import type { GameProps } from "./shared";
 
-const ACCENT = "#E8C85A";
+const ACCENT = "var(--color-accent-amber)";
 
 /**
  * Soft tactile experience: the user holds the bear, progress fills,
@@ -173,12 +174,12 @@ export function HugGame({ onReveal }: GameProps) {
           <div className="h-2 overflow-hidden rounded-full bg-white/10">
             <motion.div
               className="h-full rounded-full"
-              style={{ background: `linear-gradient(90deg, ${ACCENT}, #fff5d6)` }}
+              style={{ background: `linear-gradient(90deg, ${ACCENT}, var(--color-tint-amber-pale))` }}
               animate={{ width: `${progress}%` }}
               transition={{ type: "spring", stiffness: 80, damping: 18 }}
             />
           </div>
-          <p className="mt-2 text-xs text-[#aaa3bc] min-h-[1.25rem]">
+          <p className="mt-2 text-xs text-[var(--color-tint-sky-text)] min-h-[1.25rem]">
             {phase === "complete"
               ? "Grazie 💛"
               : progress < 30
@@ -197,9 +198,9 @@ export function HugGame({ onReveal }: GameProps) {
           onPointerLeave={endPress}
           onPointerCancel={endPress}
           whileTap={{ scale: 0.96 }}
-          className="relative z-10 mx-auto mt-7 inline-flex min-h-[56px] cursor-pointer touch-none items-center justify-center rounded-full px-8 text-base font-semibold text-[#1a1230]"
+          className="relative z-10 mx-auto mt-7 inline-flex min-h-[56px] cursor-pointer touch-none items-center justify-center rounded-full px-8 text-base font-semibold text-[var(--color-surface)]"
           style={{
-            background: `linear-gradient(135deg, ${ACCENT}, #c79a2b)`,
+            background: `linear-gradient(135deg, ${ACCENT}, var(--color-tint-amber-pale))`,
             boxShadow: `0 0 36px ${ACCENT}66`,
           }}
         >
@@ -263,13 +264,13 @@ function Bear({
     <svg viewBox="0 0 220 220" width={size} height={size} className="overflow-visible" aria-label="Orsetto di peluche">
       <defs>
         <radialGradient id="bearBody" cx="50%" cy="40%" r="60%">
-          <stop offset="0%" stopColor="#f5d486" />
-          <stop offset="60%" stopColor="#d9a851" />
-          <stop offset="100%" stopColor="#8c6126" />
+          <stop offset="0%" stopColor="var(--color-tint-amber-pale)" />
+          <stop offset="60%" stopColor="var(--color-tint-amber-pale)" />
+          <stop offset="100%" stopColor="var(--color-tint-amber-pale)" />
         </radialGradient>
         <radialGradient id="bearBelly" cx="50%" cy="50%" r="55%">
-          <stop offset="0%" stopColor="#fbe5b1" />
-          <stop offset="100%" stopColor="#e6c071" stopOpacity="0.4" />
+          <stop offset="0%" stopColor="var(--color-tint-amber-pale)" />
+          <stop offset="100%" stopColor="var(--color-tint-amber-pale)" stopOpacity="0.4" />
         </radialGradient>
         <radialGradient id="cheekGlow" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor={ACCENT} stopOpacity={0.55 - sadness * 0.4} />
@@ -278,36 +279,36 @@ function Bear({
       </defs>
       <circle cx="62" cy="62" r="22" fill="url(#bearBody)" />
       <circle cx="158" cy="62" r="22" fill="url(#bearBody)" />
-      <circle cx="62" cy="62" r="11" fill="#7a5020" />
-      <circle cx="158" cy="62" r="11" fill="#7a5020" />
+      <circle cx="62" cy="62" r="11" fill="var(--color-tint-amber-pale)" />
+      <circle cx="158" cy="62" r="11" fill="var(--color-tint-amber-pale)" />
       <ellipse cx="110" cy="135" rx="78" ry="70" fill="url(#bearBody)" />
       <ellipse cx="110" cy="150" rx="52" ry="44" fill="url(#bearBelly)" />
       <circle cx="110" cy="92" r="58" fill="url(#bearBody)" />
-      <ellipse cx="110" cy="105" rx="28" ry="22" fill="#fbe5b1" />
-      <ellipse cx="110" cy="92" rx="7" ry="5" fill="#5a3a18" />
+      <ellipse cx="110" cy="105" rx="28" ry="22" fill="var(--color-tint-amber-pale)" />
+      <ellipse cx="110" cy="92" rx="7" ry="5" fill="var(--color-tint-amber-pale)" />
       <path
         d={`M110 96 Q110 ${96 + mouthCurve * 0.4} 110 ${100 + mouthCurve}`}
-        stroke="#5a3a18"
+        stroke="var(--color-tint-amber-pale)"
         strokeWidth="2"
         strokeLinecap="round"
         fill="none"
       />
       <path
         d={`M96 ${110 + mouthCurve * 0.3} Q110 ${112 + mouthCurve} 124 ${110 + mouthCurve * 0.3}`}
-        stroke="#5a3a18"
+        stroke="var(--color-tint-amber-pale)"
         strokeWidth="2"
         strokeLinecap="round"
         fill="none"
       />
       <g transform={`translate(0 ${eyeY})`}>
-        <ellipse cx="85" cy="78" rx="7" ry={9 - eyeLid * 0.4} fill="#2a1a08" />
-        <ellipse cx="135" cy="78" rx="7" ry={9 - eyeLid * 0.4} fill="#2a1a08" />
-        <circle cx="87" cy="75" r="2" fill="#fff" opacity={1 - sadness * 0.7} />
-        <circle cx="137" cy="75" r="2" fill="#fff" opacity={1 - sadness * 0.7} />
+        <ellipse cx="85" cy="78" rx="7" ry={9 - eyeLid * 0.4} fill="var(--color-tint-ink-pale)" />
+        <ellipse cx="135" cy="78" rx="7" ry={9 - eyeLid * 0.4} fill="var(--color-tint-ink-pale)" />
+        <circle cx="87" cy="75" r="2" fill="var(--color-text)" opacity={1 - sadness * 0.7} />
+        <circle cx="137" cy="75" r="2" fill="var(--color-text)" opacity={1 - sadness * 0.7} />
         {sadness > 0.7 && (
           <motion.path
             d="M85 88 Q82 102 85 110"
-            stroke="#7ec9f0"
+            stroke="var(--color-tint-sky-bright)"
             strokeWidth="2"
             strokeLinecap="round"
             fill="none"

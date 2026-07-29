@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { motion } from "framer-motion";
@@ -22,7 +23,7 @@ export default function FinalePage() {
   }
 
   return (
-    <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] layout-padding safe-inset py-12 sm:py-20">
+    <main className="min-h-dvh flex items-center justify-center bg-[var(--color-bg)] layout-padding safe-inset py-12 sm:py-20">
       <div className="max-w-lg mx-auto text-center flex flex-col items-center gap-8 sm:gap-10">
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
@@ -44,7 +45,7 @@ export default function FinalePage() {
         </motion.h1>
 
         <motion.p
-          className="text-[#c8c0d8] text-base sm:text-lg"
+          className="text-[var(--color-text-warm)] text-base sm:text-lg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -53,12 +54,12 @@ export default function FinalePage() {
         </motion.p>
 
         <motion.div
-          className="w-full p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#1a1230] to-[#2d1b69] border border-white/10 flex flex-col items-center gap-4"
+          className="w-full p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-hover)] border border-white/10 flex flex-col items-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <p className="text-xs sm:text-sm text-[#8b85a0]">Le sei parole:</p>
+          <p className="text-xs sm:text-sm text-[var(--color-muted-strong)]">Le sei parole:</p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {STEPS.map((step, i) => (
               <motion.span
@@ -84,13 +85,13 @@ export default function FinalePage() {
             animate={{ scaleX: 1 }}
             transition={{ delay: 1.0, duration: 0.6 }}
           />
-          <p className="text-base sm:text-xl md:text-2xl font-light italic text-[#a09ab5] leading-relaxed">
+          <p className="text-base sm:text-xl md:text-2xl font-light italic text-[var(--color-muted)] leading-relaxed">
             &ldquo;{FULL_PHRASE}&rdquo;
           </p>
         </motion.div>
 
         <motion.div
-          className="w-full p-6 sm:p-8 rounded-2xl bg-[#1a1230] border border-[var(--color-accent)]/20 flex flex-col items-center gap-3"
+          className="w-full p-6 sm:p-8 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-accent)]/20 flex flex-col items-center gap-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.5 }}
@@ -98,7 +99,7 @@ export default function FinalePage() {
           <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold gradient-text">
             Workshop di Psicologia
           </h2>
-          <p className="text-[#c8c0d8] text-sm sm:text-base leading-relaxed">
+          <p className="text-[var(--color-text-warm)] text-sm sm:text-base leading-relaxed">
             Ti aspetto al <span className="text-white font-semibold">WORKSHOP DI PSICOLOGIA</span>{" "}
             per il <span className="text-[var(--color-accent)]">Muro della consapevolezza</span>.
           </p>
@@ -116,7 +117,7 @@ export default function FinalePage() {
         >
           <button
             onClick={() => router.push("/")}
-            className="text-sm text-[#a09ab5] hover:text-white transition-colors min-h-[44px] py-2 inline-flex items-center cursor-pointer"
+            className="text-sm text-[var(--color-muted)] hover:text-white transition-colors min-h-[44px] py-2 inline-flex items-center cursor-pointer"
           >
             ↻ Ricominciare il percorso
           </button>

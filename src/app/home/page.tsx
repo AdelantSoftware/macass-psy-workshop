@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import Link from "next/link";
@@ -22,7 +23,7 @@ export default function HomePage() {
   const completedCount = progress.completedSteps.length;
 
   return (
-    <main className="min-h-dvh bg-[#0f0a1a] pb-24 sm:pb-32 safe-inset">
+    <main className="min-h-dvh bg-[var(--color-bg)] pb-24 sm:pb-32 safe-inset">
       {/* Header */}
       <header className="relative py-12 sm:py-16">
         <div className="absolute inset-0 z-0">
@@ -39,7 +40,7 @@ export default function HomePage() {
             Il Percorso delle <span className="gradient-text">Sei Parole</span>
           </motion.h1>
           <motion.p
-            className="text-[#c8c0d8] text-sm sm:text-lg text-pretty"
+            className="text-[var(--color-text-warm)] text-sm sm:text-lg text-pretty"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -82,15 +83,15 @@ export default function HomePage() {
                 className="object-cover group-hover:scale-105 group-active:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, 60vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a1a]/80 via-[#0f0a1a]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)]/80 via-[var(--color-bg)]/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 text-center flex flex-col gap-1">
                 <p className="font-display text-xl sm:text-2xl font-semibold text-shadow">
                   Mappa del Festival
                 </p>
-                <p className="text-[#c8c0d8] text-sm text-shadow-soft">
+                <p className="text-[var(--color-text-warm)] text-sm text-shadow-soft">
                   Trova le 6 posizioni dei QR Code nascosti
                 </p>
-                <span className="inline-block mt-2 px-5 py-2 bg-[#5ae8c8]/20 text-[#5ae8c8] rounded-full text-sm font-medium group-hover:bg-[#5ae8c8]/30 transition-colors">
+                <span className="inline-block mt-2 px-5 py-2 bg-[var(--color-accent-mint)]/20 text-[var(--color-accent-mint)] rounded-full text-sm font-medium group-hover:bg-[var(--color-accent-mint)]/30 transition-colors">
                   Vedi la mappa →
                 </span>
               </div>
@@ -144,7 +145,7 @@ function ResetProgressButton({ onReset }: { onReset: () => void }) {
       <button
         onClick={onReset}
         className={cn(
-          "text-xs text-[#a09ab5] hover:text-red-400 transition-colors min-h-[44px] px-4 py-2 cursor-pointer",
+          "text-xs text-[var(--color-muted)] hover:text-red-400 transition-colors min-h-[44px] px-4 py-2 cursor-pointer",
         )}
       >
         ↻ Ripristina progressi

@@ -4,7 +4,7 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Outfit", system-ui, sans-serif;
 
-  /* Brand */
+  /* ─── Brand ─── */
   --color-bg: #0f0a1a;
   --color-surface: #1a1230;
   --color-surface-hover: #2d1b69;
@@ -13,7 +13,7 @@
   --color-muted: #a09ab5;
   --color-muted-strong: #8b85a0;
 
-  /* Accents (one per tappa + 1 primary) */
+  /* ─── Accents (one per tappa + 1 primary) ─── */
   --color-accent: #e85a8f;        /* primary pink, finale */
   --color-accent-deep: #c84a7a;
   --color-accent-darker: #a83a6a;
@@ -24,16 +24,84 @@
   --color-accent-amber: #e8c85a;   /* hug */
   --color-accent-violet: #9e5ae8;  /* ships */
 
-  /* Gradients as raw values (used both for bg + buttons) */
+  /* ─── Per-accent tints (bright / pale / glass / bg-soft) ───
+     Used for sub-accents in the wheel, drag affordances, hover layers.
+     Pattern: each accent gets a "bright" (most-saturated lighter shade) +
+     "pale" (soft glow), and the "20/33/40/55/66" suffix is the alpha. */
+  --color-tint-sky-bright: #74a8ff;
+  --color-tint-sky-pale: #8ab2f5;
+  --color-tint-sky-paler: #8ab4fb;
+  --color-tint-sky-shade: #a9a2bb;
+  --color-tint-sky-faint: #aaa4bc;
+  --color-tint-sky-mute: #9690aa;
+  --color-tint-sky-deepest: #827c94;
+  --color-tint-sky-text: #aaa3bc;
+  --color-tint-sky-quote: #aaa3b9;
+  --color-tint-sky-soft: #b7afc4;
+  --color-tint-sky-mist: #b9b1c9;
+  --color-tint-sky-pale-2: #d1cadf;
+  --color-tint-sky-glow: #eeeaf5;
+  --color-tint-sky-pill: #7fa9ef;
+  --color-tint-sky-ring: #7cafff;
+  --color-tint-sky-edge: #6f9de9;
+  --color-tint-sky-text-soft: #9d97b1;
+
+  --color-tint-rust-pale: #ff9b7d;
+  --color-tint-rust-light: #ff9b87;
+
+  --color-tint-amber-pale: #fff5d6;
+
+  --color-tint-violet-pale: #d9baff;
+
+  --color-tint-pink-pale: #f5aec8;
+  --color-tint-pink-paler: #f2aec7;
+
+  --color-tint-ink: #1a1230;
+  --color-tint-ink-pale: #171027;
+
+  /* ─── Surface scrims and shadows ─── */
+  --color-scrim-80: rgba(15, 10, 26, 0.8);
+  --color-scrim-60: rgba(15, 10, 26, 0.6);
+  --color-scrim-90: rgba(15, 10, 26, 0.9);
+  --color-scrim-30: rgba(15, 10, 26, 0.3);
+  --color-scrim-20: rgba(15, 10, 26, 0.2);
+  --color-scrim-15: rgba(15, 10, 26, 0.15);
+
+  --color-shadow-soft: rgba(0, 0, 0, 0.4);
+  --color-shadow-mid: rgba(0, 0, 0, 0.3);
+  --color-shadow-deep: rgba(0, 0, 0, 0.5);
+
+  --color-on-dark-1: rgba(255, 255, 255, 0.02);
+  --color-on-dark-2: rgba(255, 255, 255, 0.05);
+  --color-on-dark-3: rgba(255, 255, 255, 0.06);
+  --color-on-dark-4: rgba(255, 255, 255, 0.08);
+  --color-on-dark-5: rgba(255, 255, 255, 0.1);
+  --color-on-dark-6: rgba(255, 255, 255, 0.15);
+  --color-on-dark-7: rgba(255, 255, 255, 0.18);
+  --color-on-dark-8: rgba(255, 255, 255, 0.2);
+  --color-on-dark-9: rgba(255, 255, 255, 0.25);
+  --color-on-dark-10: rgba(255, 255, 255, 0.28);
+  --color-on-dark-11: rgba(255, 255, 255, 0.4);
+
+  --color-card-glass: rgba(26, 18, 48, 0.95);
+  --color-card-glass-2: rgba(26, 18, 48, 0.8);
+
+  /* ─── Gradients as raw values ─── */
   --gradient-hero: linear-gradient(135deg, #e85a8f 0%, #5ae8c8 100%);
   --gradient-cta: linear-gradient(135deg, #e85a8f 0%, #c84a7a 50%, #a83a6a 100%);
   --gradient-progress: linear-gradient(90deg, #e85a8f, #5ae8c8);
   --gradient-overlay-bottom: linear-gradient(180deg, #0f0a1a30 0%, #0f0a1a 100%);
   --gradient-overlay-top: linear-gradient(0deg, #0f0a1a, transparent);
 
-  /* Radii */
+  /* ─── Radii ─── */
   --radius-card: 1rem;
   --radius-button: 9999px;
+
+  /* ─── Spacing scale tokens (Touch targets: registered for
+       utility classes — see .touch-target / .touch-target-lg below) ─── */
+  --spacing-touch: 44px;
+  --spacing-touch-lg: 48px;
+  --spacing-touch-xl: 56px;
 }
 
 :root {
@@ -141,8 +209,8 @@ input, select, textarea {
 .app-footer {
   margin-top: auto;
   padding: 1.5rem 1.25rem;
-  background: rgba(255, 255, 255, 0.02);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-on-dark-2);
+  border-top: 1px solid var(--color-on-dark-2);
   text-align: center;
 }
 
@@ -157,17 +225,30 @@ input, select, textarea {
   background-clip: text;
 }
 
-.text-shadow      { text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.3); }
-.text-shadow-soft { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4); }
+.text-shadow      { text-shadow: 0 2px 12px var(--color-shadow-deep), 0 1px 3px var(--color-shadow-mid); }
+.text-shadow-soft { text-shadow: 0 1px 8px var(--color-shadow-soft); }
 
-/* ───────── Animations ───────── */
+/* ───────── Touch-target utilities (replace min-h-[44px] / [48px] / [56px]) ───────── */
+.touch-target     { min-height: var(--spacing-touch); }
+.touch-target-lg  { min-height: var(--spacing-touch-lg); }
+.touch-target-xl  { min-height: var(--spacing-touch-xl); }
+
+/* ───────── Step-card progress (replaces h-[10px] / h-2.5 etc.) ───────── */
+.progress-bar-track { height: 10px; }
+.progress-bar-track-lg { height: 12px; }
+
+/* ───────── Pulse / shadow utilities using tokens ───────── */
+.shadow-pulse-pink {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px var(--color-accent-soft); }
+  50%      { box-shadow: 0 0 40px var(--color-accent-soft); }
+}
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(232, 90, 143, 0.3); }
-  50%      { box-shadow: 0 0 40px rgba(232, 90, 143, 0.6); }
 }
 @keyframes spinSlow {
   from { transform: rotate(0deg); }
@@ -179,7 +260,6 @@ input, select, textarea {
 }
 
 .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
-.animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
 .animate-spin-slow  { animation: spinSlow 20s linear infinite; }
 .animate-float      { animation: float 3s ease-in-out infinite; }
 
@@ -189,14 +269,14 @@ input, select, textarea {
 }
 .step-card:hover, .step-card:active {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 30px var(--color-shadow-mid);
 }
 
 /* ───────── Scrollbar ───────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--color-on-dark-6);
   border-radius: 2px;
 }
 

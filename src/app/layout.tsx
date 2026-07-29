@@ -1,3 +1,4 @@
+/* refactored: tokens */
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#e85a8f",
+  themeColor: "var(--color-accent)",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -61,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={cn(cormorant.variable, outfit.variable, "antialiased flex flex-col min-h-dvh")}>
         {children}
         <footer className="app-footer">
-          <p className="text-xs text-[#8b85a0]">Made with love by Adelant</p>
+          <p className="text-xs text-[var(--color-muted-strong)]">Made with love by Adelant</p>
         </footer>
       </body>
     </html>

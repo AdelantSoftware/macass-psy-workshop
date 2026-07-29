@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { motion, type HTMLMotionProps } from "framer-motion";
@@ -47,7 +48,7 @@ export const PrimaryButton = forwardRef<HTMLButtonElement, PrimaryButtonProps>(
         className={cn(
           baseClass,
           sizeClass[size],
-          "bg-[var(--gradient-cta)] text-white shadow-[0_8px_32px_rgba(232,90,143,0.4)]",
+          "bg-[var(--gradient-cta)] text-white shadow-[0_8px_32px_var(--color-accent)]",
           rest.disabled && "opacity-50 cursor-not-allowed",
           className,
         )}

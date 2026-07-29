@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { useCallback, useState } from "react";
@@ -50,7 +51,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
 
   if (!step) {
     return (
-      <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] layout-padding safe-inset">
+      <main className="min-h-dvh flex items-center justify-center bg-[var(--color-bg)] layout-padding safe-inset">
         <div className="text-center">
           <p className="text-xl sm:text-2xl mb-4">❌ Tappa non trovata</p>
           <button onClick={() => router.push("/home")} className="text-[var(--color-accent)] underline cursor-pointer min-h-[44px]">
@@ -108,7 +109,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
   }
 
   return (
-    <main className="min-h-dvh bg-[#0f0a1a] pb-20 safe-inset">
+    <main className="min-h-dvh bg-[var(--color-bg)] pb-20 safe-inset">
       <PageHeader
         title={
           <div className="flex flex-col items-center gap-2">
@@ -134,10 +135,10 @@ export default function TappaClient({ stepId }: { stepId: number }) {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3 }}
             >
-              <p className="text-center text-[#a09ab5] mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base text-pretty">
+              <p className="text-center text-[var(--color-muted)] mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base text-pretty">
                 {step.description}
               </p>
-              <div className="p-4 sm:p-6 rounded-2xl bg-[#1a1230] border border-white/5">
+              <div className="p-4 sm:p-6 rounded-2xl bg-[var(--color-surface)] border border-white/5">
                 <Interaction onReveal={handleReveal} />
               </div>
             </motion.div>

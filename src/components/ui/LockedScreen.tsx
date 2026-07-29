@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { useState, type ReactNode } from "react";
@@ -36,7 +37,7 @@ export function LockedScreen({
 }: LockedScreenProps) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <main className="min-h-dvh bg-[#0f0a1a] flex items-center justify-center layout-padding safe-inset">
+    <main className="min-h-dvh bg-[var(--color-bg)] flex items-center justify-center layout-padding safe-inset">
       <motion.div
         className="text-center max-w-sm w-full animate-fade-in-up"
         initial={{ opacity: 0, y: 20 }}
@@ -47,7 +48,7 @@ export function LockedScreen({
           {icon}
         </div>
         <h1 className="text-xl sm:text-2xl font-bold mb-3 text-balance">{title}</h1>
-        <div className="text-[#8b85a0] mb-5 sm:mb-6 text-sm sm:text-base">
+        <div className="text-[var(--color-muted-strong)] mb-5 sm:mb-6 text-sm sm:text-base">
           {description}
         </div>
         <PrimaryButton onClick={primaryAction.onClick}>
@@ -59,7 +60,7 @@ export function LockedScreen({
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
-              className="text-xs text-[#8b85a0] hover:text-white transition-colors mt-2 min-h-[44px] px-2 py-2"
+              className="text-xs text-[var(--color-muted-strong)] hover:text-white transition-colors mt-2 min-h-[44px] px-2 py-2"
             >
               {secondaryAction.label}
             </button>
@@ -86,7 +87,7 @@ export function LockedScreen({
           <div className="mt-4">
             <a
               href={footerLink.href}
-              className="text-sm text-[#8b85a0] hover:text-white transition-colors min-h-[44px] inline-flex items-center"
+              className="text-sm text-[var(--color-muted-strong)] hover:text-white transition-colors min-h-[44px] inline-flex items-center"
             >
               ← {footerLink.label}
             </a>
@@ -123,7 +124,7 @@ export function ManualCodeForm({ stepId, onSubmit, gateLocked }: ManualCodeFormP
   };
   return (
     <div className="p-3 sm:p-4 bg-white/5 rounded-xl border border-white/10">
-      <p className="text-xs text-[#8b85a0] mb-2 text-left">
+      <p className="text-xs text-[var(--color-muted-strong)] mb-2 text-left">
         Inserisci il numero della tappa (1-6):
       </p>
       <div className="flex gap-2">
@@ -136,7 +137,7 @@ export function ManualCodeForm({ stepId, onSubmit, gateLocked }: ManualCodeFormP
           onKeyDown={(e) => {
             if (e.key === "Enter") submit();
           }}
-          className="flex-1 px-3 py-2 bg-[#1a1230] border border-white/10 rounded-lg text-white text-center text-lg font-bold focus:outline-none focus:border-[var(--color-accent)] min-h-[48px]"
+          className="flex-1 px-3 py-2 bg-[var(--color-surface)] border border-white/10 rounded-lg text-white text-center text-lg font-bold focus:outline-none focus:border-[var(--color-accent)] min-h-[48px]"
           placeholder="?"
         />
         <GhostButton size="sm" onClick={submit} className="!bg-[var(--color-accent)] !border-[var(--color-accent)] text-white">

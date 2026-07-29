@@ -1,10 +1,11 @@
+/* refactored: tokens */
 "use client";
 
 import { useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GameShell, type GameProps } from "./shared";
 
-const ACCENT = "#9E5AE8";
+const ACCENT = "var(--color-accent-violet)";
 const HARBOR_DEFAULT_WIDTH = 320;
 
 /**
@@ -58,7 +59,7 @@ export function ShipsGame({ onReveal }: GameProps) {
           >
             <div className="absolute inset-0 rounded-full blur-2xl" style={{ background: `${ACCENT}35` }} />
             <svg viewBox="0 0 96 96" className="relative h-full w-full" aria-hidden="true">
-              <circle cx="48" cy="48" r="44" fill="#21143a" stroke={ACCENT} strokeOpacity="0.5" />
+              <circle cx="48" cy="48" r="44" fill="var(--color-tint-ink-pale)" stroke={ACCENT} strokeOpacity="0.5" />
               <path
                 d="M21 60c10-6 18 6 27 0s17 6 27 0"
                 fill="none"
@@ -66,19 +67,19 @@ export function ShipsGame({ onReveal }: GameProps) {
                 strokeWidth="3"
                 strokeLinecap="round"
               />
-              <path d="M31 53h35l-8 11H39Z" fill="#f5eeff" />
+              <path d="M31 53h35l-8 11H39Z" fill="var(--color-tint-violet-pale)" />
               <path d="M47 29v25M45 31 33 51h12Z" stroke={ACCENT} fill={ACCENT} fillOpacity="0.6" />
             </svg>
           </motion.div>
           <p className="font-display text-2xl font-semibold text-white">Le Navi nel Porto</p>
-          <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[#a9a2bb]">
+          <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-tint-sky-shade)]">
             A volte basta attraversare un piccolo tratto d&apos;acqua per scoprire che qualcuno era già lì.
           </p>
           <motion.button
             onClick={() => setPhase("active")}
             className="mt-6 min-h-[48px] rounded-full px-7 py-3 font-semibold text-white shadow-lg cursor-pointer"
             style={{
-              background: `linear-gradient(135deg, ${ACCENT}, #6e37ad)`,
+              background: `linear-gradient(135deg, ${ACCENT}, var(--color-tint-violet-pale))`,
               boxShadow: `0 0 28px ${ACCENT}45`,
             }}
             whileHover={{ scale: 1.04 }}
@@ -95,10 +96,10 @@ export function ShipsGame({ onReveal }: GameProps) {
         >
           <div
             ref={setHarborRef}
-            className="relative h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-[#090617] shadow-2xl sm:h-[340px]"
+            className="relative h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-[var(--color-tint-ink-pale)] shadow-2xl sm:h-[340px]"
             style={{ boxShadow: `inset 0 0 70px ${ACCENT}12` }}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(158,90,232,0.18),transparent_38%),linear-gradient(#100922,#171036_57%,#101b3b_58%,#070d25)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,var(--color-accent-violet),transparent_38%),linear-gradient(#100922,#171036_57%,#101b3b_58%,#070d25)]" />
             {/* Stars */}
             {[10, 18, 27, 39, 48, 59, 73, 83, 91].map((left, i) => (
               <motion.i
@@ -111,9 +112,9 @@ export function ShipsGame({ onReveal }: GameProps) {
             ))}
             {/* Moon */}
             <motion.div
-              className="absolute right-[12%] top-7 h-12 w-12 rounded-full bg-[#fff4cf] sm:h-16 sm:w-16"
-              style={{ boxShadow: "0 0 35px #fff1bd88" }}
-              animate={{ boxShadow: ["0 0 24px #fff1bd55", "0 0 45px #fff1bd99", "0 0 24px #fff1bd55"] }}
+              className="absolute right-[12%] top-7 h-12 w-12 rounded-full bg-[var(--color-tint-amber-pale)] sm:h-16 sm:w-16"
+              style={{ boxShadow: "0 0 35px var(--color-tint-amber-pale)88" }}
+              animate={{ boxShadow: ["0 0 24px var(--color-tint-amber-pale)55", "0 0 45px var(--color-tint-amber-pale)99", "0 0 24px var(--color-tint-amber-pale)55"] }}
               transition={{ duration: 4, repeat: Infinity }}
             />
             {/* Ocean */}
@@ -121,7 +122,7 @@ export function ShipsGame({ onReveal }: GameProps) {
               {[0, 1, 2, 3].map((i) => (
                 <motion.div
                   key={i}
-                  className="absolute h-px rounded-full bg-[#b596ff]"
+                  className="absolute h-px rounded-full bg-[var(--color-tint-violet-pale)]"
                   style={{
                     width: `${35 + i * 12}%`,
                     left: `${(i * 23) % 35}%`,
@@ -140,7 +141,7 @@ export function ShipsGame({ onReveal }: GameProps) {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 aria-hidden="true"
               >
-                <path d="M0 25Q50 5 100 25t100 0t100 0t100 0t100 0t100 0v55H0Z" fill="#28386c" fillOpacity="0.42" />
+                <path d="M0 25Q50 5 100 25t100 0t100 0t100 0t100 0t100 0v55H0Z" fill="var(--color-tint-ink-pale)" fillOpacity="0.42" />
               </motion.svg>
             </div>
             {/* Background island */}
@@ -148,10 +149,10 @@ export function ShipsGame({ onReveal }: GameProps) {
               <svg viewBox="0 0 150 60" className="w-28 opacity-80" aria-hidden="true">
                 <path
                   d="M8 56c8-26 24-37 43-35 13-20 38-17 47 4 20-3 37 12 44 31Z"
-                  fill="#17152c"
-                  stroke="#614881"
+                  fill="var(--color-tint-ink-pale)"
+                  stroke="var(--color-tint-violet-pale)"
                 />
-                <path d="M68 23c-1-16 10-17 13-20-2 9 8 13 3 25" fill="#48366a" />
+                <path d="M68 23c-1-16 10-17 13-20-2 9 8 13 3 25" fill="var(--color-tint-violet-pale)" />
               </svg>
             </div>
 
@@ -164,7 +165,7 @@ export function ShipsGame({ onReveal }: GameProps) {
                     animate={{ scaleX: 1, opacity: [0, 1, 0.7, 1] }}
                     transition={{ duration: 0.8 }}
                     style={{
-                      background: `linear-gradient(90deg, transparent, ${ACCENT}, #fff, ${ACCENT})`,
+                      background: `linear-gradient(90deg, transparent, ${ACCENT}, var(--color-text), ${ACCENT})`,
                       boxShadow: `0 0 18px ${ACCENT}`,
                     }}
                   />
@@ -172,7 +173,7 @@ export function ShipsGame({ onReveal }: GameProps) {
                     <motion.span
                       key={i}
                       className="absolute left-[68%] top-[42%] h-1.5 w-1.5 rounded-full"
-                      style={{ background: i % 3 === 0 ? "#fff1a6" : ACCENT }}
+                      style={{ background: i % 3 === 0 ? "var(--color-tint-amber-pale)" : ACCENT }}
                       initial={{ x: 0, y: 0, opacity: 1 }}
                       animate={{
                         x: Math.cos((i / 12) * Math.PI * 2) * (38 + (i % 3) * 10),
@@ -223,10 +224,10 @@ export function ShipsGame({ onReveal }: GameProps) {
                 exit={{ opacity: 0 }}
                 className="mt-4"
               >
-                <p className="text-sm text-[#b9b1c9]">Trascina la vela verso la nave illuminata</p>
+                <p className="text-sm text-[var(--color-tint-sky-mist)]">Trascina la vela verso la nave illuminata</p>
                 <motion.button
                   onClick={nudge}
-                  className="mt-2 min-h-[48px] rounded-full border border-[#9E5AE8]/35 bg-[#9E5AE8]/10 px-6 text-sm font-medium text-[#d9baff] cursor-pointer"
+                  className="mt-2 min-h-[48px] rounded-full border border-[var(--color-accent-violet)]/35 bg-[var(--color-accent-violet)]/10 px-6 text-sm font-medium text-[var(--color-tint-violet-pale)] cursor-pointer"
                   whileTap={{ scale: 0.95 }}
                   aria-label="Avvicina la nave"
                 >
@@ -240,7 +241,7 @@ export function ShipsGame({ onReveal }: GameProps) {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-5"
               >
-                <p className="font-display text-2xl text-[#d9baff]">
+                <p className="font-display text-2xl text-[var(--color-tint-violet-pale)]">
                   La distanza diventa incontro.
                 </p>
                 <p className="mt-1 text-xs uppercase tracking-[0.25em] text-white/40">
@@ -264,8 +265,8 @@ function Boat({ small = false }: { small?: boolean }) {
     >
       <defs>
         <linearGradient id={small ? "smallHull" : "largeHull"} x1="0" y1="0" x2="0" y2="1">
-          <stop stopColor={small ? "#f6efff" : "#ddd2ef"} />
-          <stop offset="1" stopColor={small ? ACCENT : "#70508f"} />
+          <stop stopColor={small ? "var(--color-tint-violet-pale)" : "var(--color-tint-violet-pale)"} />
+          <stop offset="1" stopColor={small ? ACCENT : "var(--color-tint-violet-pale)"} />
         </linearGradient>
       </defs>
       <path
@@ -275,20 +276,20 @@ function Boat({ small = false }: { small?: boolean }) {
         strokeOpacity="0.55"
         strokeWidth="2"
       />
-      <path d="M56 10v48" stroke="#e8ddf6" strokeWidth="3" strokeLinecap="round" />
+      <path d="M56 10v48" stroke="var(--color-tint-amber-pale)" strokeWidth="3" strokeLinecap="round" />
       <path
         d="M53 14 20 53h33Z"
-        fill={small ? ACCENT : "#b991df"}
+        fill={small ? ACCENT : "var(--color-tint-violet-pale)"}
         fillOpacity="0.75"
         stroke="white"
         strokeOpacity="0.5"
       />
-      <path d="m60 23 28 30H60Z" fill="#f8f1ff" fillOpacity="0.9" />
+      <path d="m60 23 28 30H60Z" fill="var(--color-tint-violet-pale)" fillOpacity="0.9" />
       {!small && (
         <>
-          <rect x="76" y="44" width="25" height="14" rx="3" fill="#301b49" />
-          <circle cx="83" cy="51" r="2" fill="#ffd98a" />
-          <circle cx="94" cy="51" r="2" fill="#ffd98a" />
+          <rect x="76" y="44" width="25" height="14" rx="3" fill="var(--color-tint-ink-pale)" />
+          <circle cx="83" cy="51" r="2" fill="var(--color-tint-amber-pale)" />
+          <circle cx="94" cy="51" r="2" fill="var(--color-tint-amber-pale)" />
         </>
       )}
     </svg>

@@ -1,3 +1,4 @@
+/* refactored: tokens */
 /**
  * Shared utilities for the interactive mini-games.
  */
@@ -32,7 +33,7 @@ export function GameShell({
     <div
       className="relative min-h-[430px] overflow-hidden rounded-3xl p-5 sm:p-7 text-center"
       style={{
-        background: `radial-gradient(circle at 50% 35%, ${accent}26, transparent 54%), linear-gradient(180deg, rgba(255,255,255,0.025), transparent)`,
+        background: `radial-gradient(circle at 50% 35%, ${accent}26, transparent 54%), linear-gradient(180deg, var(--color-on-dark-2), transparent)`,
       }}
     >
       {children}

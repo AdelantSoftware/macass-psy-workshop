@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { useState } from "react";
@@ -18,7 +19,7 @@ export default function QRPage() {
 
   if (!authorized) {
     return (
-      <main className="min-h-dvh flex items-center justify-center bg-[#0f0a1a] layout-padding safe-inset">
+      <main className="min-h-dvh flex items-center justify-center bg-[var(--color-bg)] layout-padding safe-inset">
         <motion.div
           className="text-center max-w-sm w-full"
           initial={{ opacity: 0, y: 20 }}
@@ -29,7 +30,7 @@ export default function QRPage() {
             🔐
           </div>
           <h1 className="text-xl sm:text-2xl font-bold mb-3 text-balance">Area riservata</h1>
-          <p className="text-[#8b85a0] text-sm mb-6">
+          <p className="text-[var(--color-muted-strong)] text-sm mb-6">
             Inserisci la chiave per accedere alla generazione QR code.
           </p>
           <form
@@ -44,7 +45,7 @@ export default function QRPage() {
               type="password"
               value={inputKey}
               onChange={(e) => setInputKey(e.target.value)}
-              className="flex-1 px-4 py-3 bg-[#1a1230] border border-white/10 rounded-xl text-white text-center focus:outline-none focus:border-[var(--color-accent)] min-h-[48px]"
+              className="flex-1 px-4 py-3 bg-[var(--color-surface)] border border-white/10 rounded-xl text-white text-center focus:outline-none focus:border-[var(--color-accent)] min-h-[48px]"
               placeholder="Chiave..."
             />
             <PrimaryButton type="submit" size="md" className="!px-5 !py-3 !min-h-[48px]">
@@ -53,7 +54,7 @@ export default function QRPage() {
           </form>
           <button
             onClick={() => router.push("/home")}
-            className="inline-block mt-6 text-sm text-[#8b85a0] hover:text-white transition-colors min-h-[44px] py-2 cursor-pointer"
+            className="inline-block mt-6 text-sm text-[var(--color-muted-strong)] hover:text-white transition-colors min-h-[44px] py-2 cursor-pointer"
           >
             ← Torna alla Home
           </button>
@@ -63,7 +64,7 @@ export default function QRPage() {
   }
 
   return (
-    <main className="min-h-dvh bg-[#0f0a1a] pb-20 sm:pb-24 safe-inset">
+    <main className="min-h-dvh bg-[var(--color-bg)] pb-20 sm:pb-24 safe-inset">
       <PageHeader
         title={
           <>
@@ -90,7 +91,7 @@ export default function QRPage() {
             <motion.div
               key={step.id}
               variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
-              className="bg-[#1a1230] border border-white/5 rounded-2xl p-4 sm:p-6 text-center"
+              className="bg-[var(--color-surface)] border border-white/5 rounded-2xl p-4 sm:p-6 text-center"
             >
               <div className="inline-block mb-3">
                 <div
@@ -101,20 +102,20 @@ export default function QRPage() {
                 </div>
               </div>
               <h3 className="font-bold text-base sm:text-lg mb-1">{step.title}</h3>
-              <p className="text-[#8b85a0] text-xs sm:text-sm mb-3 sm:mb-4">
+              <p className="text-[var(--color-muted-strong)] text-xs sm:text-sm mb-3 sm:mb-4">
                 📍 {step.location}
               </p>
               <div className="inline-block p-3 sm:p-4 bg-white rounded-xl mb-3 sm:mb-4">
                 <QRCodeSVG
                   value={`${QR_BASE}/${step.id}`}
                   size={160}
-                  bgColor="#ffffff"
+                  bgColor="var(--color-text)fff"
                   fgColor={step.color}
                   level="H"
                   includeMargin={false}
                 />
               </div>
-              <p className="text-[10px] sm:text-xs text-[#8b85a0] mb-2 font-mono break-all">
+              <p className="text-[10px] sm:text-xs text-[var(--color-muted-strong)] mb-2 font-mono break-all">
                 {`${QR_BASE}/${step.id}`}
               </p>
               <p className="text-sm font-semibold" style={{ color: step.color }}>

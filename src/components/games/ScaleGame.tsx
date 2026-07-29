@@ -1,10 +1,11 @@
+/* refactored: tokens */
 "use client";
 
 import { useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GameShell, type GameProps } from "./shared";
 
-const ACCENT = "#E85A8F";
+const ACCENT = "var(--color-accent)";
 
 const QUALITIES = ["Empatia", "Forza", "Creatività", "Coraggio", "Unicità"];
 
@@ -63,9 +64,9 @@ export function ScaleGame({ onReveal }: GameProps) {
           >
             <defs>
               <linearGradient id="introMetal" x1="0" y1="0" x2="1" y2="1">
-                <stop stopColor="#fff0f6" />
+                <stop stopColor="var(--color-tint-pink-pale)" />
                 <stop offset="0.5" stopColor={ACCENT} />
-                <stop offset="1" stopColor="#6e2945" />
+                <stop offset="1" stopColor="var(--color-tint-pink-paler)" />
               </linearGradient>
             </defs>
             <path
@@ -79,22 +80,22 @@ export function ScaleGame({ onReveal }: GameProps) {
             <path
               d="M25 39h130M40 42 24 79h33Zm100 0-16 37h33Z"
               fill="none"
-              stroke="#f4cddd"
+              stroke="var(--color-tint-pink-pale)"
               strokeWidth="4"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            <circle cx="90" cy="39" r="8" fill={ACCENT} stroke="#ffe4ef" strokeWidth="3" />
+            <circle cx="90" cy="39" r="8" fill={ACCENT} stroke="var(--color-tint-amber-pale)" strokeWidth="3" />
           </motion.svg>
           <p className="font-display text-2xl font-semibold">La Bilancia</p>
-          <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[#aaa3b9]">
+          <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-tint-sky-quote)]">
             Lascia andare le misure che non ti appartengono. Il tuo valore non ha bisogno di confronti.
           </p>
           <motion.button
             onClick={() => setPhase("active")}
             className="mt-6 min-h-[48px] rounded-full px-7 py-3 font-semibold text-white cursor-pointer"
             style={{
-              background: `linear-gradient(135deg, ${ACCENT}, #a83260)`,
+              background: `linear-gradient(135deg, ${ACCENT}, var(--color-tint-pink-paler))`,
               boxShadow: `0 0 28px ${ACCENT}40`,
             }}
             whileHover={{ scale: 1.04 }}
@@ -114,12 +115,12 @@ export function ScaleGame({ onReveal }: GameProps) {
         animate={{ opacity: 1 }}
         className="relative pb-1 text-center"
       >
-        <div className="relative h-[390px] overflow-hidden rounded-3xl border border-white/[0.08] bg-[radial-gradient(circle_at_50%_70%,rgba(232,90,143,0.12),transparent_40%),linear-gradient(180deg,#130b21,#0c0815)] sm:h-[430px]">
+        <div className="relative h-[390px] overflow-hidden rounded-3xl border border-[var(--color-on-dark-4)]/[0.08] bg-[radial-gradient(circle_at_50%_70%,rgba(232,90,143,0.12),transparent_40%),linear-gradient(180deg,#130b21,#0c0815)] sm:h-[430px]">
           {/* Sparkles */}
           {[0, 1, 2, 3, 4, 5].map((i) => (
             <motion.span
               key={i}
-              className="absolute h-1 w-1 rounded-full bg-[#ffd6e6]"
+              className="absolute h-1 w-1 rounded-full bg-[var(--color-tint-pink-pale)]"
               style={{ left: `${12 + i * 16}%`, top: `${8 + (i % 3) * 9}%` }}
               animate={{ opacity: [0.15, 0.7, 0.15] }}
               transition={{ repeat: Infinity, duration: 2 + i * 0.25 }}
@@ -138,9 +139,9 @@ export function ScaleGame({ onReveal }: GameProps) {
                   className="h-16 w-16"
                   animate={{
                     filter: [
-                      "drop-shadow(0 0 8px #E85A8F77)",
-                      "drop-shadow(0 0 22px #E85A8Fcc)",
-                      "drop-shadow(0 0 8px #E85A8F77)",
+                      "drop-shadow(0 0 8px var(--color-accent)77)",
+                      "drop-shadow(0 0 22px var(--color-accent)cc)",
+                      "drop-shadow(0 0 8px var(--color-accent)77)",
                     ],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
@@ -149,7 +150,7 @@ export function ScaleGame({ onReveal }: GameProps) {
                   <path
                     d="M40 68S11 51 11 29c0-17 21-22 29-7 8-15 29-10 29 7 0 22-29 39-29 39Z"
                     fill={ACCENT}
-                    stroke="#ffd7e6"
+                    stroke="var(--color-tint-pink-pale)"
                     strokeWidth="2"
                   />
                 </motion.svg>
@@ -164,15 +165,15 @@ export function ScaleGame({ onReveal }: GameProps) {
               animate={{ rotate: tilt }}
               transition={{ type: "spring", stiffness: 105, damping: 12, mass: 0.8 }}
               style={{
-                background: "linear-gradient(180deg,#f8dce7,#a85475 55%,#542239)",
+                background: "linear-gradient(180deg,var(--color-tint-pink-pale),var(--color-tint-sky-edge) 55%,var(--color-tint-pink-paler))",
                 boxShadow:
                   phase === "complete"
                     ? `0 0 18px ${ACCENT}, 0 0 38px ${ACCENT}55`
-                    : "0 4px 12px #0008",
+                    : "0 4px 12px var(--color-shadow-mid)",
               }}
             >
-              <span className="absolute -left-1 -top-1 h-5 w-5 rounded-full border-2 border-[#f6cedd] bg-[#7c3551]" />
-              <span className="absolute -right-1 -top-1 h-5 w-5 rounded-full border-2 border-[#f6cedd] bg-[#7c3551]" />
+              <span className="absolute -left-1 -top-1 h-5 w-5 rounded-full border-2 border-[var(--color-tint-pink-pale)] bg-[var(--color-tint-sky-deepest)]" />
+              <span className="absolute -right-1 -top-1 h-5 w-5 rounded-full border-2 border-[var(--color-tint-pink-pale)] bg-[var(--color-tint-sky-deepest)]" />
 
               {/* Left pan: judgments */}
               <motion.div
@@ -180,10 +181,10 @@ export function ScaleGame({ onReveal }: GameProps) {
                 animate={{ y: tilt < 0 ? 7 : 0 }}
                 transition={{ type: "spring", stiffness: 100, damping: 12 }}
               >
-                <div className="mx-auto h-16 w-px bg-gradient-to-b from-[#e7b2c6] to-[#7e3a55]" />
-                <div className="relative -mt-1 min-h-[146px] rounded-b-[48px] border-x border-b border-[#ad5a79]/80 bg-[#2a1020]/80 px-2 pb-3 pt-4 backdrop-blur-sm">
-                  <span className="absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[#d88aa8]" />
-                  <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#d98ca9]">
+                <div className="mx-auto h-16 w-px bg-gradient-to-b from-[var(--color-tint-pink-pale)] to-[var(--color-tint-sky-edge)]" />
+                <div className="relative -mt-1 min-h-[146px] rounded-b-[48px] border-x border-b border-[var(--color-tint-sky-edge)]/80 bg-[#2a1020]/80 px-2 pb-3 pt-4 backdrop-blur-sm">
+                  <span className="absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[var(--color-tint-pink-pale)]" />
+                  <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-tint-pink-pale)]">
                     Giudizi
                   </p>
                   <AnimatePresence mode="popLayout">
@@ -200,8 +201,8 @@ export function ScaleGame({ onReveal }: GameProps) {
                             removeJudgment(j.id);
                           }
                         }}
-                        className="mb-1.5 block min-h-[40px] w-full touch-pan-y rounded-sm border border-[#e8b6c8]/20 bg-[#f4e9e7] px-2 py-1 text-left text-[9px] font-medium leading-tight text-[#51273a] shadow-md sm:text-[10px] cursor-pointer"
-                        style={{ backgroundImage: "linear-gradient(95deg,transparent 92%,#dabfc2 92%)" }}
+                        className="mb-1.5 block min-h-[40px] w-full touch-pan-y rounded-sm border border-[var(--color-tint-pink-pale)]/20 bg-[var(--color-tint-sky-glow)] px-2 py-1 text-left text-[9px] font-medium leading-tight text-[var(--color-tint-pink-paler)] shadow-md sm:text-[10px] cursor-pointer"
+                        style={{ backgroundImage: "linear-gradient(95deg,transparent 92%,var(--color-tint-sky-glow) 92%)" }}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1, rotate: j.id % 2 ? -1 : 1 }}
                         exit={{
@@ -214,7 +215,7 @@ export function ScaleGame({ onReveal }: GameProps) {
                         whileTap={{ scale: 0.92 }}
                         aria-label={`Elimina: ${j.text}`}
                       >
-                        <span className="mr-1 text-[#b13e69]">×</span>
+                        <span className="mr-1 text-[var(--color-tint-sky-edge)]">×</span>
                         {j.text}
                       </motion.button>
                     ))}
@@ -223,7 +224,7 @@ export function ScaleGame({ onReveal }: GameProps) {
                     <motion.p
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="pt-8 font-display text-base text-[#f5aec8]"
+                      className="pt-8 font-display text-base text-[var(--color-tint-pink-pale)]"
                     >
                       Spazio libero
                     </motion.p>
@@ -237,21 +238,21 @@ export function ScaleGame({ onReveal }: GameProps) {
                 animate={{ y: tilt < 0 ? -7 : 0 }}
                 transition={{ type: "spring", stiffness: 100, damping: 12 }}
               >
-                <div className="mx-auto h-16 w-px bg-gradient-to-b from-[#e7b2c6] to-[#7e3a55]" />
-                <div className="relative -mt-1 min-h-[146px] rounded-b-[48px] border-x border-b border-[#ad5a79]/80 bg-[#1d1729]/90 px-2 pb-3 pt-4">
-                  <span className="absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[#d88aa8]" />
-                  <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-[#eac6d5]">
+                <div className="mx-auto h-16 w-px bg-gradient-to-b from-[var(--color-tint-pink-pale)] to-[var(--color-tint-sky-edge)]" />
+                <div className="relative -mt-1 min-h-[146px] rounded-b-[48px] border-x border-b border-[var(--color-tint-sky-edge)]/80 bg-[#1d1729]/90 px-2 pb-3 pt-4">
+                  <span className="absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[var(--color-tint-pink-pale)]" />
+                  <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-tint-pink-pale)]">
                     Ciò che sei
                   </p>
                   {QUALITIES.map((q, i) => (
                     <motion.div
                       key={q}
-                      className="mb-1.5 flex min-h-[20px] items-center justify-center rounded-full border border-white/10 bg-white/[0.05] px-1 text-[9px] text-[#f3dce5] sm:text-[10px]"
+                      className="mb-1.5 flex min-h-[20px] items-center justify-center rounded-full border border-white/10 bg-[var(--color-on-dark-2)]/[0.05] px-1 text-[9px] text-[#f3dce5] sm:text-[10px]"
                       initial={{ opacity: 0, x: 12 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.08 }}
                     >
-                      <span className="mr-1 text-[#E85A8F]">◆</span>
+                      <span className="mr-1 text-[var(--color-accent)]">◆</span>
                       {q}
                     </motion.div>
                   ))}
@@ -268,16 +269,16 @@ export function ScaleGame({ onReveal }: GameProps) {
           >
             <defs>
               <linearGradient id="scaleMetal" x1="0" y1="0" x2="1" y2="1">
-                <stop stopColor="#f8dce7" />
-                <stop offset="0.42" stopColor="#bd6989" />
-                <stop offset="1" stopColor="#532239" />
+                <stop stopColor="var(--color-tint-pink-pale)" />
+                <stop offset="0.42" stopColor="var(--color-tint-pink-paler)" />
+                <stop offset="1" stopColor="var(--color-tint-pink-paler)" />
               </linearGradient>
             </defs>
             <path d="M110 26v112" stroke="url(#scaleMetal)" strokeWidth="11" strokeLinecap="round" />
-            <path d="M73 153 101 90h18l28 63Z" fill="#39182a" stroke="url(#scaleMetal)" strokeWidth="4" strokeLinejoin="round" />
+            <path d="M73 153 101 90h18l28 63Z" fill="var(--color-tint-pink-paler)" stroke="url(#scaleMetal)" strokeWidth="4" strokeLinejoin="round" />
             <path d="M52 164h116c9 0 14 5 17 12H35c3-7 8-12 17-12Z" fill="url(#scaleMetal)" />
-            <circle cx="110" cy="26" r="11" fill="#4d2034" stroke="#f5ccdc" strokeWidth="4" />
-            <circle cx="110" cy="26" r="3" fill="#fff0f6" />
+            <circle cx="110" cy="26" r="11" fill="var(--color-tint-pink-paler)" stroke="var(--color-tint-pink-pale)" strokeWidth="4" />
+            <circle cx="110" cy="26" r="3" fill="var(--color-tint-pink-pale)" />
           </svg>
 
           {/* Burst effect */}
@@ -287,7 +288,7 @@ export function ScaleGame({ onReveal }: GameProps) {
               [0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
                 <motion.i
                   key={`${burst}-${i}`}
-                  className="absolute left-[24%] top-[48%] z-40 h-2 w-1 bg-[#ead6d2]"
+                  className="absolute left-[24%] top-[48%] z-40 h-2 w-1 bg-[var(--color-tint-sky-glow)]"
                   initial={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
                   animate={{
                     opacity: 0,
@@ -309,7 +310,7 @@ export function ScaleGame({ onReveal }: GameProps) {
               exit={{ opacity: 0 }}
               className="mt-4"
             >
-              <p className="text-sm text-[#b7afc4]">Sfiora via ogni giudizio</p>
+              <p className="text-sm text-[var(--color-tint-sky-soft)]">Sfiora via ogni giudizio</p>
               <p className="mt-1 text-xs text-white/35">trascina una carta oppure toccala</p>
             </motion.div>
           ) : (
@@ -319,7 +320,7 @@ export function ScaleGame({ onReveal }: GameProps) {
               animate={{ opacity: 1, y: 0 }}
               className="mt-4"
             >
-              <p className="font-display text-2xl text-[#f2aec7]">Sei già abbastanza.</p>
+              <p className="font-display text-2xl text-[var(--color-tint-pink-paler)]">Sei già abbastanza.</p>
               <p className="mt-1 text-xs uppercase tracking-[0.22em] text-white/35">
                 la misura torna al cuore
               </p>

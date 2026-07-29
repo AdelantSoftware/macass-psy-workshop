@@ -1,3 +1,4 @@
+/* refactored: tokens */
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -28,10 +29,10 @@ export function StepCard({ step, unlocked, completed }: StepCardProps) {
           className={cn("object-cover", !unlocked && "blur-sm")}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1230] to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface)] to-transparent" />
         <IconBadge
           size="sm"
-          color={unlocked ? step.color : "#1a1230"}
+          color={unlocked ? step.color : "var(--color-surface)"}
           className="absolute top-3 left-3"
         >
           {unlocked ? step.id : "🔒"}
@@ -46,21 +47,21 @@ export function StepCard({ step, unlocked, completed }: StepCardProps) {
         <h3 className="font-display font-bold text-lg sm:text-xl">
           {unlocked ? step.title : "Tappa bloccata"}
         </h3>
-        <p className="text-[#a09ab5] text-xs sm:text-sm">📍 {step.location}</p>
-        <p className="text-xs sm:text-sm text-[#a09ab5] leading-relaxed">
+        <p className="text-[var(--color-muted)] text-xs sm:text-sm">📍 {step.location}</p>
+        <p className="text-xs sm:text-sm text-[var(--color-muted)] leading-relaxed">
           {unlocked ? step.description : "Scansiona il QR Code per sbloccare"}
         </p>
         <div className="flex items-center justify-between mt-2">
           <span
             className="text-[10px] sm:text-xs font-mono tracking-wider px-2 sm:px-3 py-1 rounded-full"
             style={{
-              backgroundColor: unlocked ? `${step.color}20` : "rgba(255,255,255,0.05)",
-              color: unlocked && completed ? step.color : "#8b85a0",
+              backgroundColor: unlocked ? `${step.color}20` : "var(--color-on-dark-2)",
+              color: unlocked && completed ? step.color : "var(--color-muted-strong)",
             }}
           >
             {completed ? step.word : "???"}
           </span>
-          <span className="text-[10px] sm:text-xs text-[#a09ab5]">
+          <span className="text-[10px] sm:text-xs text-[var(--color-muted)]">
             {step.id}/6
           </span>
         </div>
@@ -71,8 +72,8 @@ export function StepCard({ step, unlocked, completed }: StepCardProps) {
   const cardClass = cn(
     "step-card block rounded-2xl overflow-hidden border shadow-lg shadow-black/10",
     unlocked
-      ? "bg-[#1a1230] border-white/5"
-      : "bg-[#1a1230]/50 border-white/5 opacity-60",
+      ? "bg-[var(--color-surface)] border-white/5"
+      : "bg-[var(--color-surface)]/50 border-white/5 opacity-60",
     completed && "ring-2 ring-[var(--color-accent-mint)]/30",
   );
 

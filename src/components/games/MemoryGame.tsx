@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -5,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GameShell, type GameProps } from "./shared";
 import { ProgressDots } from "@/components/ui/ProgressBar";
 
-const ACCENT = "#5AE89E";
+const ACCENT = "var(--color-accent-mint)";
 const BEST_TIME_KEY = "macass.memory.best";
 
 interface Concept {
@@ -15,12 +16,12 @@ interface Concept {
 }
 
 const CONCEPTS: Concept[] = [
-  { key: "star",     label: "Stella",   render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><defs><radialGradient id="memStarA" cx="50%" cy="40%" r="60%"><stop offset="0%" stopColor="#fff5d6" /><stop offset="100%" stopColor={ACCENT} /></radialGradient></defs><path d="M32 6 L39 25 L59 26 L43 39 L49 58 L32 47 L15 58 L21 39 L5 26 L25 25 Z" fill="url(#memStarA)" /></svg>) },
-  { key: "moon",     label: "Luna",     render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><defs><linearGradient id="memMoonA" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stopColor="#c8baff" /><stop offset="100%" stopColor="#7a5ad9" /></linearGradient></defs><path d="M44 14a22 22 0 1 0 0 36 18 18 0 0 1 0-36Z" fill="url(#memMoonA)" /></svg>) },
-  { key: "flower",   label: "Fiore",    render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><g transform="translate(32 32)">{[0, 60, 120, 180, 240, 300].map((deg) => <ellipse key={deg} cx="0" cy="-13" rx="6" ry="11" fill="#ff9bcc" transform={`rotate(${deg})`} />)}<circle r="6" fill="#ffd98a" /></g></svg>) },
+  { key: "star",     label: "Stella",   render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><defs><radialGradient id="memStarA" cx="50%" cy="40%" r="60%"><stop offset="0%" stopColor="var(--color-tint-amber-pale)" /><stop offset="100%" stopColor={ACCENT} /></radialGradient></defs><path d="M32 6 L39 25 L59 26 L43 39 L49 58 L32 47 L15 58 L21 39 L5 26 L25 25 Z" fill="url(#memStarA)" /></svg>) },
+  { key: "moon",     label: "Luna",     render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><defs><linearGradient id="memMoonA" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stopColor="var(--color-tint-violet-pale)" /><stop offset="100%" stopColor="var(--color-tint-violet-pale)" /></linearGradient></defs><path d="M44 14a22 22 0 1 0 0 36 18 18 0 0 1 0-36Z" fill="url(#memMoonA)" /></svg>) },
+  { key: "flower",   label: "Fiore",    render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><g transform="translate(32 32)">{[0, 60, 120, 180, 240, 300].map((deg) => <ellipse key={deg} cx="0" cy="-13" rx="6" ry="11" fill="var(--color-tint-pink-pale)" transform={`rotate(${deg})`} />)}<circle r="6" fill="var(--color-tint-amber-pale)" /></g></svg>) },
   { key: "infinity", label: "Infinito", render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><path d="M8 32c0-8 6-14 14-14s12 6 18 14 10 14 18 14 14-6 14-14-6-14-14-14-12 6-18 14-10 14-18 14S8 40 8 32Z" fill="none" stroke={ACCENT} strokeWidth="5" strokeLinecap="round" /></svg>) },
-  { key: "lotus",    label: "Loto",     render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><g transform="translate(32 40)" fill="#ffb3d9"><path d="M0 0 Q-14 -4 -14 -16 Q-6 -10 0 -2 Z" /><path d="M0 0 Q-10 -10 -2 -22 Q4 -10 0 -2 Z" /><path d="M0 0 Q10 -10 2 -22 Q-4 -10 0 -2 Z" /><path d="M0 0 Q14 -4 14 -16 Q6 -10 0 -2 Z" /></g><circle cx="32" cy="40" r="3" fill="#fff5d6" /></svg>) },
-  { key: "spiral",   label: "Spirale",  render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><path d="M32 32 m-22 0 a22 22 0 1 0 44 0 a18 18 0 1 1 -36 0 a14 14 0 1 0 28 0 a10 10 0 1 1 -20 0 a6 6 0 1 0 12 0" fill="none" stroke="#ffd98a" strokeWidth="2.5" strokeLinecap="round" /></svg>) },
+  { key: "lotus",    label: "Loto",     render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><g transform="translate(32 40)" fill="var(--color-tint-pink-pale)"><path d="M0 0 Q-14 -4 -14 -16 Q-6 -10 0 -2 Z" /><path d="M0 0 Q-10 -10 -2 -22 Q4 -10 0 -2 Z" /><path d="M0 0 Q10 -10 2 -22 Q-4 -10 0 -2 Z" /><path d="M0 0 Q14 -4 14 -16 Q6 -10 0 -2 Z" /></g><circle cx="32" cy="40" r="3" fill="var(--color-tint-amber-pale)" /></svg>) },
+  { key: "spiral",   label: "Spirale",  render: () => (<svg viewBox="0 0 64 64" className="h-12 w-12"><path d="M32 32 m-22 0 a22 22 0 1 0 44 0 a18 18 0 1 1 -36 0 a14 14 0 1 0 28 0 a10 10 0 1 1 -20 0 a6 6 0 1 0 12 0" fill="none" stroke="var(--color-tint-amber-pale)" strokeWidth="2.5" strokeLinecap="round" /></svg>) },
 ];
 
 interface Card {
@@ -164,7 +165,7 @@ export function MemoryGame({ onReveal }: GameProps) {
 
       {/* Status bar */}
       <div className="relative z-10 mb-4 flex items-center justify-between px-1 text-[10px] uppercase tracking-[0.28em]">
-        <div className="flex items-center gap-2 text-[#b9b1c9]">
+        <div className="flex items-center gap-2 text-[var(--color-tint-sky-mist)]">
           <span
             className="h-1.5 w-1.5 rounded-full"
             style={{ background: ACCENT, boxShadow: `0 0 8px ${ACCENT}` }}
@@ -173,7 +174,7 @@ export function MemoryGame({ onReveal }: GameProps) {
             {phase === "preview" ? "Osserva" : phase === "complete" ? "Completo" : "Trova le coppie"}
           </span>
         </div>
-        <div className="flex items-center gap-3 text-[10px] text-[#9d97b1]">
+        <div className="flex items-center gap-3 text-[10px] text-[var(--color-tint-sky-text-soft)]">
           <span>
             ⏱ <span className="font-mono text-white/90">{fmt(elapsed)}</span>
           </span>
@@ -230,15 +231,15 @@ export function MemoryGame({ onReveal }: GameProps) {
                   scale: { duration: 0.5 },
                 }}
               >
-                <div className="absolute inset-0 grid place-items-center rounded-xl border border-white/10 bg-gradient-to-br from-[#1f1538] to-[#2d1b69] [backface-visibility:hidden]">
+                <div className="absolute inset-0 grid place-items-center rounded-xl border border-white/10 bg-gradient-to-br from-[var(--color-tint-ink-pale)] to-[var(--color-surface-hover)] [backface-visibility:hidden]">
                   <CardBack />
                 </div>
                 <div
                   className="absolute inset-0 grid place-items-center rounded-xl border [backface-visibility:hidden]"
                   style={{
                     transform: "rotateY(180deg)",
-                    background: card.matched ? `${ACCENT}1f` : "rgba(26,18,48,0.95)",
-                    borderColor: card.matched ? `${ACCENT}66` : "rgba(255,255,255,0.18)",
+                    background: card.matched ? `${ACCENT}1f` : "var(--color-card-glass)",
+                    borderColor: card.matched ? `${ACCENT}66` : "var(--color-on-dark-7)",
                     boxShadow: card.matched ? `0 0 18px ${ACCENT}55` : undefined,
                   }}
                 >
@@ -254,7 +255,7 @@ export function MemoryGame({ onReveal }: GameProps) {
         {phase === "preview" ? (
           <motion.p
             key="preview"
-            className="relative z-10 mt-4 text-xs uppercase tracking-[0.26em] text-[#9d97b1]"
+            className="relative z-10 mt-4 text-xs uppercase tracking-[0.26em] text-[var(--color-tint-sky-text-soft)]"
             initial={{ opacity: 0 }}
             animate={{ opacity: [0.3, 1, 0.3] }}
             exit={{ opacity: 0 }}
@@ -265,7 +266,7 @@ export function MemoryGame({ onReveal }: GameProps) {
         ) : phase === "active" ? (
           <motion.div
             key="active"
-            className="relative z-10 mt-4 flex items-center justify-center gap-2 text-xs text-[#b9b1c9]"
+            className="relative z-10 mt-4 flex items-center justify-center gap-2 text-xs text-[var(--color-tint-sky-mist)]"
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
@@ -293,7 +294,7 @@ export function MemoryGame({ onReveal }: GameProps) {
               Hai ritrovato
             </p>
             <p className="mt-1 font-display text-2xl text-white">
-              {fmt(elapsed)} <span className="text-sm text-[#aaa3bc]">· {moves} mosse</span>
+              {fmt(elapsed)} <span className="text-sm text-[var(--color-tint-sky-text)]">· {moves} mosse</span>
             </p>
             {bestTime === elapsed && (
               <motion.p
@@ -339,13 +340,13 @@ function CardBack() {
         </g>
       ))}
       <circle cx="32" cy="32" r="5" fill={ACCENT} fillOpacity="0.85" />
-      <circle cx="32" cy="32" r="2" fill="#0f0a1a" />
+      <circle cx="32" cy="32" r="2" fill="var(--color-bg)" />
     </svg>
   );
 }
 
 function Confetti() {
-  const colors = [ACCENT, "#ffd98a", "#ff9bcc", "#7ad9ff", "#c8baff"];
+  const colors = [ACCENT, "var(--color-tint-amber-pale)", "var(--color-tint-pink-pale)", "var(--color-tint-sky-bright)", "var(--color-tint-violet-pale)"];
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       {Array.from({ length: 36 }, (_, i) => {

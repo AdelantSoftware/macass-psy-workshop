@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { motion } from "framer-motion";
@@ -26,7 +27,7 @@ export function ProgressBar({
   return (
     <div className={className}>
       {(label || rightLabel) && (
-        <div className="flex justify-between text-xs text-[#a09ab5] mb-2">
+        <div className="flex justify-between text-xs text-[var(--color-muted)] mb-2">
           {label && <span>{label}</span>}
           {rightLabel && <span>{rightLabel}</span>}
         </div>
@@ -72,7 +73,7 @@ export function ProgressDots({
           className="h-1.5 rounded-full"
           animate={{
             width: i < filled ? 18 : 6,
-            backgroundColor: i < filled ? color : "rgba(255,255,255,0.15)",
+            backgroundColor: i < filled ? color : "var(--color-on-dark-6)",
           }}
           transition={{ type: "spring", stiffness: 220, damping: 18 }}
         />

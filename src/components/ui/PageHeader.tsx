@@ -1,3 +1,4 @@
+/* refactored: tokens */
 import Link from "next/link";
 import { type ReactNode } from "react";
 import { motion } from "framer-motion";
@@ -45,7 +46,7 @@ export function PageHeader({
         <nav className="mb-3 sm:absolute sm:mb-0 sm:left-4 sm:top-1/2 sm:-translate-y-1/2 sm:left-6">
           <Link
             href={backHref}
-            className="inline-flex items-center gap-1 text-sm text-[#8b85a0] hover:text-white transition-colors min-h-[44px] min-w-[44px] px-2 sm:px-0"
+            className="inline-flex items-center gap-1 text-sm text-[var(--color-muted-strong)] hover:text-white transition-colors min-h-[44px] min-w-[44px] px-2 sm:px-0"
           >
             <span aria-hidden="true">←</span>
             <span className="sm:sr-only">{backLabel}</span>
@@ -63,7 +64,7 @@ export function PageHeader({
       </motion.h1>
       {subtitle && (
         <motion.p
-          className="mt-1 text-sm text-[#8b85a0]"
+          className="mt-1 text-sm text-[var(--color-muted-strong)]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.1 }}

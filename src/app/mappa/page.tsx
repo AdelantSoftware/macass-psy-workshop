@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import Image from "next/image";
@@ -24,7 +25,7 @@ const PIN_POSITIONS: ReadonlyArray<{ top: string; left: string }> = [
 
 export default function MappaPage() {
   return (
-    <main className="min-h-dvh bg-[#0f0a1a] pb-20 sm:pb-24 safe-inset">
+    <main className="min-h-dvh bg-[var(--color-bg)] pb-20 sm:pb-24 safe-inset">
       <PageHeader
         title={
           <>
@@ -45,7 +46,7 @@ export default function MappaPage() {
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 60vw"
           />
-          <div className="absolute inset-0 bg-[#0f0a1a]/30" />
+          <div className="absolute inset-0 bg-[var(--color-bg)]/30" />
           {STEPS.map((step, i) => (
             <PinMarker
               key={step.id}

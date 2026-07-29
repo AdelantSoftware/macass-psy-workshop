@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -89,7 +90,7 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
   }, [scanning, onScan]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#0f0a1a] flex flex-col items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-[var(--color-bg)] flex flex-col items-center justify-center">
       <div className="relative w-full max-w-lg aspect-[3/4] rounded-2xl overflow-hidden bg-black">
         <div id="qr-reader" className="w-full h-full" />
       </div>

@@ -1,3 +1,4 @@
+/* refactored: tokens */
 "use client";
 
 import { motion } from "framer-motion";
@@ -48,13 +49,13 @@ export function RevealCard({
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <motion.div
-        className="rounded-2xl bg-gradient-to-br from-[#1a1230] to-[#2d1b69] border border-white/10 p-6 sm:p-10"
+        className="rounded-2xl bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-hover)] border border-white/10 p-6 sm:p-10"
         initial={{ scale: 0.9 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
       >
         {eyebrow && (
-          <p className="text-xs sm:text-sm text-[#8b85a0] mb-3 sm:mb-4">
+          <p className="text-xs sm:text-sm text-[var(--color-muted-strong)] mb-3 sm:mb-4">
             {eyebrow}
           </p>
         )}
@@ -74,7 +75,7 @@ export function RevealCard({
           transition={{ duration: 0.6, delay: 0.5 }}
         />
         {resolvedCaption !== undefined && (
-          <p className="text-xs sm:text-sm text-[#8b85a0]">{resolvedCaption}</p>
+          <p className="text-xs sm:text-sm text-[var(--color-muted-strong)]">{resolvedCaption}</p>
         )}
       </motion.div>
       <motion.button
