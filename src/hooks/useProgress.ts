@@ -17,27 +17,57 @@ const DEFAULT_PROGRESS: Progress = {
 };
 
 /**
- * localStorage-backed progress store. Using `useSyncExternalStore`
- * (instead of a `useEffect`-driven `useState`) keeps us in line with
- * React 19's recommendation: state is derived from a subscribe
- * pattern, not from a setState-in-effect.
+ * localStorage-backed progress store, using `useSyncExternalStore`.
+ *
+ * Important: `getSnapshot` MUST return a stable reference as long as
+ * the underlying value has not changed. Otherwise React 19 detects an
+ * infinite update loop (Minified error #185). We achieve this by
+ * holding a single module-level cache that we only invalidate on write.
  */
 
 const isBrowser = () => typeof window !== "undefined";
 
+let cachedSnapshot: Progress | null = null;
+
+const invalidateCache = () => {
+  cachedSnapshot = null;
+};
+
+const isSameProgress = (a: Progress, b: Progress) =>
+  a.currentStep === b.currentStep &&
+  a.unlockedSteps.length === b.unlockedSteps.length &&
+  a.completedSteps.length === b.completedSteps.length &&
+  a.unlockedSteps.every((v, i) => v === b.unlockedSteps[i]) &&
+  a.completedSteps.every((v, i) => v === b.completedSteps[i]);
+
 const readSnapshot = (): Progress => {
-  if (!isBrowser()) return DEFAULT_PROGRESS;
+  if (cachedSnapshot) return cachedSnapshot;
+  if (!isBrowser()) {
+    cachedSnapshot = DEFAULT_PROGRESS;
+    return cachedSnapshot;
+  }
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_PROGRESS;
+    if (!raw) {
+      cachedSnapshot = DEFAULT_PROGRESS;
+      return cachedSnapshot;
+    }
     const parsed = JSON.parse(raw) as Partial<Progress>;
-    return {
+    const next: Progress = {
       unlockedSteps: Array.isArray(parsed.unlockedSteps) ? parsed.unlockedSteps : [1],
       completedSteps: Array.isArray(parsed.completedSteps) ? parsed.completedSteps : [],
       currentStep: typeof parsed.currentStep === "number" ? parsed.currentStep : 1,
     };
+    // If the parsed value matches the previous cache, keep the previous
+    // reference so consumers don't see a new identity.
+    if (cachedSnapshot && isSameProgress(cachedSnapshot, next)) {
+      return cachedSnapshot;
+    }
+    cachedSnapshot = next;
+    return cachedSnapshot;
   } catch {
-    return DEFAULT_PROGRESS;
+    cachedSnapshot = DEFAULT_PROGRESS;
+    return cachedSnapshot;
   }
 };
 
@@ -48,6 +78,7 @@ const writeSnapshot = (progress: Progress) => {
   } catch {
     /* quota / private mode — ignore */
   }
+  cachedSnapshot = progress;
   listeners.forEach((l) => l());
 };
 
@@ -112,6 +143,7 @@ export function useProgress() {
   );
 
   const resetProgress = useCallback(() => {
+    invalidateCache();
     writeSnapshot(DEFAULT_PROGRESS);
   }, []);
 
