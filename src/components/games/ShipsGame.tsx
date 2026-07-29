@@ -14,21 +14,16 @@ const HARBOR_DEFAULT_WIDTH = 320;
 export function ShipsGame({ onReveal }: GameProps) {
   const [phase, setPhase] = useState<"intro" | "active" | "complete">("intro");
   const [shipX, setShipX] = useState(0);
-  const [harborWidth, setHarborWidth] = useState(HARBOR_DEFAULT_WIDTH);
   const harborRef = useRef<HTMLDivElement>(null);
+  // Track the harbor width with a callback ref, so reading the DOM
+  // dimension is implicit and does not need a ResizeObserver effect
+  // (which would set state during render of the parent).
+  const [harborWidth, setHarborWidth] = useState<number>(HARBOR_DEFAULT_WIDTH);
+  const setHarborRef = useCallback((node: HTMLDivElement | null) => {
+    harborRef.current = node;
+    if (node) setHarborWidth(node.clientWidth);
+  }, []);
   const revealedRef = useRef(false);
-
-  // Track the harbor width so drag constraints can use it without reading
-  // the ref during render (which React 19 forbids).
-  useEffect(() => {
-    if (!harborRef.current) return;
-    const observer = new ResizeObserver(([entry]) => {
-      if (entry) setHarborWidth(entry.contentRect.width);
-    });
-    observer.observe(harborRef.current);
-    setHarborWidth(harborRef.current.clientWidth);
-    return () => observer.disconnect();
-  }, [phase]);
 
   const complete = useCallback(() => {
     if (revealedRef.current) return;
@@ -99,7 +94,7 @@ export function ShipsGame({ onReveal }: GameProps) {
           className="text-center"
         >
           <div
-            ref={harborRef}
+            ref={setHarborRef}
             className="relative h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-[#090617] shadow-2xl sm:h-[340px]"
             style={{ boxShadow: `inset 0 0 70px ${ACCENT}12` }}
           >

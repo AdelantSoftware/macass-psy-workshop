@@ -50,17 +50,19 @@ export function HugGame({ onReveal }: GameProps) {
   }, [pressing, phase]);
 
   // Auto-progress to "complete" once the bar fills.
-  // Triggered from the rAF loop (not a setState-in-effect) so the
-  // phase transition happens at the source of the progress tick.
+  // The rAF loop is the single source of truth for `progress`; this
+  // effect only watches it for the one-shot transition to "complete"
+  // (guarded by a ref so we never re-schedule the side effects).
   useEffect(() => {
     if (progress >= 100 && phase === "active" && !revealCalled.current) {
       revealCalled.current = true;
-      setTimeout(() => {
+      const id = window.setTimeout(() => {
         setPhase("complete");
         setPressing(false);
         tryVibrate([40, 30, 80, 30, 140]);
-        setTimeout(onReveal, 2400);
+        window.setTimeout(onReveal, 2400);
       }, 0);
+      return () => window.clearTimeout(id);
     }
   }, [progress, phase, onReveal]);
 
