@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/cn";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -18,8 +19,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Il Percorso delle Sei Parole — MACASS Psy Workshop",
-  description:
-    "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
+  description: "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
   manifest: "/manifest.json",
   icons: {
     icon: "/favicon.ico",
@@ -32,16 +32,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Il Percorso delle Sei Parole",
-    description:
-      "Scansiona i QR Code, affronta le sfide e scopri le sei parole della consapevolezza.",
+    description: "Scansiona i QR Code, affronta le sfide e scopri le sei parole della consapevolezza.",
     type: "website",
     locale: "it_IT",
   },
   twitter: {
     card: "summary_large_image",
     title: "Il Percorso delle Sei Parole",
-    description:
-      "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
+    description: "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
   },
 };
 
@@ -53,21 +51,14 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
       <head>
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
       </head>
-      <body
-        className={`${cormorant.variable} ${outfit.variable} antialiased min-h-[105vh] flex flex-col`}
-        style={{ fontFamily: "var(--font-body)" }}
-      >
+      <body className={cn(cormorant.variable, outfit.variable, "antialiased flex flex-col min-h-dvh")}>
         {children}
         <footer className="app-footer">
           <p className="text-xs text-[#8b85a0]">Made with love by Adelant</p>

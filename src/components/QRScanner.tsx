@@ -14,7 +14,7 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
 
   useEffect(() => {
     let stream: MediaStream | null = null;
-    let animationId: number | null = null;
+    const animationId: number | null = null;
     let stopped = false;
 
     const startCamera = async () => {

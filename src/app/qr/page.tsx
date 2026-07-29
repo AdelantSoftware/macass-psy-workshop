@@ -1,19 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { STEPS } from "@/data/steps";
 import { QRCodeSVG } from "qrcode.react";
+import { STEPS } from "@/data/steps";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { PrimaryButton } from "@/components/ui/Button";
 
 const QR_KEY = "macass2026";
-
-const QR_URLS = STEPS.map((step) => ({
-  ...step,
-  url: `https://voce.adelant.tech/tappa/${step.id}`,
-}));
+const QR_BASE = "https://voce.adelant.tech/tappa";
 
 export default function QRPage() {
+  const router = useRouter();
   const [inputKey, setInputKey] = useState("");
   const [authorized, setAuthorized] = useState(false);
 
@@ -26,63 +25,109 @@ export default function QRPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-white/5 flex items-center justify-center text-3xl">🔐</div>
-          <h1 className="text-xl sm:text-2xl font-bold mb-3">Area riservata</h1>
-          <p className="text-[#8b85a0] text-sm mb-6">Inserisci la chiave per accedere alla generazione QR code.</p>
-          <div className="flex gap-2">
+          <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-white/5 flex items-center justify-center text-3xl">
+            🔐
+          </div>
+          <h1 className="text-xl sm:text-2xl font-bold mb-3 text-balance">Area riservata</h1>
+          <p className="text-[#8b85a0] text-sm mb-6">
+            Inserisci la chiave per accedere alla generazione QR code.
+          </p>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (inputKey === QR_KEY) setAuthorized(true);
+              else window.alert("Chiave errata.");
+            }}
+            className="flex gap-2"
+          >
             <input
               type="password"
               value={inputKey}
               onChange={(e) => setInputKey(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter" && inputKey === QR_KEY) setAuthorized(true); }}
-              className="flex-1 px-4 py-3 bg-[#1a1230] border border-white/10 rounded-xl text-white text-center focus:outline-none focus:border-[#e85a8f] min-h-[48px]"
+              className="flex-1 px-4 py-3 bg-[#1a1230] border border-white/10 rounded-xl text-white text-center focus:outline-none focus:border-[var(--color-accent)] min-h-[48px]"
               placeholder="Chiave..."
             />
-            <button
-              onClick={() => { if (inputKey === QR_KEY) setAuthorized(true); else alert("Chiave errata."); }}
-              className="px-5 py-3 bg-[#e85a8f] text-white rounded-xl font-semibold hover:scale-105 active:scale-95 transition-transform cursor-pointer min-h-[48px]"
-            >
+            <PrimaryButton type="submit" size="md" className="!px-5 !py-3 !min-h-[48px]">
               →
-            </button>
-          </div>
-          <Link href="/home" className="inline-block mt-6 text-sm text-[#8b85a0] hover:text-white transition-colors min-h-[44px] py-2">
+            </PrimaryButton>
+          </form>
+          <button
+            onClick={() => router.push("/home")}
+            className="inline-block mt-6 text-sm text-[#8b85a0] hover:text-white transition-colors min-h-[44px] py-2 cursor-pointer"
+          >
             ← Torna alla Home
-          </Link>
+          </button>
         </motion.div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-dvh bg-[#0f0a1a] pb-24 safe-inset">
-      <div className="relative py-12 sm:py-16 layout-padding text-center border-b border-white/5">
-        <Link href="/home" className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8b85a0] hover:text-white transition-colors text-sm min-h-[44px] flex items-center justify-center">← Home</Link>
-        <h1 className="text-xl sm:text-3xl md:text-4xl font-bold">📱 QR Code — Stampa per il Festival</h1>
-        <p className="text-[#8b85a0] text-sm mt-1">Stampali e posizionali nelle 6 tappe del percorso</p>
-      </div>
+    <main className="min-h-dvh bg-[#0f0a1a] pb-20 sm:pb-24 safe-inset">
+      <PageHeader
+        title={
+          <>
+            <span aria-hidden="true">📱 </span>QR Code — Stampa per il Festival
+          </>
+        }
+        subtitle="Stampali e posizionali nelle 6 tappe del percorso"
+        backHref="/home"
+        backLabel="Home"
+        dense
+      />
 
-      <div className="max-w-6xl mx-auto layout-padding mt-12 sm:mt-16">
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8" initial="hidden" animate="show" variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } }}>
-          {QR_URLS.map((step) => (
-            <motion.div key={step.id} variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }} className="bg-[#1a1230] border border-white/5 rounded-2xl p-4 sm:p-6 text-center">
+      <div className="max-w-6xl mx-auto layout-padding mt-10 sm:mt-14">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: { opacity: 0 },
+            show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+          }}
+        >
+          {STEPS.map((step) => (
+            <motion.div
+              key={step.id}
+              variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
+              className="bg-[#1a1230] border border-white/5 rounded-2xl p-4 sm:p-6 text-center"
+            >
               <div className="inline-block mb-3">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold" style={{ backgroundColor: step.color }}>{step.id}</div>
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
+                  style={{ backgroundColor: step.color }}
+                >
+                  {step.id}
+                </div>
               </div>
               <h3 className="font-bold text-base sm:text-lg mb-1">{step.title}</h3>
-              <p className="text-[#8b85a0] text-xs sm:text-sm mb-3 sm:mb-4">📍 {step.location}</p>
+              <p className="text-[#8b85a0] text-xs sm:text-sm mb-3 sm:mb-4">
+                📍 {step.location}
+              </p>
               <div className="inline-block p-3 sm:p-4 bg-white rounded-xl mb-3 sm:mb-4">
-                <QRCodeSVG value={step.url} size={160} bgColor="#ffffff" fgColor={step.color} level="H" includeMargin={false} />
+                <QRCodeSVG
+                  value={`${QR_BASE}/${step.id}`}
+                  size={160}
+                  bgColor="#ffffff"
+                  fgColor={step.color}
+                  level="H"
+                  includeMargin={false}
+                />
               </div>
-              <p className="text-[10px] sm:text-xs text-[#8b85a0] mb-2 font-mono break-all">{step.url}</p>
-              <p className="text-sm font-semibold" style={{ color: step.color }}>Parola: {step.word}</p>
+              <p className="text-[10px] sm:text-xs text-[#8b85a0] mb-2 font-mono break-all">
+                {`${QR_BASE}/${step.id}`}
+              </p>
+              <p className="text-sm font-semibold" style={{ color: step.color }}>
+                Parola: {step.word}
+              </p>
             </motion.div>
           ))}
         </motion.div>
 
-        <div className="mt-10 sm:mt-12 text-center">
-          <button onClick={() => window.print()} className="px-6 py-3 sm:px-8 sm:py-3 bg-gradient-to-r from-[#e85a8f] to-[#c84a7a] text-white rounded-full font-semibold hover:scale-105 active:scale-95 transition-transform cursor-pointer min-h-[48px] text-sm sm:text-base">
+        <div className="mt-8 sm:mt-12 text-center">
+          <PrimaryButton onClick={() => window.print()} size="lg">
             🖨️ Stampa tutti i QR Code
-          </button>
+          </PrimaryButton>
         </div>
       </div>
     </main>

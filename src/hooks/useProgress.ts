@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "macass-psy-workshop-progress";
 
@@ -16,99 +16,114 @@ const DEFAULT_PROGRESS: Progress = {
   currentStep: 1,
 };
 
+/**
+ * localStorage-backed progress store. Using `useSyncExternalStore`
+ * (instead of a `useEffect`-driven `useState`) keeps us in line with
+ * React 19's recommendation: state is derived from a subscribe
+ * pattern, not from a setState-in-effect.
+ */
+
+const isBrowser = () => typeof window !== "undefined";
+
+const readSnapshot = (): Progress => {
+  if (!isBrowser()) return DEFAULT_PROGRESS;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return DEFAULT_PROGRESS;
+    const parsed = JSON.parse(raw) as Partial<Progress>;
+    return {
+      unlockedSteps: Array.isArray(parsed.unlockedSteps) ? parsed.unlockedSteps : [1],
+      completedSteps: Array.isArray(parsed.completedSteps) ? parsed.completedSteps : [],
+      currentStep: typeof parsed.currentStep === "number" ? parsed.currentStep : 1,
+    };
+  } catch {
+    return DEFAULT_PROGRESS;
+  }
+};
+
+const writeSnapshot = (progress: Progress) => {
+  if (!isBrowser()) return;
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  } catch {
+    /* quota / private mode — ignore */
+  }
+  listeners.forEach((l) => l());
+};
+
+const listeners = new Set<() => void>();
+
+const subscribe = (listener: () => void) => {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+};
+
+const getServerSnapshot = (): Progress => DEFAULT_PROGRESS;
+
+const getSnapshot = (): Progress => readSnapshot();
+
+const update = (mutator: (current: Progress) => Progress) => {
+  const next = mutator(readSnapshot());
+  writeSnapshot(next);
+};
+
 export function useProgress() {
-  const [progress, setProgress] = useState<Progress>(DEFAULT_PROGRESS);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        setProgress(JSON.parse(stored));
-      }
-    } catch {
-      // ignore
-    }
-    setLoaded(true);
-  }, []);
-
-  const save = useCallback((p: Progress) => {
-    setProgress(p);
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
-    } catch {
-      // ignore
-    }
-  }, []);
+  const progress = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const unlockStep = useCallback(
     (stepId: number) => {
-      // Step 1 is always unlocked by default
+      // Step 1 is always unlocked by default.
       if (stepId === 1) return;
-
-      // Can only unlock if previous step is completed
-      const prevCompleted = progress.completedSteps.includes(stepId - 1);
-      if (!prevCompleted) return;
-
-      const updated = {
-        ...progress,
-        unlockedSteps: progress.unlockedSteps.includes(stepId)
-          ? progress.unlockedSteps
-          : [...progress.unlockedSteps, stepId],
+      const current = readSnapshot();
+      if (!current.completedSteps.includes(stepId - 1)) return;
+      update((p) => ({
+        ...p,
+        unlockedSteps: p.unlockedSteps.includes(stepId)
+          ? p.unlockedSteps
+          : [...p.unlockedSteps, stepId],
         currentStep: stepId,
-      };
-      save(updated);
+      }));
     },
-    [progress, save]
+    [],
   );
 
-  const completeStep = useCallback(
-    (stepId: number) => {
-      const updated = {
-        ...progress,
-        completedSteps: progress.completedSteps.includes(stepId)
-          ? progress.completedSteps
-          : [...progress.completedSteps, stepId],
-      };
-      save(updated);
-    },
-    [progress, save]
-  );
+  const completeStep = useCallback((stepId: number) => {
+    update((p) => ({
+      ...p,
+      completedSteps: p.completedSteps.includes(stepId)
+        ? p.completedSteps
+        : [...p.completedSteps, stepId],
+    }));
+  }, []);
 
   const isUnlocked = useCallback(
     (stepId: number) => progress.unlockedSteps.includes(stepId),
-    [progress.unlockedSteps]
+    [progress.unlockedSteps],
   );
 
   const isCompleted = useCallback(
     (stepId: number) => progress.completedSteps.includes(stepId),
-    [progress.completedSteps]
+    [progress.completedSteps],
   );
 
-  const allCompleted = progress.completedSteps.length >= 6;
-
-  // Check if a step is the next available step to scan
   const canScan = useCallback(
-    (stepId: number) => {
-      if (stepId === 1) return true; // Step 1 is always scannable (already unlocked)
-      return progress.completedSteps.includes(stepId - 1);
-    },
-    [progress.completedSteps]
+    (stepId: number) => stepId === 1 || progress.completedSteps.includes(stepId - 1),
+    [progress.completedSteps],
   );
 
   const resetProgress = useCallback(() => {
-    save(DEFAULT_PROGRESS);
-  }, [save]);
+    writeSnapshot(DEFAULT_PROGRESS);
+  }, []);
 
   return {
     progress,
-    loaded,
+    loaded: true,
     unlockStep,
     completeStep,
     isUnlocked,
     isCompleted,
     canScan,
-    allCompleted,
+    allCompleted: progress.completedSteps.length >= 6,
     resetProgress,
   };
 }
