@@ -98,14 +98,12 @@ export function AgendaGame({ onReveal }: GameProps) {
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-[var(--color-tint-sky-faint)]">
               Scorri via ciò che oggi non ti serve. Cancellare può essere un gesto di cura.
             </p>
-            <motion.button
+            <button
               onClick={() => setPhase("active")}
-              className="mt-8 min-h-12 rounded-full bg-[var(--color-accent-sky)] px-7 py-3 text-sm font-semibold text-white shadow-[0_0_30px_var(--color-accent-sky)] cursor-pointer"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
+              className="btn btn-primary btn-lg mt-8"
             >
               Apri la mia agenda
-            </motion.button>
+            </button>
           </motion.div>
         ) : phase === "active" ? (
           <motion.div

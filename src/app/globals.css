@@ -1,33 +1,21 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @theme {
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Outfit", system-ui, sans-serif;
 
-  /* ─── Brand ─── */
-  --color-bg: #0f0a1a;
-  --color-surface: #1a1230;
-  --color-surface-hover: #2d1b69;
-  --color-text: #f0eef5;
-  --color-text-warm: #c8c0d8;
-  --color-muted: #a09ab5;
-  --color-muted-strong: #8b85a0;
-
-  /* ─── Accents (one per tappa + 1 primary) ─── */
-  --color-accent: #e85a8f;        /* primary pink, finale */
+  /* Accenti per tappa */
+  --color-accent-rust: #e8735a;
+  --color-accent-sky: #5a8fe8;
+  --color-accent-amber: #e8c85a;
+  --color-accent-mint: #5ae8c8;
+  --color-accent-violet: #9e5ae8;
   --color-accent-deep: #c84a7a;
   --color-accent-darker: #a83a6a;
   --color-accent-soft: #e85a8f33;
-  --color-accent-mint: #5ae8c8;    /* memory */
-  --color-accent-rust: #e8735a;    /* emotion wheel */
-  --color-accent-sky: #5a8fe8;     /* agenda */
-  --color-accent-amber: #e8c85a;   /* hug */
-  --color-accent-violet: #9e5ae8;  /* ships */
 
-  /* ─── Per-accent tints (bright / pale / glass / bg-soft) ───
-     Used for sub-accents in the wheel, drag affordances, hover layers.
-     Pattern: each accent gets a "bright" (most-saturated lighter shade) +
-     "pale" (soft glow), and the "20/33/40/55/66" suffix is the alpha. */
+  /* Tints per minigiochi */
   --color-tint-sky-bright: #74a8ff;
   --color-tint-sky-pale: #8ab2f5;
   --color-tint-sky-paler: #8ab4fb;
@@ -45,32 +33,25 @@
   --color-tint-sky-ring: #7cafff;
   --color-tint-sky-edge: #6f9de9;
   --color-tint-sky-text-soft: #9d97b1;
-
   --color-tint-rust-pale: #ff9b7d;
   --color-tint-rust-light: #ff9b87;
-
   --color-tint-amber-pale: #fff5d6;
-
   --color-tint-violet-pale: #d9baff;
-
   --color-tint-pink-pale: #f5aec8;
   --color-tint-pink-paler: #f2aec7;
-
   --color-tint-ink: #1a1230;
   --color-tint-ink-pale: #171027;
 
-  /* ─── Surface scrims and shadows ─── */
+  /* Scrims + shadows */
   --color-scrim-80: rgba(15, 10, 26, 0.8);
   --color-scrim-60: rgba(15, 10, 26, 0.6);
   --color-scrim-90: rgba(15, 10, 26, 0.9);
   --color-scrim-30: rgba(15, 10, 26, 0.3);
   --color-scrim-20: rgba(15, 10, 26, 0.2);
   --color-scrim-15: rgba(15, 10, 26, 0.15);
-
   --color-shadow-soft: rgba(0, 0, 0, 0.4);
   --color-shadow-mid: rgba(0, 0, 0, 0.3);
   --color-shadow-deep: rgba(0, 0, 0, 0.5);
-
   --color-on-dark-1: rgba(255, 255, 255, 0.02);
   --color-on-dark-2: rgba(255, 255, 255, 0.05);
   --color-on-dark-3: rgba(255, 255, 255, 0.06);
@@ -82,26 +63,39 @@
   --color-on-dark-9: rgba(255, 255, 255, 0.25);
   --color-on-dark-10: rgba(255, 255, 255, 0.28);
   --color-on-dark-11: rgba(255, 255, 255, 0.4);
-
   --color-card-glass: rgba(26, 18, 48, 0.95);
   --color-card-glass-2: rgba(26, 18, 48, 0.8);
 
-  /* ─── Gradients as raw values ─── */
+  /* Gradienti */
   --gradient-hero: linear-gradient(135deg, #e85a8f 0%, #5ae8c8 100%);
   --gradient-cta: linear-gradient(135deg, #e85a8f 0%, #c84a7a 50%, #a83a6a 100%);
   --gradient-progress: linear-gradient(90deg, #e85a8f, #5ae8c8);
   --gradient-overlay-bottom: linear-gradient(180deg, #0f0a1a30 0%, #0f0a1a 100%);
   --gradient-overlay-top: linear-gradient(0deg, #0f0a1a, transparent);
+}
 
-  /* ─── Radii ─── */
-  --radius-card: 1rem;
-  --radius-button: 9999px;
-
-  /* ─── Spacing scale tokens (Touch targets: registered for
-       utility classes — see .touch-target / .touch-target-lg below) ─── */
-  --spacing-touch: 44px;
-  --spacing-touch-lg: 48px;
-  --spacing-touch-xl: 56px;
+/* DaisyUI custom theme override */
+[data-theme="macass"] {
+  --color-primary: #e85a8f;
+  --color-primary-content: #f0eef5;
+  --color-secondary: #1a1230;
+  --color-secondary-content: #f0eef5;
+  --color-accent: #5ae8c8;
+  --color-accent-content: #0f0a1a;
+  --color-neutral: #0f0a1a;
+  --color-neutral-content: #f0eef5;
+  --color-base-100: #0f0a1a;
+  --color-base-200: #1a1230;
+  --color-base-300: #2d1b69;
+  --color-base-content: #f0eef5;
+  --color-info: #5a8fe8;
+  --color-info-content: #0f0a1a;
+  --color-success: #5ae8c8;
+  --color-success-content: #0f0a1a;
+  --color-warning: #e8c85a;
+  --color-warning-content: #0f0a1a;
+  --color-error: #e8735a;
+  --color-error-content: #f0eef5;
 }
 
 :root {
@@ -109,16 +103,10 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
-
-  /* Animation easing shared across components */
   --ease-spring: cubic-bezier(0.12, 0.72, 0.12, 1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -129,46 +117,24 @@ html {
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-text);
   min-height: 100dvh;
   overflow-x: hidden;
+  overscroll-behavior: none;
   padding-top: var(--safe-top);
   padding-left: var(--safe-left);
   padding-right: var(--safe-right);
   padding-bottom: var(--safe-bottom);
-  overscroll-behavior: none;
   font-family: var(--font-body);
   display: flex;
   flex-direction: column;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  text-wrap: balance;
-}
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); text-wrap: balance; }
+button, a, input { touch-action: manipulation; }
+button { -webkit-user-select: none; user-select: none; }
+input, select, textarea { font-size: 16px !important; }
 
-/* Touch targets — minimum 44×44 for primary, 36 for inline */
-button, a, input {
-  touch-action: manipulation;
-}
-
-button {
-  -webkit-user-select: none;
-  user-select: none;
-  background: none;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-}
-
-input, select, textarea {
-  font-size: 16px !important; /* prevent iOS zoom */
-}
-
-/* ───────── Layout helpers ───────── */
-
-/* Safe areas */
+/* Safe areas + layout */
 .safe-top { padding-top: var(--safe-top); }
 .safe-bottom { padding-bottom: var(--safe-bottom); }
 .safe-inset {
@@ -177,35 +143,15 @@ input, select, textarea {
   padding-left: var(--safe-left);
   padding-right: var(--safe-right);
 }
-
-/* Horizontal gutter — applied to every screen so content never touches edges */
 .layout-padding {
   padding-left: max(1.25rem, calc(var(--safe-left) + 1.25rem));
   padding-right: max(1.25rem, calc(var(--safe-right) + 1.25rem));
 }
-
-/* Wider gutter for "hero" blocks (welcomes, finals) */
 .layout-padding-lg {
   padding-left: max(1.75rem, calc(var(--safe-left) + 1.75rem));
   padding-right: max(1.75rem, calc(var(--safe-right) + 1.75rem));
 }
 
-/* Vertical rhythm — apply to top-level sections of a page */
-.stack > * + * { margin-top: 1.5rem; }
-.stack-sm > * + * { margin-top: 0.75rem; }
-.stack-lg > * + * { margin-top: 3rem; }
-.stack-xl > * + * { margin-top: 4rem; }
-
-/* Inline micro-spacing via gap (preferred over margin-top) */
-.layout-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-.layout-stack-sm { gap: 0.75rem; }
-.layout-stack-lg { gap: 3rem; }
-
-/* App footer */
 .app-footer {
   margin-top: auto;
   padding: 1.5rem 1.25rem;
@@ -214,74 +160,30 @@ input, select, textarea {
   text-align: center;
 }
 
-/* ───────── Typography helpers ───────── */
 .text-balance { text-wrap: balance; }
-.text-pretty  { text-wrap: pretty; }
-
+.text-pretty { text-wrap: pretty; }
 .gradient-text {
   background: var(--gradient-hero);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-.text-shadow      { text-shadow: 0 2px 12px var(--color-shadow-deep), 0 1px 3px var(--color-shadow-mid); }
+.text-shadow { text-shadow: 0 2px 12px var(--color-shadow-deep), 0 1px 3px var(--color-shadow-mid); }
 .text-shadow-soft { text-shadow: 0 1px 8px var(--color-shadow-soft); }
 
-/* ───────── Touch-target utilities (replace min-h-[44px] / [48px] / [56px]) ───────── */
-.touch-target     { min-height: var(--spacing-touch); }
-.touch-target-lg  { min-height: var(--spacing-touch-lg); }
-.touch-target-xl  { min-height: var(--spacing-touch-xl); }
-
-/* ───────── Step-card progress (replaces h-[10px] / h-2.5 etc.) ───────── */
-.progress-bar-track { height: 10px; }
-.progress-bar-track-lg { height: 12px; }
-
-/* ───────── Pulse / shadow utilities using tokens ───────── */
-.shadow-pulse-pink {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 20px var(--color-accent-soft); }
-  50%      { box-shadow: 0 0 40px var(--color-accent-soft); }
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
-}
+/* Animazioni custom per minigiochi */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px var(--color-accent-soft); } 50% { box-shadow: 0 0 40px var(--color-accent-soft); } }
 
 .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
-.animate-spin-slow  { animation: spinSlow 20s linear infinite; }
-.animate-float      { animation: float 3s ease-in-out infinite; }
+.animate-spin-slow { animation: spinSlow 20s linear infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
 
-/* ───────── Cards ───────── */
-.step-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.step-card:hover, .step-card:active {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px var(--color-shadow-mid);
-}
-
-/* ───────── Scrollbar ───────── */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: var(--color-on-dark-6);
-  border-radius: 2px;
-}
+::-webkit-scrollbar-thumb { background: var(--color-on-dark-6); border-radius: 2px; }
 
-/* ───────── Print ───────── */
-@media print {
-  body { background: white; color: black; }
-  .no-print { display: none !important; }
-}
+@media print { body { background: white; color: black; } .no-print { display: none !important; } }

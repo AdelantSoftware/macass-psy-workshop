@@ -75,18 +75,12 @@ export function ShipsGame({ onReveal }: GameProps) {
           <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-tint-sky-shade)]">
             A volte basta attraversare un piccolo tratto d&apos;acqua per scoprire che qualcuno era già lì.
           </p>
-          <motion.button
+          <button
             onClick={() => setPhase("active")}
-            className="mt-6 min-h-[48px] rounded-full px-7 py-3 font-semibold text-white shadow-lg cursor-pointer"
-            style={{
-              background: `linear-gradient(135deg, ${ACCENT}, var(--color-tint-violet-pale))`,
-              boxShadow: `0 0 28px ${ACCENT}45`,
-            }}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
+            className="btn btn-primary btn-lg mt-6"
           >
             Entra nel porto
-          </motion.button>
+          </button>
         </motion.div>
       ) : (
         <motion.div
@@ -225,14 +219,13 @@ export function ShipsGame({ onReveal }: GameProps) {
                 className="mt-4"
               >
                 <p className="text-sm text-[var(--color-tint-sky-mist)]">Trascina la vela verso la nave illuminata</p>
-                <motion.button
-                  onClick={nudge}
-                  className="mt-2 min-h-[48px] rounded-full border border-[var(--color-accent-violet)]/35 bg-[var(--color-accent-violet)]/10 px-6 text-sm font-medium text-[var(--color-tint-violet-pale)] cursor-pointer"
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Avvicina la nave"
-                >
-                  oppure tocca per avanzare →
-                </motion.button>
+                <button
+              onClick={nudge}
+              className="btn btn-ghost btn-sm mt-3"
+              aria-label="Avvicina la nave"
+            >
+              oppure tocca per avanzare →
+            </button>
               </motion.div>
             ) : (
               <motion.div

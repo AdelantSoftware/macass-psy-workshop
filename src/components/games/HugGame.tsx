@@ -192,20 +192,19 @@ export function HugGame({ onReveal }: GameProps) {
       )}
 
       {phase === "intro" && (
-        <motion.button
-          onPointerDown={startPress}
-          onPointerUp={endPress}
-          onPointerLeave={endPress}
-          onPointerCancel={endPress}
-          whileTap={{ scale: 0.96 }}
-          className="relative z-10 mx-auto mt-7 inline-flex min-h-[56px] cursor-pointer touch-none items-center justify-center rounded-full px-8 text-base font-semibold text-[var(--color-surface)]"
-          style={{
-            background: `linear-gradient(135deg, ${ACCENT}, var(--color-tint-amber-pale))`,
-            boxShadow: `0 0 36px ${ACCENT}66`,
-          }}
-        >
-          <span className="mr-2">🤗</span>Tienimi stretto
-        </motion.button>
+        <button
+                      onPointerDown={startPress}
+                      onPointerUp={endPress}
+                      onPointerLeave={endPress}
+                      onPointerCancel={endPress}
+                      className="btn btn-lg text-base-100 mt-7"
+                      style={{
+                        background: `linear-gradient(135deg, ${ACCENT}, var(--color-tint-amber-pale))`,
+                        boxShadow: `0 0 36px ${ACCENT}66`,
+                      }}
+                    >
+                      <span className="mr-2">🤗</span>Tienimi stretto
+                    </button>
       )}
 
       <AnimatePresence>

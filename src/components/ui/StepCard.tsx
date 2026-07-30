@@ -1,6 +1,5 @@
-/* refactored: tokens */
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { cn } from "@/lib/cn";
@@ -8,90 +7,43 @@ import type { Step } from "@/data/steps";
 
 interface StepCardProps {
   step: Step;
-  /** Whether the step has been unlocked (by QR scan) */
   unlocked: boolean;
-  /** Whether the step has been completed */
   completed: boolean;
 }
 
-/**
- * Tappa summary card — used in the home grid and in the map legend.
- * Single source of truth so visuals stay aligned.
- */
 export function StepCard({ step, unlocked, completed }: StepCardProps) {
   const cardBody = (
     <>
-      <div className="relative h-40 sm:h-48">
-        <Image
-          src={step.image}
-          alt={step.title}
-          fill
-          className={cn("object-cover", !unlocked && "blur-sm")}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface)] to-transparent" />
-        <IconBadge
-          size="sm"
-          color={unlocked ? step.color : "var(--color-surface)"}
-          className="absolute top-3 left-3"
-        >
+      <figure className="relative h-40 sm:h-48">
+        <Image src={step.image} alt={step.title} fill className={cn("object-cover", !unlocked && "blur-sm")} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+        <div className="absolute inset-0 bg-gradient-to-t from-base-200 to-transparent" />
+        <IconBadge size="sm" color={unlocked ? step.color : "transparent"} className="absolute top-3 left-3">
           {unlocked ? step.id : "🔒"}
         </IconBadge>
-        {completed && (
-          <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-[var(--color-accent-mint)] flex items-center justify-center text-xs">
-            ✓
-          </div>
-        )}
-      </div>
-      <div className="p-4 sm:p-5 flex flex-col gap-1">
-        <h3 className="font-display font-bold text-lg sm:text-xl">
-          {unlocked ? step.title : "Tappa bloccata"}
-        </h3>
-        <p className="text-[var(--color-muted)] text-xs sm:text-sm">📍 {step.location}</p>
-        <p className="text-xs sm:text-sm text-[var(--color-muted)] leading-relaxed">
-          {unlocked ? step.description : "Scansiona il QR Code per sbloccare"}
-        </p>
-        <div className="flex items-center justify-between mt-2">
-          <span
-            className="text-[10px] sm:text-xs font-mono tracking-wider px-2 sm:px-3 py-1 rounded-full"
-            style={{
-              backgroundColor: unlocked ? `${step.color}20` : "var(--color-on-dark-2)",
-              color: unlocked && completed ? step.color : "var(--color-muted-strong)",
-            }}
-          >
+        {completed && <div className="absolute top-3 right-3 badge badge-success badge-sm">✓</div>}
+      </figure>
+      <div className="card-body p-4 sm:p-5 gap-1">
+        <h3 className="card-title text-lg">{unlocked ? step.title : "Tappa bloccata"}</h3>
+        <p className="text-xs text-base-content/60">📍 {step.location}</p>
+        <p className="text-xs text-base-content/60 leading-relaxed">{unlocked ? step.description : "Scansiona il QR Code per sbloccare"}</p>
+        <div className="card-actions justify-between items-center mt-2">
+          <span className={cn("badge badge-sm font-mono tracking-wider", completed && "badge-success")} style={completed ? {} : { backgroundColor: unlocked ? `${step.color}20` : "transparent", color: "var(--color-muted-strong)" }}>
             {completed ? step.word : "???"}
           </span>
-          <span className="text-[10px] sm:text-xs text-[var(--color-muted)]">
-            {step.id}/6
-          </span>
+          <span className="text-xs text-base-content/40">{step.id}/6</span>
         </div>
       </div>
     </>
   );
 
-  const cardClass = cn(
-    "step-card block rounded-2xl overflow-hidden border shadow-lg shadow-black/10",
-    unlocked
-      ? "bg-[var(--color-surface)] border-white/5"
-      : "bg-[var(--color-surface)]/50 border-white/5 opacity-60",
-    completed && "ring-2 ring-[var(--color-accent-mint)]/30",
-  );
+  const cardClass = cn("card bg-base-200 border border-base-300 overflow-hidden transition-all duration-200", completed && "ring-2 ring-success/30");
 
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 24 },
-        show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 200, damping: 24 } },
-      }}
-    >
+    <motion.div variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } }}>
       {unlocked ? (
-        <Link href={`/tappa/${step.id}`} className={cardClass}>
-          {cardBody}
-        </Link>
+        <Link href={`/tappa/${step.id}`} className={cardClass}>{cardBody}</Link>
       ) : (
-        <div className={cardClass} aria-disabled>
-          {cardBody}
-        </div>
+        <div className={cardClass} aria-disabled>{cardBody}</div>
       )}
     </motion.div>
   );

@@ -91,18 +91,12 @@ export function ScaleGame({ onReveal }: GameProps) {
           <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-tint-sky-quote)]">
             Lascia andare le misure che non ti appartengono. Il tuo valore non ha bisogno di confronti.
           </p>
-          <motion.button
-            onClick={() => setPhase("active")}
-            className="mt-6 min-h-[48px] rounded-full px-7 py-3 font-semibold text-white cursor-pointer"
-            style={{
-              background: `linear-gradient(135deg, ${ACCENT}, var(--color-tint-pink-paler))`,
-              boxShadow: `0 0 28px ${ACCENT}40`,
-            }}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-          >
-            Metti in equilibrio
-          </motion.button>
+          <button
+              onClick={() => setPhase("active")}
+              className="btn btn-primary btn-lg mt-6"
+            >
+              Metti in equilibrio
+            </button>
         </motion.div>
       </GameShell>
     );
@@ -115,7 +109,7 @@ export function ScaleGame({ onReveal }: GameProps) {
         animate={{ opacity: 1 }}
         className="relative pb-1 text-center"
       >
-        <div className="relative h-[390px] overflow-hidden rounded-3xl border border-[var(--color-on-dark-4)]/[0.08] bg-[radial-gradient(circle_at_50%_70%,rgba(232,90,143,0.12),transparent_40%),linear-gradient(180deg,#130b21,#0c0815)] sm:h-[430px]">
+        <div className="relative h-[390px] overflow-hidden rounded-3xl border border-[var(--color-on-dark-4)]/[0.08] bg-[radial-gradient(circle_at_50%_70%,var(--color-accent-soft),transparent_40%),var(--gradient-overlay-top)] sm:h-[430px]">
           {/* Sparkles */}
           {[0, 1, 2, 3, 4, 5].map((i) => (
             <motion.span
@@ -182,7 +176,7 @@ export function ScaleGame({ onReveal }: GameProps) {
                 transition={{ type: "spring", stiffness: 100, damping: 12 }}
               >
                 <div className="mx-auto h-16 w-px bg-gradient-to-b from-[var(--color-tint-pink-pale)] to-[var(--color-tint-sky-edge)]" />
-                <div className="relative -mt-1 min-h-[146px] rounded-b-[48px] border-x border-b border-[var(--color-tint-sky-edge)]/80 bg-[#2a1020]/80 px-2 pb-3 pt-4 backdrop-blur-sm">
+                <div className="relative -mt-1 min-h-[146px] rounded-b-[48px] border-x border-b border-[var(--color-tint-sky-edge)]/80 bg-[var(--color-tint-pink-pale)]/[0.08] px-2 pb-3 pt-4 backdrop-blur-sm">
                   <span className="absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[var(--color-tint-pink-pale)]" />
                   <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-tint-pink-pale)]">
                     Giudizi
@@ -239,7 +233,7 @@ export function ScaleGame({ onReveal }: GameProps) {
                 transition={{ type: "spring", stiffness: 100, damping: 12 }}
               >
                 <div className="mx-auto h-16 w-px bg-gradient-to-b from-[var(--color-tint-pink-pale)] to-[var(--color-tint-sky-edge)]" />
-                <div className="relative -mt-1 min-h-[146px] rounded-b-[48px] border-x border-b border-[var(--color-tint-sky-edge)]/80 bg-[#1d1729]/90 px-2 pb-3 pt-4">
+                <div className="relative -mt-1 min-h-[146px] rounded-b-[48px] border-x border-b border-[var(--color-tint-sky-edge)]/80 bg-[var(--color-tint-pink-pale)]/[0.08] px-2 pb-3 pt-4">
                   <span className="absolute -top-1 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[var(--color-tint-pink-pale)]" />
                   <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-[var(--color-tint-pink-pale)]">
                     Ciò che sei
@@ -247,7 +241,7 @@ export function ScaleGame({ onReveal }: GameProps) {
                   {QUALITIES.map((q, i) => (
                     <motion.div
                       key={q}
-                      className="mb-1.5 flex min-h-[20px] items-center justify-center rounded-full border border-white/10 bg-[var(--color-on-dark-2)]/[0.05] px-1 text-[9px] text-[#f3dce5] sm:text-[10px]"
+                      className="mb-1.5 flex min-h-[20px] items-center justify-center rounded-full border border-white/10 bg-[var(--color-on-dark-2)]/[0.05] px-1 text-[9px] text-[var(--color-text-warm)] sm:text-[10px]"
                       initial={{ opacity: 0, x: 12 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.08 }}

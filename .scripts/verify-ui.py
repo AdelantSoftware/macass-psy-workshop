@@ -268,24 +268,31 @@ def main() -> int:
     else:
         print("  ✓ no conflicts")
 
-    # 4. Arbitrary values (informational)
+    # 4. Arbitrary values (informational - warn only on non-CSS-variable patterns)
     print()
     print("[4/4] Arbitrary-value classes (informational)…")
     arb_counts: Counter[str] = Counter()
+    NON_TOKEN_PATTERN = re.compile(r"\[[^\]]*[^a-zA-Z0-9\-_.\-%]\]")  # crude filter
     for f in files:
         text = f.read_text(encoding="utf-8")
         for m in CLASS_ATTR_RE.finditer(text):
             cls = m.group(1) or m.group(2) or m.group(3) or m.group(4) or ""
             for tok in re.split(r"\s+", cls.strip()):
                 if "[" in tok and "]" in tok:
-                    # Only the bracketed portion
                     bracket = re.search(r"\[[^\]]+\]", tok)
                     if bracket:
-                        arb_counts[bracket.group(0)] += 1
+                        val = bracket.group(0)
+                        # Allow CSS variables: var(--...), calc(...), linear-gradient(...), etc.
+                        # Also allow percentages, em/rem/px inside brackets (standard Tailwind arbitrary values)
+                        # Flag only suspicious patterns: bare hex, bare numbers without units in non-size contexts
+                        if not re.search(r"var\(|calc\(|linear-gradient|radial-gradient|conic-gradient|%|em|rem|px|vw|vh|deg|turn|fr", val):
+                            arb_counts[val] += 1
     if arb_counts:
         for v, c in arb_counts.most_common(20):
             print(f"  {c:4d} × {v}")
-    print(f"  → {len(arb_counts)} unique bracketed values")
+        print(f"  → {len(arb_counts)} unique non-token bracketed values (review)")
+    else:
+        print("  ✓ no suspicious arbitrary values")
 
     print()
     print("─" * 60)
