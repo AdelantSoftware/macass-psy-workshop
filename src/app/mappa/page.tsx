@@ -20,20 +20,37 @@ const PIN_POSITIONS: ReadonlyArray<{ top: string; left: string }> = [
 export default function MappaPage() {
   return (
     <div className="min-h-dvh bg-base-100 pb-20">
-      <PageHeader title="📍 Mappa del Festival" subtitle="Le 6 posizioni dei QR Code da trovare" backHref="/home" />
+      <PageHeader
+        title="📍 Mappa del Festival"
+        subtitle="Le 6 posizioni dei QR Code da trovare"
+        backHref="/home"
+      />
 
       <div className="layout-padding mt-10">
-        <div className="card bg-base-200 border border-base-300 overflow-hidden">
+        <div className="card bg-base-200 border border-base-300/60 overflow-hidden shadow-lg shadow-black/20">
           <figure className="relative h-[45vh] sm:h-[50vh] md:h-[60vh]">
-            <Image src="/images/map-bg.jpg" alt="Mappa del festival" fill className="object-cover" sizes="(max-width: 768px) 100vw, 60vw" />
+            <Image
+              src="/images/map-bg.jpg"
+              alt="Mappa del festival"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 60vw"
+            />
             <div className="absolute inset-0 bg-base-100/30" />
             {STEPS.map((step, i) => (
-              <PinMarker key={step.id} step={step} position={PIN_POSITIONS[i]} delay={i * 0.3} />
+              <PinMarker
+                key={step.id}
+                step={step}
+                position={PIN_POSITIONS[i]}
+                delay={i * 0.3}
+              />
             ))}
           </figure>
         </div>
 
-        <SectionTitle size="sm" className="mt-6 mb-3">Legenda</SectionTitle>
+        <SectionTitle size="sm" className="mt-6 mb-3">
+          Legenda
+        </SectionTitle>
         <motion.div
           className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3"
           initial={{ opacity: 0, y: 12 }}

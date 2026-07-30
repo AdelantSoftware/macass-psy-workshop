@@ -29,7 +29,10 @@ export default function TappaClient({ stepId }: { stepId: number }) {
   const handleScan = useCallback(
     (data: string) => {
       setShowScanner(false);
-      if (!canScan(stepId)) { alert("Devi prima completare la tappa precedente."); return; }
+      if (!canScan(stepId)) {
+        alert("Devi prima completare la tappa precedente.");
+        return;
+      }
       const match = data.match(/\/tappa\/(\d)/);
       if (match && Number(match[1]) === stepId) unlockStep(stepId);
       else alert("QR Code non valido.");
@@ -42,14 +45,17 @@ export default function TappaClient({ stepId }: { stepId: number }) {
       <div className="hero min-h-dvh bg-base-100">
         <div className="hero-content text-center">
           <p className="text-xl mb-4">❌ Tappa non trovata</p>
-          <button onClick={() => router.push("/home")} className="link link-hover text-primary">Torna alla Home</button>
+          <button onClick={() => router.push("/home")} className="link link-hover text-primary">
+            Torna alla Home
+          </button>
         </div>
       </div>
     );
   }
 
   const Interaction = INTERACTIONS[stepId];
-  const handleNext = () => (stepId < 6 ? router.push(`/tappa/${stepId + 1}`) : router.push("/finale"));
+  const handleNext = () =>
+    stepId < 6 ? router.push(`/tappa/${stepId + 1}`) : router.push("/finale");
 
   if (!unlocked) {
     const prev = STEPS[stepId - 2];
@@ -60,22 +66,45 @@ export default function TappaClient({ stepId }: { stepId: number }) {
           title={step.title}
           description={
             canScan(stepId) ? (
-              <>Scansiona il QR Code a <strong className="text-base-content">{step.location}</strong> per sbloccare questa tappa.</>
+              <>
+                Scansiona il QR Code a{" "}
+                <strong className="text-base-content">{step.location}</strong>{" "}
+                per sbloccare questa tappa.
+              </>
             ) : (
-              <>Prima completa la tappa {stepId - 1} ({prev?.location ?? "precedente"}).</>
+              <>
+                Prima completa la tappa {stepId - 1} (
+                {prev?.location ?? "precedente"}).
+              </>
             )
           }
-          primaryAction={{ label: "📷 Scansiona QR Code", onClick: () => setShowScanner(true) }}
+          primaryAction={{
+            label: "📷 Scansiona QR Code",
+            onClick: () => setShowScanner(true),
+          }}
           secondaryAction={{
             label: "📱 Non hai la camera? Inserisci codice manualmente",
             render: (close) => (
-              <ManualCodeForm stepId={stepId} onSubmit={() => { unlockStep(stepId); close(); }} gateLocked={!canScan(stepId)} />
+              <ManualCodeForm
+                stepId={stepId}
+                onSubmit={() => {
+                  unlockStep(stepId);
+                  close();
+                }}
+                gateLocked={!canScan(stepId)}
+              />
             ),
           }}
           footerLink={{ href: "/home", label: "Torna alla Home" }}
         />
         <AnimatePresence>
-          {showScanner && <QRScanner key="scanner" onScan={handleScan} onClose={() => setShowScanner(false)} />}
+          {showScanner && (
+            <QRScanner
+              key="scanner"
+              onScan={handleScan}
+              onClose={() => setShowScanner(false)}
+            />
+          )}
         </AnimatePresence>
       </>
     );
@@ -83,21 +112,30 @@ export default function TappaClient({ stepId }: { stepId: number }) {
 
   return (
     <div className="min-h-dvh bg-base-100 flex flex-col">
-      {/* Fixed header */}
-      <div className="sticky top-0 z-20 bg-base-100 border-b border-base-300">
+      {/* Fixed header — più pulito */}
+      <div className="sticky top-0 z-20 bg-base-100/90 backdrop-blur-md border-b border-base-300/50">
         <div className="flex items-center gap-3 p-4 max-w-4xl mx-auto w-full">
-          <button onClick={() => router.push("/home")} className="btn btn-ghost btn-sm btn-square">
+          <button
+            onClick={() => router.push("/home")}
+            className="btn btn-ghost btn-sm btn-square text-base-content/60 hover:text-base-content"
+          >
             <span className="text-lg">←</span>
           </button>
-          <IconBadge size="md" color={step.color}>{step.id}</IconBadge>
+          <IconBadge size="md" color={step.color}>
+            {step.id}
+          </IconBadge>
           <div className="flex-1 min-w-0">
-            <h1 className="font-display text-lg sm:text-xl font-bold truncate">{step.title}</h1>
-            <p className="text-xs text-base-content/60 truncate">📍 {step.location}</p>
+            <h1 className="font-display text-lg sm:text-xl font-bold truncate">
+              {step.title}
+            </h1>
+            <p className="text-xs text-base-content/50 truncate">
+              📍 {step.location}
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Game content — fills remaining space */}
+      {/* Game content */}
       <div className="flex-1 flex flex-col">
         <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 sm:px-8 sm:py-10 max-w-4xl mx-auto w-full">
           <AnimatePresence mode="wait">
@@ -109,10 +147,10 @@ export default function TappaClient({ stepId }: { stepId: number }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
               >
-                <p className="text-center text-base-content/60 mb-6 leading-relaxed text-sm sm:text-base max-w-lg">
+                <p className="text-center text-base-content/50 mb-6 leading-relaxed text-sm sm:text-base max-w-lg font-light">
                   {step.description}
                 </p>
-                <div className="card bg-base-200 border border-base-300 w-full max-w-2xl">
+                <div className="card bg-base-200 border border-base-300/60 w-full max-w-2xl">
                   <div className="card-body p-4 sm:p-6 md:p-8">
                     <Interaction onReveal={handleReveal} />
                   </div>
@@ -126,7 +164,9 @@ export default function TappaClient({ stepId }: { stepId: number }) {
                   word={step.word}
                   color={step.color}
                   stepId={stepId}
-                  actionLabel={stepId < 6 ? "Prossima tappa →" : "Scopri il significato →"}
+                  actionLabel={
+                    stepId < 6 ? "Prossima tappa →" : "Scopri il significato →"
+                  }
                   onAction={handleNext}
                 />
               </div>

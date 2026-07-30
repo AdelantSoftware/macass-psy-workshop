@@ -19,41 +19,59 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Il Percorso delle Sei Parole — MACASS Psy Workshop",
-  description: "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
+  description:
+    "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
   manifest: "/manifest.json",
   icons: { icon: "/favicon.ico", apple: "/apple-touch-icon.png" },
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "MACASS Psy" },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "MACASS Psy",
+  },
   openGraph: {
     title: "Il Percorso delle Sei Parole",
-    description: "Scansiona i QR Code, affronta le sfide e scopri le sei parole della consapevolezza.",
-    type: "website", locale: "it_IT",
+    description:
+      "Scansiona i QR Code, affronta le sfide e scopri le sei parole della consapevolezza.",
+    type: "website",
+    locale: "it_IT",
   },
   twitter: {
     card: "summary_large_image",
     title: "Il Percorso delle Sei Parole",
-    description: "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
+    description:
+      "Un percorso immersivo di sei tappe per scoprire le sei parole della consapevolezza.",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#e85a8f",
+  themeColor: "#c9775e",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="it" data-theme="macass">
       <head>
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
       </head>
-      <body className={cn(cormorant.variable, outfit.variable, "antialiased flex flex-col min-h-dvh")}>
+      <body
+        className={cn(
+          cormorant.variable,
+          outfit.variable,
+          "antialiased flex flex-col min-h-dvh",
+        )}
+      >
         {children}
         <footer className="app-footer">
-          <p className="text-xs text-base-content/40">Made with love by Adelant</p>
+          <p>Made with love by Adelant</p>
         </footer>
       </body>
     </html>

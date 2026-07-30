@@ -5,7 +5,7 @@ import { useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GameShell, type GameProps } from "./shared";
 
-const ACCENT = "var(--color-accent-violet)";
+const ACCENT = "var(--color-accent-lavender)";
 const HARBOR_DEFAULT_WIDTH = 320;
 
 /**
@@ -67,12 +67,12 @@ export function ShipsGame({ onReveal }: GameProps) {
                 strokeWidth="3"
                 strokeLinecap="round"
               />
-              <path d="M31 53h35l-8 11H39Z" fill="var(--color-tint-violet-pale)" />
+              <path d="M31 53h35l-8 11H39Z" fill="var(--color-tint-lavender-pale)" />
               <path d="M47 29v25M45 31 33 51h12Z" stroke={ACCENT} fill={ACCENT} fillOpacity="0.6" />
             </svg>
           </motion.div>
           <p className="font-display text-2xl font-semibold text-white">Le Navi nel Porto</p>
-          <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-tint-sky-shade)]">
+          <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[var(--color-tint-clay-shade)]">
             A volte basta attraversare un piccolo tratto d&apos;acqua per scoprire che qualcuno era già lì.
           </p>
           <button
@@ -93,7 +93,7 @@ export function ShipsGame({ onReveal }: GameProps) {
             className="relative h-[300px] overflow-hidden rounded-3xl border border-white/10 bg-[var(--color-tint-ink-pale)] shadow-2xl sm:h-[340px]"
             style={{ boxShadow: `inset 0 0 70px ${ACCENT}12` }}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,var(--color-accent-violet),transparent_38%),linear-gradient(#100922,#171036_57%,#101b3b_58%,#070d25)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,var(--color-accent-lavender),transparent_38%),linear-gradient(#100922,#171036_57%,#101b3b_58%,#070d25)]" />
             {/* Stars */}
             {[10, 18, 27, 39, 48, 59, 73, 83, 91].map((left, i) => (
               <motion.i
@@ -106,9 +106,9 @@ export function ShipsGame({ onReveal }: GameProps) {
             ))}
             {/* Moon */}
             <motion.div
-              className="absolute right-[12%] top-7 h-12 w-12 rounded-full bg-[var(--color-tint-amber-pale)] sm:h-16 sm:w-16"
-              style={{ boxShadow: "0 0 35px var(--color-tint-amber-pale)88" }}
-              animate={{ boxShadow: ["0 0 24px var(--color-tint-amber-pale)55", "0 0 45px var(--color-tint-amber-pale)99", "0 0 24px var(--color-tint-amber-pale)55"] }}
+              className="absolute right-[12%] top-7 h-12 w-12 rounded-full bg-[var(--color-tint-ochre-pale)] sm:h-16 sm:w-16"
+              style={{ boxShadow: "0 0 35px var(--color-tint-ochre-pale)88" }}
+              animate={{ boxShadow: ["0 0 24px var(--color-tint-ochre-pale)55", "0 0 45px var(--color-tint-ochre-pale)99", "0 0 24px var(--color-tint-ochre-pale)55"] }}
               transition={{ duration: 4, repeat: Infinity }}
             />
             {/* Ocean */}
@@ -116,7 +116,7 @@ export function ShipsGame({ onReveal }: GameProps) {
               {[0, 1, 2, 3].map((i) => (
                 <motion.div
                   key={i}
-                  className="absolute h-px rounded-full bg-[var(--color-tint-violet-pale)]"
+                  className="absolute h-px rounded-full bg-[var(--color-tint-lavender-pale)]"
                   style={{
                     width: `${35 + i * 12}%`,
                     left: `${(i * 23) % 35}%`,
@@ -144,9 +144,9 @@ export function ShipsGame({ onReveal }: GameProps) {
                 <path
                   d="M8 56c8-26 24-37 43-35 13-20 38-17 47 4 20-3 37 12 44 31Z"
                   fill="var(--color-tint-ink-pale)"
-                  stroke="var(--color-tint-violet-pale)"
+                  stroke="var(--color-tint-lavender-pale)"
                 />
-                <path d="M68 23c-1-16 10-17 13-20-2 9 8 13 3 25" fill="var(--color-tint-violet-pale)" />
+                <path d="M68 23c-1-16 10-17 13-20-2 9 8 13 3 25" fill="var(--color-tint-lavender-pale)" />
               </svg>
             </div>
 
@@ -159,7 +159,7 @@ export function ShipsGame({ onReveal }: GameProps) {
                     animate={{ scaleX: 1, opacity: [0, 1, 0.7, 1] }}
                     transition={{ duration: 0.8 }}
                     style={{
-                      background: `linear-gradient(90deg, transparent, ${ACCENT}, var(--color-text), ${ACCENT})`,
+                      background: `linear-gradient(90deg, transparent, ${ACCENT}, var(--color-base-content), ${ACCENT})`,
                       boxShadow: `0 0 18px ${ACCENT}`,
                     }}
                   />
@@ -167,7 +167,7 @@ export function ShipsGame({ onReveal }: GameProps) {
                     <motion.span
                       key={i}
                       className="absolute left-[68%] top-[42%] h-1.5 w-1.5 rounded-full"
-                      style={{ background: i % 3 === 0 ? "var(--color-tint-amber-pale)" : ACCENT }}
+                      style={{ background: i % 3 === 0 ? "var(--color-tint-ochre-pale)" : ACCENT }}
                       initial={{ x: 0, y: 0, opacity: 1 }}
                       animate={{
                         x: Math.cos((i / 12) * Math.PI * 2) * (38 + (i % 3) * 10),
@@ -218,7 +218,7 @@ export function ShipsGame({ onReveal }: GameProps) {
                 exit={{ opacity: 0 }}
                 className="mt-4"
               >
-                <p className="text-sm text-[var(--color-tint-sky-mist)]">Trascina la vela verso la nave illuminata</p>
+                <p className="text-sm text-[var(--color-tint-clay-mist)]">Trascina la vela verso la nave illuminata</p>
                 <button
               onClick={nudge}
               className="btn btn-ghost btn-sm mt-3"
@@ -234,7 +234,7 @@ export function ShipsGame({ onReveal }: GameProps) {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-5"
               >
-                <p className="font-display text-2xl text-[var(--color-tint-violet-pale)]">
+                <p className="font-display text-2xl text-[var(--color-tint-lavender-pale)]">
                   La distanza diventa incontro.
                 </p>
                 <p className="mt-1 text-xs uppercase tracking-[0.25em] text-white/40">
@@ -258,8 +258,8 @@ function Boat({ small = false }: { small?: boolean }) {
     >
       <defs>
         <linearGradient id={small ? "smallHull" : "largeHull"} x1="0" y1="0" x2="0" y2="1">
-          <stop stopColor={small ? "var(--color-tint-violet-pale)" : "var(--color-tint-violet-pale)"} />
-          <stop offset="1" stopColor={small ? ACCENT : "var(--color-tint-violet-pale)"} />
+          <stop stopColor={small ? "var(--color-tint-lavender-pale)" : "var(--color-tint-lavender-pale)"} />
+          <stop offset="1" stopColor={small ? ACCENT : "var(--color-tint-lavender-pale)"} />
         </linearGradient>
       </defs>
       <path
@@ -269,20 +269,20 @@ function Boat({ small = false }: { small?: boolean }) {
         strokeOpacity="0.55"
         strokeWidth="2"
       />
-      <path d="M56 10v48" stroke="var(--color-tint-amber-pale)" strokeWidth="3" strokeLinecap="round" />
+      <path d="M56 10v48" stroke="var(--color-tint-ochre-pale)" strokeWidth="3" strokeLinecap="round" />
       <path
         d="M53 14 20 53h33Z"
-        fill={small ? ACCENT : "var(--color-tint-violet-pale)"}
+        fill={small ? ACCENT : "var(--color-tint-lavender-pale)"}
         fillOpacity="0.75"
         stroke="white"
         strokeOpacity="0.5"
       />
-      <path d="m60 23 28 30H60Z" fill="var(--color-tint-violet-pale)" fillOpacity="0.9" />
+      <path d="m60 23 28 30H60Z" fill="var(--color-tint-lavender-pale)" fillOpacity="0.9" />
       {!small && (
         <>
           <rect x="76" y="44" width="25" height="14" rx="3" fill="var(--color-tint-ink-pale)" />
-          <circle cx="83" cy="51" r="2" fill="var(--color-tint-amber-pale)" />
-          <circle cx="94" cy="51" r="2" fill="var(--color-tint-amber-pale)" />
+          <circle cx="83" cy="51" r="2" fill="var(--color-tint-ochre-pale)" />
+          <circle cx="94" cy="51" r="2" fill="var(--color-tint-ochre-pale)" />
         </>
       )}
     </svg>

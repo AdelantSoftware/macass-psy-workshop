@@ -5,97 +5,103 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Outfit", system-ui, sans-serif;
 
-  /* Accenti per tappa */
-  --color-accent-rust: #e8735a;
-  --color-accent-sky: #5a8fe8;
-  --color-accent-amber: #e8c85a;
-  --color-accent-mint: #5ae8c8;
-  --color-accent-violet: #9e5ae8;
-  --color-accent-deep: #c84a7a;
-  --color-accent-darker: #a83a6a;
-  --color-accent-soft: #e85a8f33;
+  /* Accenti per tappa — palette calda, terrosa, organica */
+  --color-accent-clay: #c9775e;
+  --color-accent-ochre: #b8926a;
+  --color-accent-sand: #c4a87c;
+  --color-accent-sage: #7fa87f;
+  --color-accent-lavender: #9a7ea8;
+  --color-accent-amber: #d4a85a;
 
-  /* Tints per minigiochi */
-  --color-tint-sky-bright: #74a8ff;
-  --color-tint-sky-pale: #8ab2f5;
-  --color-tint-sky-paler: #8ab4fb;
-  --color-tint-sky-shade: #a9a2bb;
-  --color-tint-sky-faint: #aaa4bc;
-  --color-tint-sky-mute: #9690aa;
-  --color-tint-sky-deepest: #827c94;
-  --color-tint-sky-text: #aaa3bc;
-  --color-tint-sky-quote: #aaa3b9;
-  --color-tint-sky-soft: #b7afc4;
-  --color-tint-sky-mist: #b9b1c9;
-  --color-tint-sky-pale-2: #d1cadf;
-  --color-tint-sky-glow: #eeeaf5;
-  --color-tint-sky-pill: #7fa9ef;
-  --color-tint-sky-ring: #7cafff;
-  --color-tint-sky-edge: #6f9de9;
-  --color-tint-sky-text-soft: #9d97b1;
-  --color-tint-rust-pale: #ff9b7d;
-  --color-tint-rust-light: #ff9b87;
-  --color-tint-amber-pale: #fff5d6;
-  --color-tint-violet-pale: #d9baff;
-  --color-tint-pink-pale: #f5aec8;
-  --color-tint-pink-paler: #f2aec7;
-  --color-tint-ink: #1a1230;
-  --color-tint-ink-pale: #171027;
+  --color-accent-deep: #b86a4a;
+  --color-accent-darker: #9a5a3e;
+  --color-accent-soft: #c9775e33;
 
-  /* Scrims + shadows */
-  --color-scrim-80: rgba(15, 10, 26, 0.8);
-  --color-scrim-60: rgba(15, 10, 26, 0.6);
-  --color-scrim-90: rgba(15, 10, 26, 0.9);
-  --color-scrim-30: rgba(15, 10, 26, 0.3);
-  --color-scrim-20: rgba(15, 10, 26, 0.2);
-  --color-scrim-15: rgba(15, 10, 26, 0.15);
-  --color-shadow-soft: rgba(0, 0, 0, 0.4);
-  --color-shadow-mid: rgba(0, 0, 0, 0.3);
-  --color-shadow-deep: rgba(0, 0, 0, 0.5);
-  --color-on-dark-1: rgba(255, 255, 255, 0.02);
-  --color-on-dark-2: rgba(255, 255, 255, 0.05);
-  --color-on-dark-3: rgba(255, 255, 255, 0.06);
-  --color-on-dark-4: rgba(255, 255, 255, 0.08);
-  --color-on-dark-5: rgba(255, 255, 255, 0.1);
-  --color-on-dark-6: rgba(255, 255, 255, 0.15);
-  --color-on-dark-7: rgba(255, 255, 255, 0.18);
-  --color-on-dark-8: rgba(255, 255, 255, 0.2);
-  --color-on-dark-9: rgba(255, 255, 255, 0.25);
-  --color-on-dark-10: rgba(255, 255, 255, 0.28);
-  --color-on-dark-11: rgba(255, 255, 255, 0.4);
-  --color-card-glass: rgba(26, 18, 48, 0.95);
-  --color-card-glass-2: rgba(26, 18, 48, 0.8);
+  /* Tints per minigiochi — palette estesa */
+  --color-tint-clay-pale: #e8b09e;
+  --color-tint-clay-light: #e0a08c;
+  --color-tint-clay-paler: #d6907a;
+  --color-tint-clay-shade: #c07a64;
+  --color-tint-clay-faint: #b06a55;
+  --color-tint-clay-mute: #a05a48;
+  --color-tint-clay-deepest: #8a4a3a;
+  --color-tint-clay-text: #d4a08e;
+  --color-tint-clay-quote: #cfa08e;
+  --color-tint-clay-soft: #dab0a0;
+  --color-tint-clay-mist: #e0c0b4;
+  --color-tint-clay-pale-2: #e8d0c8;
+  --color-tint-clay-glow: #f0e8e0;
+  --color-tint-clay-pill: #d49078;
+  --color-tint-clay-ring: #cca090;
+  --color-tint-clay-edge: #b88a78;
+  --color-tint-clay-text-soft: #b09888;
 
-  /* Gradienti */
-  --gradient-hero: linear-gradient(135deg, #e85a8f 0%, #5ae8c8 100%);
-  --gradient-cta: linear-gradient(135deg, #e85a8f 0%, #c84a7a 50%, #a83a6a 100%);
-  --gradient-progress: linear-gradient(90deg, #e85a8f, #5ae8c8);
-  --gradient-overlay-bottom: linear-gradient(180deg, #0f0a1a30 0%, #0f0a1a 100%);
-  --gradient-overlay-top: linear-gradient(0deg, #0f0a1a, transparent);
+  --color-tint-ochre-pale: #e8d0b8;
+  --color-tint-ochre-light: #dcc0a4;
+  --color-tint-sage-pale: #c8e0c8;
+  --color-tint-lavender-pale: #d0c0e0;
+  --color-tint-amber-pale: #f0e0c0;
+  --color-tint-amber-paler: #e8d4b8;
+
+  --color-tint-ink: #1a1410;
+  --color-tint-ink-pale: #14100c;
+
+  /* Scrims + shadows — caldi */
+  --color-scrim-80: rgba(20, 16, 12, 0.8);
+  --color-scrim-60: rgba(20, 16, 12, 0.6);
+  --color-scrim-90: rgba(20, 16, 12, 0.9);
+  --color-scrim-30: rgba(20, 16, 12, 0.3);
+  --color-scrim-20: rgba(20, 16, 12, 0.2);
+  --color-scrim-15: rgba(20, 16, 12, 0.15);
+  --color-shadow-soft: rgba(0, 0, 0, 0.3);
+  --color-shadow-mid: rgba(0, 0, 0, 0.25);
+  --color-shadow-deep: rgba(0, 0, 0, 0.4);
+
+  --color-on-dark-1: rgba(232, 221, 208, 0.02);
+  --color-on-dark-2: rgba(232, 221, 208, 0.05);
+  --color-on-dark-3: rgba(232, 221, 208, 0.07);
+  --color-on-dark-4: rgba(232, 221, 208, 0.1);
+  --color-on-dark-5: rgba(232, 221, 208, 0.12);
+  --color-on-dark-6: rgba(232, 221, 208, 0.18);
+  --color-on-dark-7: rgba(232, 221, 208, 0.22);
+  --color-on-dark-8: rgba(232, 221, 208, 0.25);
+  --color-on-dark-9: rgba(232, 221, 208, 0.3);
+  --color-on-dark-10: rgba(232, 221, 208, 0.35);
+  --color-on-dark-11: rgba(232, 221, 208, 0.45);
+
+  --color-card-glass: rgba(42, 34, 28, 0.95);
+  --color-card-glass-2: rgba(42, 34, 28, 0.8);
+
+  /* Gradienti — caldi, organici */
+  --gradient-hero: linear-gradient(135deg, #c9775e 0%, #7fa87f 100%);
+  --gradient-cta: linear-gradient(135deg, #c9775e 0%, #b86a4a 50%, #9a5a3e 100%);
+  --gradient-progress: linear-gradient(90deg, #c9775e, #7fa87f);
+  --gradient-overlay-bottom: linear-gradient(180deg, #1a141030 0%, #1a1410 100%);
+  --gradient-overlay-top: linear-gradient(0deg, #1a1410, transparent);
 }
 
 /* DaisyUI custom theme override */
 [data-theme="macass"] {
-  --color-primary: #e85a8f;
-  --color-primary-content: #f0eef5;
-  --color-secondary: #1a1230;
-  --color-secondary-content: #f0eef5;
-  --color-accent: #5ae8c8;
-  --color-accent-content: #0f0a1a;
-  --color-neutral: #0f0a1a;
-  --color-neutral-content: #f0eef5;
-  --color-base-100: #0f0a1a;
-  --color-base-200: #1a1230;
-  --color-base-300: #2d1b69;
-  --color-base-content: #f0eef5;
-  --color-info: #5a8fe8;
-  --color-info-content: #0f0a1a;
-  --color-success: #5ae8c8;
-  --color-success-content: #0f0a1a;
-  --color-warning: #e8c85a;
-  --color-warning-content: #0f0a1a;
-  --color-error: #e8735a;
-  --color-error-content: #f0eef5;
+  --color-primary: #c9775e;
+  --color-primary-content: #e8ddd0;
+  --color-secondary: #7fa87f;
+  --color-secondary-content: #1a1410;
+  --color-accent: #b8926a;
+  --color-accent-content: #1a1410;
+  --color-neutral: #1a1410;
+  --color-neutral-content: #e8ddd0;
+  --color-base-100: #1a1410;
+  --color-base-200: #2a221c;
+  --color-base-300: #3d3228;
+  --color-base-content: #e8ddd0;
+  --color-info: #7a9ebe;
+  --color-info-content: #1a1410;
+  --color-success: #7fa87f;
+  --color-success-content: #1a1410;
+  --color-warning: #d4a85a;
+  --color-warning-content: #1a1410;
+  --color-error: #c9775e;
+  --color-error-content: #1a1410;
 }
 
 :root {
@@ -127,6 +133,8 @@ body {
   font-family: var(--font-body);
   display: flex;
   flex-direction: column;
+  background-color: var(--color-base-100);
+  color: var(--color-base-content);
 }
 
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); text-wrap: balance; }
@@ -154,10 +162,16 @@ input, select, textarea { font-size: 16px !important; }
 
 .app-footer {
   margin-top: auto;
-  padding: 1.5rem 1.25rem;
-  background: var(--color-on-dark-2);
-  border-top: 1px solid var(--color-on-dark-2);
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--color-on-dark-4);
   text-align: center;
+}
+
+.app-footer p {
+  font-size: 0.75rem;
+  color: var(--color-base-content);
+  opacity: 0.35;
+  letter-spacing: 0.05em;
 }
 
 .text-balance { text-wrap: balance; }

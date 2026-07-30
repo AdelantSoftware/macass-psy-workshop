@@ -23,17 +23,19 @@ export default function FinalePage() {
 
   return (
     <div className="min-h-dvh flex items-center justify-center bg-base-100 layout-padding py-12">
-      <div className="max-w-lg mx-auto text-center flex flex-col items-center gap-8">
+      <div className="max-w-lg mx-auto text-center flex flex-col items-center gap-10">
+        {/* Icon */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl sm:text-3xl shadow-lg shadow-primary/20">
             ✦
           </div>
         </motion.div>
 
+        {/* Title */}
         <motion.h1
           className="font-display text-3xl sm:text-5xl md:text-6xl font-bold"
           initial={{ opacity: 0, y: 20 }}
@@ -44,7 +46,7 @@ export default function FinalePage() {
         </motion.h1>
 
         <motion.p
-          className="text-base-content/60 text-base sm:text-lg"
+          className="text-base-content/50 text-base sm:text-lg font-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
@@ -52,21 +54,29 @@ export default function FinalePage() {
           Hai completato tutte e sei le tappe del percorso.
         </motion.p>
 
+        {/* Words card */}
         <motion.div
-          className="card bg-base-200 border border-base-300 w-full"
+          className="card bg-base-200 border border-base-300/60 w-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <div className="card-body items-center gap-4">
-            <p className="text-sm text-base-content/60">Le sei parole:</p>
+          <div className="card-body items-center gap-5 p-6 sm:p-8">
+            <p className="text-xs text-base-content/40 uppercase tracking-widest">
+              Le sei parole
+            </p>
             <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               {STEPS.map((step, i) => (
                 <motion.span
                   key={step.id}
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.3 + i * 0.12 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20,
+                    delay: 0.3 + i * 0.12,
+                  }}
                   className="px-3 py-1.5 rounded-full text-sm sm:text-lg font-bold tracking-wider"
                   style={{ backgroundColor: `${step.color}20`, color: step.color }}
                 >
@@ -74,30 +84,48 @@ export default function FinalePage() {
                 </motion.span>
               ))}
             </div>
-            <div className="divider my-2" />
-            <p className="text-xl md:text-2xl font-light italic text-base-content/60 leading-relaxed">
+            <div className="divider my-1" />
+            <p className="text-xl md:text-2xl font-light italic text-base-content/50 leading-relaxed">
               &ldquo;{FULL_PHRASE}&rdquo;
             </p>
           </div>
         </motion.div>
 
+        {/* Workshop CTA */}
         <motion.div
-          className="card bg-base-200 border border-primary/20 w-full"
+          className="card bg-base-200 border border-primary/15 w-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
         >
-          <div className="card-body items-center gap-3">
-            <h2 className="card-title font-display text-2xl sm:text-3xl gradient-text">Workshop di Psicologia</h2>
-            <p className="text-sm sm:text-base text-base-content/60">
-              Ti aspetto al <span className="font-semibold text-white">WORKSHOP DI PSICOLOGIA</span> per il <span className="text-primary">Muro della consapevolezza</span>.
+          <div className="card-body items-center gap-4 p-6 sm:p-8">
+            <h2 className="card-title font-display text-2xl sm:text-3xl gradient-text">
+              Workshop di Psicologia
+            </h2>
+            <p className="text-sm sm:text-base text-base-content/60 leading-relaxed">
+              Ti aspetto al{" "}
+              <span className="font-semibold text-base-content">
+                WORKSHOP DI PSICOLOGIA
+              </span>{" "}
+              per il{" "}
+              <span className="text-primary">Muro della consapevolezza</span>.
             </p>
-            <span className="badge badge-outline badge-primary">🧠 Scopri di più su te stesso</span>
+            <span className="badge badge-outline badge-primary badge-sm">
+              🧠 Scopri di più su te stesso
+            </span>
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}>
-          <button onClick={() => router.push("/")} className="link link-hover text-sm text-base-content/60">
+        {/* Reset link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+        >
+          <button
+            onClick={() => router.push("/")}
+            className="link link-hover text-sm text-base-content/40 hover:text-base-content/60"
+          >
             ↻ Ricominciare il percorso
           </button>
         </motion.div>

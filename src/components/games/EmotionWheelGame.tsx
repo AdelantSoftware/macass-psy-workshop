@@ -13,17 +13,17 @@ interface Emotion {
 }
 
 const EMOTIONS: Emotion[] = [
-  { name: "Felicità",  prompt: "Quale piccola cosa ti ha acceso un sorriso oggi?", color: "var(--color-tint-rust-pale)" },
-  { name: "Tristezza", prompt: "Di cosa avrebbe bisogno la tua tristezza, se potesse parlare?", color: "var(--color-tint-sky-shade)" },
-  { name: "Rabbia",    prompt: "Quale confine sta chiedendo di essere ascoltato?", color: "var(--color-tint-rust-light)" },
-  { name: "Paura",     prompt: "Cosa cambierebbe se non dovessi affrontarla da solə?", color: "var(--color-tint-violet-pale)" },
-  { name: "Sorpresa",  prompt: "Cosa non ti aspettavi di sentire proprio qui?", color: "var(--color-tint-rust-pale)" },
-  { name: "Disgusto",  prompt: "Da cosa il tuo corpo sta cercando di proteggerti?", color: "var(--color-tint-rust-pale)" },
-  { name: "Serenità",  prompt: "Dove senti questa quiete, adesso, nel tuo corpo?", color: "var(--color-tint-pink-pale)" },
-  { name: "Gratitudine", prompt: "A chi o a cosa vorresti dire grazie, in silenzio?", color: "var(--color-tint-rust-pale)" },
+  { name: "Felicità",  prompt: "Quale piccola cosa ti ha acceso un sorriso oggi?", color: "var(--color-tint-clay-pale)" },
+  { name: "Tristezza", prompt: "Di cosa avrebbe bisogno la tua tristezza, se potesse parlare?", color: "var(--color-tint-clay-shade)" },
+  { name: "Rabbia",    prompt: "Quale confine sta chiedendo di essere ascoltato?", color: "var(--color-tint-clay-light)" },
+  { name: "Paura",     prompt: "Cosa cambierebbe se non dovessi affrontarla da solə?", color: "var(--color-tint-lavender-pale)" },
+  { name: "Sorpresa",  prompt: "Cosa non ti aspettavi di sentire proprio qui?", color: "var(--color-tint-clay-pale)" },
+  { name: "Disgusto",  prompt: "Da cosa il tuo corpo sta cercando di proteggerti?", color: "var(--color-tint-clay-pale)" },
+  { name: "Serenità",  prompt: "Dove senti questa quiete, adesso, nel tuo corpo?", color: "var(--color-tint-clay-pale)" },
+  { name: "Gratitudine", prompt: "A chi o a cosa vorresti dire grazie, in silenzio?", color: "var(--color-tint-clay-pale)" },
 ];
 
-const ACCENT = "var(--color-accent-rust)";
+const ACCENT = "var(--color-accent-clay)";
 const SECTOR_COUNT = EMOTIONS.length; // 8 → 45deg slices
 
 function polar(angle: number, radius = 47): { x: number; y: number } {
@@ -66,7 +66,7 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
       <div
         className="pointer-events-none absolute inset-0 opacity-25"
         style={{
-          backgroundImage: "radial-gradient(circle, var(--color-accent-rust) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, var(--color-accent-clay) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
           maskImage: "linear-gradient(to bottom, black, transparent 75%)",
         }}
@@ -82,7 +82,7 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
             exit={{ opacity: 0, scale: 0.96 }}
           >
             <motion.div
-              className="relative mb-7 grid h-28 w-28 place-items-center rounded-full border border-[var(--color-accent-rust)]/30"
+              className="relative mb-7 grid h-28 w-28 place-items-center rounded-full border border-[var(--color-accent-clay)]/30"
               animate={{
                 boxShadow: [
                   "0 0 0 0 var(--color-accent-soft)",
@@ -92,8 +92,8 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <div className="absolute inset-3 rounded-full border border-dashed border-[var(--color-accent-rust)]/50" />
-              <svg viewBox="0 0 48 48" className="h-12 w-12 text-[var(--color-accent-rust)]" fill="none" aria-hidden="true">
+              <div className="absolute inset-3 rounded-full border border-dashed border-[var(--color-accent-clay)]/50" />
+              <svg viewBox="0 0 48 48" className="h-12 w-12 text-[var(--color-accent-clay)]" fill="none" aria-hidden="true">
                 <path
                   d="M24 39s-13-7.4-13-17.2C11 15.3 18.5 12 24 18c5.5-6 13-2.7 13 3.8C37 31.6 24 39 24 39Z"
                   stroke="currentColor"
@@ -108,11 +108,11 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
                 />
               </svg>
             </motion.div>
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-[var(--color-accent-rust)]">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-[var(--color-accent-clay)]">
               Un momento per te
             </p>
             <h3 className="font-display text-3xl font-semibold text-white">Che cosa senti?</h3>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-[var(--color-tint-sky-shade)]">
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-[var(--color-tint-clay-shade)]">
               Lascia che la ruota scelga una parola. Non serve giudicarla: basta ascoltarla.
             </p>
             <button
@@ -129,12 +129,12 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[var(--color-accent-rust)]">
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[var(--color-accent-clay)]">
               {phase === "active" ? "Lascia andare il controllo" : "La ruota si è fermata su"}
             </p>
             <div className="relative h-[40vw] w-[40vw] max-h-[280px] max-w-[280px]">
               <motion.div
-                className="absolute inset-1 rounded-full bg-[var(--color-accent-rust)]/20 blur-2xl"
+                className="absolute inset-1 rounded-full bg-[var(--color-accent-clay)]/20 blur-2xl"
                 animate={
                   phase === "complete"
                     ? { scale: [1, 1.25, 1.08], opacity: [0.25, 0.7, 0.35] }
@@ -168,7 +168,7 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
                     />
                   ))}
                   <circle cx="50" cy="50" r="12" fill="var(--color-tint-ink-pale)" stroke="var(--color-on-dark-10)" strokeWidth="1" />
-                  <circle cx="50" cy="50" r="4" fill="var(--color-accent-rust)" />
+                  <circle cx="50" cy="50" r="4" fill="var(--color-accent-clay)" />
                 </svg>
               </motion.div>
               <motion.div
@@ -182,7 +182,7 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
                 Array.from({ length: 12 }, (_, index) => (
                   <motion.span
                     key={index}
-                    className="absolute left-1/2 top-1/2 h-1.5 w-1.5 rounded-full bg-[var(--color-accent-rust)]"
+                    className="absolute left-1/2 top-1/2 h-1.5 w-1.5 rounded-full bg-[var(--color-accent-clay)]"
                     initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
                     animate={{
                       x: Math.cos((index * Math.PI) / 6) * 145,
@@ -198,7 +198,7 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
               {phase === "active" ? (
                 <motion.p
                   key="listening"
-                  className="mt-3 text-sm italic text-[var(--color-tint-sky-shade)]"
+                  className="mt-3 text-sm italic text-[var(--color-tint-clay-shade)]"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: [0.4, 1, 0.4] }}
                   transition={{ repeat: Infinity, duration: 1.4 }}
@@ -214,10 +214,10 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ type: "spring", stiffness: 220, damping: 18 }}
                   >
-                    <h3 className="font-display text-4xl font-semibold text-[var(--color-tint-rust-light)]">
+                    <h3 className="font-display text-4xl font-semibold text-[var(--color-tint-clay-light)]">
                       {selected.name}
                     </h3>
-                    <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-[var(--color-tint-sky-pale-2)]">
+                    <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-[var(--color-tint-clay-pale-2)]">
                       {selected.prompt}
                     </p>
                   </motion.div>
