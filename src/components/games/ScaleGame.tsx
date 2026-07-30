@@ -109,7 +109,7 @@ export function ScaleGame({ onReveal }: GameProps) {
         animate={{ opacity: 1 }}
         className="relative pb-1 text-center"
       >
-        <div className="relative h-[390px] overflow-hidden rounded-3xl border border-[var(--color-on-dark-4)]/[0.08] bg-[radial-gradient(circle_at_50%_70%,var(--color-accent-soft),transparent_40%),var(--gradient-overlay-top)] sm:h-[430px]">
+        <div className="relative h-[50vh] min-h-[300px] max-h-[430px] overflow-hidden rounded-3xl border border-[var(--color-on-dark-4)]/[0.08] bg-[radial-gradient(circle_at_50%_70%,var(--color-accent-soft),transparent_40%),var(--gradient-overlay-top)]">
           {/* Sparkles */}
           {[0, 1, 2, 3, 4, 5].map((i) => (
             <motion.span

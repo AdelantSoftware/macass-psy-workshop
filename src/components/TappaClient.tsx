@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { STEPS } from "@/data/steps";
 import { useProgress } from "@/hooks/useProgress";
-import { PageHeader } from "@/components/ui/PageHeader";
 import { LockedScreen, ManualCodeForm } from "@/components/ui/LockedScreen";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { RevealCard } from "@/components/ui/RevealCard";
@@ -83,41 +82,57 @@ export default function TappaClient({ stepId }: { stepId: number }) {
   }
 
   return (
-    <div className="min-h-dvh bg-base-100 pb-20">
-      <PageHeader
-        title={
-          <div className="flex flex-col items-center gap-2">
-            <IconBadge size="md" color={step.color}>{step.id}</IconBadge>
-            <span>{step.title}</span>
+    <div className="min-h-dvh bg-base-100 flex flex-col">
+      {/* Fixed header */}
+      <div className="sticky top-0 z-20 bg-base-100 border-b border-base-300">
+        <div className="flex items-center gap-3 p-4 max-w-4xl mx-auto w-full">
+          <button onClick={() => router.push("/home")} className="btn btn-ghost btn-sm btn-square">
+            <span className="text-lg">←</span>
+          </button>
+          <IconBadge size="md" color={step.color}>{step.id}</IconBadge>
+          <div className="flex-1 min-w-0">
+            <h1 className="font-display text-lg sm:text-xl font-bold truncate">{step.title}</h1>
+            <p className="text-xs text-base-content/60 truncate">📍 {step.location}</p>
           </div>
-        }
-        subtitle={<>📍 {step.location}</>}
-        backHref="/home"
-      />
+        </div>
+      </div>
 
-      <div className="max-w-lg mx-auto layout-padding mt-8">
-        <AnimatePresence mode="wait">
-          {!revealed ? (
-            <motion.div key="game" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}>
-              <p className="text-center text-base-content/60 mb-6 leading-relaxed text-sm sm:text-base">{step.description}</p>
-              <div className="card bg-base-200 border border-base-300">
-                <div className="card-body p-4 sm:p-6">
-                  <Interaction onReveal={handleReveal} />
+      {/* Game content — fills remaining space */}
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 sm:px-8 sm:py-10 max-w-4xl mx-auto w-full">
+          <AnimatePresence mode="wait">
+            {!revealed ? (
+              <motion.div
+                key="game"
+                className="w-full flex flex-col items-center"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+              >
+                <p className="text-center text-base-content/60 mb-6 leading-relaxed text-sm sm:text-base max-w-lg">
+                  {step.description}
+                </p>
+                <div className="card bg-base-200 border border-base-300 w-full max-w-2xl">
+                  <div className="card-body p-4 sm:p-6 md:p-8">
+                    <Interaction onReveal={handleReveal} />
+                  </div>
                 </div>
+              </motion.div>
+            ) : (
+              <div className="w-full max-w-lg">
+                <RevealCard
+                  key="reveal"
+                  eyebrow="Hai scoperto la parola:"
+                  word={step.word}
+                  color={step.color}
+                  stepId={stepId}
+                  actionLabel={stepId < 6 ? "Prossima tappa →" : "Scopri il significato →"}
+                  onAction={handleNext}
+                />
               </div>
-            </motion.div>
-          ) : (
-            <RevealCard
-              key="reveal"
-              eyebrow="Hai scoperto la parola:"
-              word={step.word}
-              color={step.color}
-              stepId={stepId}
-              actionLabel={stepId < 6 ? "Prossima tappa →" : "Scopri il significato →"}
-              onAction={handleNext}
-            />
-          )}
-        </AnimatePresence>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );

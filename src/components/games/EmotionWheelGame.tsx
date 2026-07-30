@@ -125,14 +125,14 @@ export function EmotionWheelGame({ onReveal }: GameProps) {
         ) : (
           <motion.div
             key="wheel"
-            className="relative z-10 flex min-h-[390px] flex-col items-center"
+            className="relative z-10 flex min-h-[40vh] flex-col items-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
             <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[var(--color-accent-rust)]">
               {phase === "active" ? "Lascia andare il controllo" : "La ruota si è fermata su"}
             </p>
-            <div className="relative h-[250px] w-[250px] sm:h-[280px] sm:w-[280px]">
+            <div className="relative h-[40vw] w-[40vw] max-h-[280px] max-w-[280px]">
               <motion.div
                 className="absolute inset-1 rounded-full bg-[var(--color-accent-rust)]/20 blur-2xl"
                 animate={

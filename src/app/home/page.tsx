@@ -22,12 +22,12 @@ export default function HomePage() {
   return (
     <div className="min-h-dvh bg-base-100 pb-24">
       {/* Hero header */}
-      <div className="relative py-12 sm:py-16">
+      <div className="relative py-16 sm:py-20 md:py-24">
         <div className="absolute inset-0 z-0">
           <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-15" />
           <div className="absolute inset-0 bg-gradient-to-b from-base-100/80 to-base-100" />
         </div>
-        <div className="relative z-10 flex flex-col items-center text-center layout-padding gap-4">
+        <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-8 gap-4">
           <motion.h1
             className="font-display text-3xl sm:text-5xl md:text-6xl font-bold text-shadow"
             initial={{ opacity: 0, y: 20 }}
@@ -37,7 +37,7 @@ export default function HomePage() {
             Il Percorso delle <span className="gradient-text">Sei Parole</span>
           </motion.h1>
           <motion.p
-            className="text-base-content/60 text-sm sm:text-lg"
+            className="text-base-content/60 text-sm sm:text-base md:text-lg max-w-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -45,7 +45,7 @@ export default function HomePage() {
             Esplora il festival, trova i QR Code, scopri le parole
           </motion.p>
           <motion.div
-            className="w-full max-w-xs mt-4"
+            className="w-full max-w-xs mt-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -55,7 +55,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center gap-16 layout-padding">
+      <div className="flex flex-col items-center gap-12 sm:gap-16 px-4 sm:px-8">
         {/* Map preview */}
         <section className="w-full max-w-4xl">
           <SectionTitle size="md" center className="mb-4 sm:mb-6">Esplora la Mappa</SectionTitle>

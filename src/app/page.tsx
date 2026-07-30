@@ -19,13 +19,13 @@ export default function WelcomePage() {
     <div className="relative min-h-dvh overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover" priority />
-        <div className="absolute inset-0 bg-gradient-to-b from-base-100/80 via-base-100/60 to-base-100/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-base-100/90 via-base-100/60 to-base-100/95" />
       </div>
 
       <AnimatePresence>
         {!exiting && (
           <motion.div
-            className="relative z-10 flex flex-col items-center justify-center min-h-dvh gap-8 layout-padding-lg"
+            className="relative z-10 flex flex-col items-center justify-center min-h-dvh gap-6 sm:gap-8 px-6 sm:px-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20 }}
@@ -42,7 +42,7 @@ export default function WelcomePage() {
             </motion.div>
 
             <motion.h1
-              className="font-display text-center text-[2.5rem] sm:text-5xl md:text-6xl font-bold leading-tight max-w-sm sm:max-w-md"
+              className="font-display text-center text-[2.5rem] sm:text-5xl md:text-6xl font-bold leading-[1.1] max-w-[90vw] sm:max-w-md"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -51,7 +51,7 @@ export default function WelcomePage() {
             </motion.h1>
 
             <motion.p
-              className="text-center text-sm sm:text-lg text-base-content/60 leading-relaxed max-w-xs sm:max-w-sm"
+              className="text-center text-sm sm:text-base md:text-lg text-base-content/60 leading-relaxed max-w-[85vw] sm:max-w-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
