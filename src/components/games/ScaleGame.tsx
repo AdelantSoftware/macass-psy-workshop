@@ -41,7 +41,7 @@ export function ScaleGame({ onReveal }: GameProps) {
         if (next.length === 0 && !revealedRef.current) {
           revealedRef.current = true;
           setPhase("complete");
-          setTimeout(onReveal, 1900);
+          setTimeout(onReveal, 5000);
         }
         return next;
       });

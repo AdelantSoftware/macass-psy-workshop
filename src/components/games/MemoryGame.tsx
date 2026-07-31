@@ -99,7 +99,7 @@ export function MemoryGame({ onReveal }: GameProps) {
     }
     if (!revealCalled.current) {
       revealCalled.current = true;
-      setTimeout(onReveal, 2200);
+      setTimeout(onReveal, 5000);
     }
   };
 
@@ -231,7 +231,7 @@ export function MemoryGame({ onReveal }: GameProps) {
                   scale: { duration: 0.5 },
                 }}
               >
-                <div className="absolute inset-0 grid place-items-center rounded-xl border border-white/10 bg-gradient-to-br from-[var(--color-tint-ink-pale)] to-[var(--color-surface-hover)] [backface-visibility:hidden]">
+                <div className="absolute inset-0 grid place-items-center rounded-xl border border-white/10 bg-gradient-to-br from-[var(--color-tint-ink-pale)] to-[var(--color-base-200)] [backface-visibility:hidden]">
                   <CardBack />
                 </div>
                 <div
@@ -340,7 +340,7 @@ function CardBack() {
         </g>
       ))}
       <circle cx="32" cy="32" r="5" fill={ACCENT} fillOpacity="0.85" />
-      <circle cx="32" cy="32" r="2" fill="var(--color-bg)" />
+      <circle cx="32" cy="32" r="2" fill="var(--color-base-100)" />
     </svg>
   );
 }

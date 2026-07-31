@@ -30,7 +30,7 @@ export function ShipsGame({ onReveal }: GameProps) {
     if (revealedRef.current) return;
     revealedRef.current = true;
     setPhase("complete");
-    setTimeout(onReveal, 1800);
+    setTimeout(onReveal, 5000);
   }, [onReveal]);
 
   const checkArrival = (_: unknown, info: { offset: { x: number } }) => {

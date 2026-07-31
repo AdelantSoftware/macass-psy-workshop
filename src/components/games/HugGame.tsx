@@ -31,7 +31,7 @@ export function HugGame({ onReveal }: GameProps) {
       const dt = Math.min(64, now - lastTickRef.current);
       lastTickRef.current = now;
       if (pressing && phase === "active") {
-        setProgress((p) => Math.min(100, p + dt * 0.045));
+        setProgress((p) => Math.min(100, p + dt * 0.000833));
         if (breathStartRef.current === null) breathStartRef.current = now;
         const elapsed = (now - breathStartRef.current) / 1000;
         // 4-second breathing cycle (inhale 2s, exhale 2s).
@@ -61,7 +61,7 @@ export function HugGame({ onReveal }: GameProps) {
         setPhase("complete");
         setPressing(false);
         tryVibrate([40, 30, 80, 30, 140]);
-        window.setTimeout(onReveal, 2400);
+        window.setTimeout(onReveal, 5000);
       }, 0);
       return () => window.clearTimeout(id);
     }

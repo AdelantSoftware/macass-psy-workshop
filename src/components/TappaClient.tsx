@@ -112,7 +112,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
 
   return (
     <div className="min-h-dvh bg-base-100 flex flex-col">
-      {/* Fixed header — più pulito */}
+      {/* Fixed header */}
       <div className="sticky top-0 z-20 bg-base-100/90 backdrop-blur-md border-b border-base-300/50">
         <div className="flex items-center gap-3 p-4 max-w-4xl mx-auto w-full">
           <button
@@ -136,8 +136,8 @@ export default function TappaClient({ stepId }: { stepId: number }) {
       </div>
 
       {/* Game content */}
-      <div className="flex-1 flex flex-col">
-        <div className="flex-1 flex flex-col items-center justify-center px-4 py-6 sm:px-8 sm:py-10 max-w-4xl mx-auto w-full">
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <div className="w-full max-w-4xl px-4 py-6 sm:px-8 sm:py-10">
           <AnimatePresence mode="wait">
             {!revealed ? (
               <motion.div

@@ -38,7 +38,7 @@ export function AgendaGame({ onReveal }: GameProps) {
         setTimeout(() => setPhase("complete"), 350);
         if (!revealCalled.current) {
           revealCalled.current = true;
-          setTimeout(onReveal, 2100);
+          setTimeout(onReveal, 5000);
         }
       }
       return next;
@@ -129,7 +129,7 @@ export function AgendaGame({ onReveal }: GameProps) {
                 >
                   {freed}
                 </motion.span>
-                <span className="text-[9px] uppercase tracking-widest text-[var(--color-muted-strong)]">liberati</span>
+                <span className="text-[9px] uppercase tracking-widest text-base-content/40">liberati</span>
               </div>
             </div>
             <p className="mb-4 px-1 text-xs text-[var(--color-tint-clay-mute)]">
@@ -160,7 +160,7 @@ export function AgendaGame({ onReveal }: GameProps) {
                       onDragEnd={(_, info) => {
                         if (info.offset.x < -75 || info.velocity.x < -500) remove(task.id);
                       }}
-                      className="relative flex min-h-[64px] touch-pan-y items-center gap-3 border border-[var(--color-on-dark-4)]/[0.08] bg-[var(--color-surface)] px-3 py-2.5 shadow-[0_8px_20px_rgba(0,0,0,0.16)]"
+                      className="relative flex min-h-[64px] touch-pan-y items-center gap-3 border border-[var(--color-on-dark-4)]/[0.08] bg-[var(--color-base-200)] px-3 py-2.5 shadow-[0_8px_20px_rgba(0,0,0,0.16)]"
                     >
                       <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-[var(--color-accent-ochre)]/25 bg-[var(--color-accent-ochre)]/10 text-lg text-[var(--color-tint-clay-paler)]">
                         {task.icon}
