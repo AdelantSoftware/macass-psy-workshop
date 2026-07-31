@@ -31,7 +31,7 @@ export function HugGame({ onReveal }: GameProps) {
       const dt = Math.min(64, now - lastTickRef.current);
       lastTickRef.current = now;
       if (pressing && phase === "active") {
-        setProgress((p) => Math.min(100, p + dt * 0.000833));
+        setProgress((p) => Math.min(100, p + dt * 0.005));
         if (breathStartRef.current === null) breathStartRef.current = now;
         const elapsed = (now - breathStartRef.current) / 1000;
         // 4-second breathing cycle (inhale 2s, exhale 2s).
@@ -49,6 +49,14 @@ export function HugGame({ onReveal }: GameProps) {
       lastTickRef.current = null;
     };
   }, [pressing, phase]);
+
+  // Click to boost: +8% per click
+  const boostProgress = () => {
+    if (phase !== "active" && phase !== "intro") return;
+    if (phase === "intro") setPhase("active");
+    setProgress((p) => Math.min(100, p + 8));
+    tryVibrate(15);
+  };
 
   // Auto-progress to "complete" once the bar fills.
   // The rAF loop is the single source of truth for `progress`; this
@@ -107,12 +115,13 @@ export function HugGame({ onReveal }: GameProps) {
       />
 
       <div
-        className="relative mx-auto flex items-center justify-center"
+        className="relative mx-auto flex items-center justify-center cursor-pointer"
         style={{ width: 280, height: 280, touchAction: "none" }}
         onPointerDown={startPress}
         onPointerUp={endPress}
         onPointerLeave={endPress}
         onPointerCancel={endPress}
+        onClick={boostProgress}
       >
         {/* Breathing rings */}
         {[0, 1, 2].map((i) => (

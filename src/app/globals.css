@@ -95,8 +95,9 @@
   --color-error: #c9775e;
   --color-error-content: #1a1410;
 }
-
-/* FIX: DaisyUI @layer bug su OpenNext */
+/* FIX: DaisyUI @layer bug su OpenNext — 
+   Tailwind arbitrary values [backface-visibility], [perspective], [transform-style]
+   non vengono generati nel build. Definizione manuale unlayered. */
 .card { --card-p: 1.5rem; --card-gap: 0.5rem; --card-fs: 0.875rem; }
 .card-body { padding: var(--card-p, 1.5rem); }
 .card-xs .card-body { --card-p: 0.5rem; --card-fs: 0.6875rem; }
@@ -104,6 +105,21 @@
 .card-md .card-body { --card-p: 1.5rem; --card-fs: 0.875rem; }
 .card-lg .card-body { --card-p: 2rem; --card-fs: 1rem; }
 .card-xl .card-body { --card-p: 2.5rem; --card-fs: 1.125rem; }
+
+/* 3D card flip — Tailwind arbitrary values non generati su OpenNext */
+.perspective-800 {
+  perspective: 800px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
 
 :root {
   --safe-top: env(safe-area-inset-top, 0px);

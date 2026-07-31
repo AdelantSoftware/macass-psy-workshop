@@ -41,15 +41,12 @@ const fmt = (s: number) => `${Math.floor(s / 60).toString().padStart(2, "0")}:${
 
 export function MemoryGame({ onReveal }: GameProps) {
   const [phase, setPhase] = useState<"preview" | "active" | "complete">("preview");
-  // Lazy initializer keeps the first render deterministic: cards are
-  // shown face-up during the preview without a post-mount setState.
+  // All cards start face-up for preview, flip after 1.7s
   const [deck, setDeck] = useState<Card[]>(() =>
     buildDeck().map((c) => ({ ...c, flipped: true })),
   );
-  const [selected, setSelected] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
   const [elapsed, setElapsed] = useState(0);
-  // Lazy init so we don't need a post-mount localStorage read.
   const [bestTime, setBestTime] = useState<number | null>(() => {
     if (typeof window === "undefined") return null;
     try {
@@ -61,17 +58,22 @@ export function MemoryGame({ onReveal }: GameProps) {
   });
   const revealCalled = useRef(false);
   const startTimeRef = useRef<number | null>(null);
+  const selectedRef = useRef<number[]>([]);
+  const deckRef = useRef<Card[]>(deck);
+  deckRef.current = deck;
 
-  // Preview → active after 1.7s.
+  // Preview → active after 1.7s — durability: usa ref per timestamp
   useEffect(() => {
-    if (phase !== "preview") return;
-    const t = window.setTimeout(() => {
-      setDeck((prev) => prev.map((c) => ({ ...c, flipped: false })));
+    const id = setTimeout(() => {
+      setDeck((prev) => {
+        const next = prev.map((c) => ({ ...c, flipped: false }));
+        return next;
+      });
       setPhase("active");
       startTimeRef.current = Date.now();
     }, 1700);
-    return () => clearTimeout(t);
-  }, [phase]);
+    return () => clearTimeout(id);
+  }, []);
 
   // Tick elapsed during active phase.
   useEffect(() => {
@@ -107,12 +109,12 @@ export function MemoryGame({ onReveal }: GameProps) {
     if (phase !== "active") return;
     const card = deck[id];
     if (!card || card.flipped || card.matched) return;
-    if (selected.length === 2) return;
+    if (selectedRef.current.length === 2) return;
 
     const nextDeck = deck.map((c) => (c.id === id ? { ...c, flipped: true } : c));
-    const nextSelected = [...selected, id];
+    const nextSelected = [...selectedRef.current, id];
+    selectedRef.current = nextSelected;
     setDeck(nextDeck);
-    setSelected(nextSelected);
 
     if (nextSelected.length === 2) {
       const nextMoves = moves + 1;
@@ -129,7 +131,7 @@ export function MemoryGame({ onReveal }: GameProps) {
               : c,
           ),
         );
-        setSelected([]);
+        selectedRef.current = [];
         if (isMatch && nextDeck.every((c) => c.matched || c.id === a || c.id === b)) {
           const finalElapsed = startTimeRef.current
             ? Math.floor((Date.now() - startTimeRef.current) / 1000)
@@ -142,7 +144,7 @@ export function MemoryGame({ onReveal }: GameProps) {
 
   const reset = () => {
     setDeck(buildDeck());
-    setSelected([]);
+    selectedRef.current = [];
     setMoves(0);
     setElapsed(0);
     setPhase("preview");
@@ -216,12 +218,12 @@ export function MemoryGame({ onReveal }: GameProps) {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.03 }}
-              className="relative aspect-square cursor-pointer [perspective:800px]"
+              className="relative aspect-square cursor-pointer perspective-800"
               disabled={phase === "preview"}
               aria-label={`Carta ${card.label}`}
             >
               <motion.div
-                className="relative h-full w-full [transform-style:preserve-3d]"
+                className="relative h-full w-full transform-style-3d"
                 animate={{
                   rotateY: showFace ? 0 : 180,
                   scale: card.matched ? [1, 1.08, 1] : 1,
@@ -231,13 +233,12 @@ export function MemoryGame({ onReveal }: GameProps) {
                   scale: { duration: 0.5 },
                 }}
               >
-                <div className="absolute inset-0 grid place-items-center rounded-xl border border-white/10 bg-gradient-to-br from-[var(--color-tint-ink-pale)] to-[var(--color-base-200)] [backface-visibility:hidden]">
+                <div className="absolute inset-0 grid place-items-center rounded-xl border border-white/10 bg-gradient-to-br from-[var(--color-tint-ink-pale)] to-[var(--color-base-200)] backface-hidden rotate-y-180">
                   <CardBack />
                 </div>
                 <div
-                  className="absolute inset-0 grid place-items-center rounded-xl border [backface-visibility:hidden]"
+                  className="absolute inset-0 grid place-items-center rounded-xl border backface-hidden"
                   style={{
-                    transform: "rotateY(180deg)",
                     background: card.matched ? `${ACCENT}1f` : "var(--color-card-glass)",
                     borderColor: card.matched ? `${ACCENT}66` : "var(--color-on-dark-7)",
                     boxShadow: card.matched ? `0 0 18px ${ACCENT}55` : undefined,
