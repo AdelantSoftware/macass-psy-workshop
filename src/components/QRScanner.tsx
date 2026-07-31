@@ -9,66 +9,50 @@ interface QRScannerProps {
 }
 
 export default function QRScanner({ onScan, onClose }: QRScannerProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState<string | null>(null);
-  const [scanning, setScanning] = useState(false);
+  // Keep the latest callback without making the effect re-run.
+  const onScanRef = useRef(onScan);
+  onScanRef.current = onScan;
 
   useEffect(() => {
-    let stream: MediaStream | null = null;
-    const animationId: number | null = null;
     let stopped = false;
-
-    const startCamera = async () => {
-      try {
-        stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment" },
-        });
-        if (stopped) {
-          stream.getTracks().forEach((t) => t.stop());
-          return;
-        }
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          await videoRef.current.play();
-          setScanning(true);
-        }
-      } catch {
-        setError("Camera non accessibile. Verifica i permessi del browser.");
-      }
-    };
-
-    startCamera();
-
-    return () => {
-      stopped = true;
-      if (stream) {
-        stream.getTracks().forEach((t) => t.stop());
-      }
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-    };
-  }, []);
-
-  // Try using html5-qrcode
-  useEffect(() => {
-    if (!scanning) return;
-
-    let scanner: unknown = null;
+    let instance: { stop: () => Promise<void> } | null = null;
 
     const initScanner = async () => {
       try {
         const { Html5Qrcode } = await import("html5-qrcode");
+
+        // Ensure the container is clean — a leftover <video> here is what
+        // causes the "two cameras stacked on top of each other" effect.
+        const container = document.getElementById("qr-reader");
+        if (container) container.innerHTML = "";
+
         const html5QrCode = new Html5Qrcode("qr-reader");
-        scanner = html5QrCode;
+        instance = html5QrCode;
+
+        // Pick ONE camera (the back-facing one) explicitly.
+        const cameras = await Html5Qrcode.getCameras();
+        const backCamera =
+          cameras.find((c) => /back|rear|environment/i.test(c.label)) ??
+          cameras.find((c) => /1/i.test(c.id)) ??
+          cameras[0];
+
+        if (!backCamera) {
+          if (!stopped) {
+            setError("Nessuna fotocamera trovata sul dispositivo.");
+          }
+          return;
+        }
+
         await html5QrCode.start(
-          { facingMode: "environment" },
+          backCamera.id,
           {
             fps: 10,
             qrbox: { width: 250, height: 250 },
           },
           (decodedText: string) => {
-            onScan(decodedText);
+            if (stopped) return;
+            onScanRef.current(decodedText);
             html5QrCode.stop().catch(() => {});
           },
           () => {
@@ -76,18 +60,24 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
           }
         );
       } catch {
-        setError("Impossibile inizializzare lo scanner QR. Prova con un altro browser.");
+        if (!stopped) {
+          setError("Impossibile inizializzare lo scanner QR. Prova con un altro browser.");
+        }
       }
     };
 
     initScanner();
 
     return () => {
-      if (scanner && typeof scanner === "object" && "stop" in scanner) {
-        (scanner as { stop: () => Promise<void> }).stop().catch(() => {});
+      stopped = true;
+      if (instance) {
+        instance.stop().catch(() => {});
       }
+      // Clear the container so no video element lingers after unmount.
+      const container = document.getElementById("qr-reader");
+      if (container) container.innerHTML = "";
     };
-  }, [scanning, onScan]);
+  }, []);
 
   return (
     <div className="fixed inset-0 z-50 bg-[var(--color-bg)] flex flex-col items-center justify-center">

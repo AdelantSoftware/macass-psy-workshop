@@ -84,7 +84,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
             onClick: () => setShowScanner(true),
           }}
           secondaryAction={{
-            label: "� Non hai la camera? Inserisci la parola segreta",
+            label: "Non hai la camera? Inserisci la parola segreta",
             render: (close) => (
               <ManualCodeForm
                 stepId={stepId}
