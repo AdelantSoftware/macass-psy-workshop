@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { STEPS, FULL_PHRASE } from "@/data/steps";
+import { FULL_PHRASE } from "@/data/steps";
 import { useProgress } from "@/hooks/useProgress";
 import { LockedScreen } from "@/components/ui/LockedScreen";
 
@@ -22,16 +23,29 @@ export default function FinalePage() {
   }
 
   return (
-    <div className="min-h-dvh flex items-center justify-center bg-base-100 layout-padding py-12">
-      <div className="w-full max-w-sm mx-auto text-center flex flex-col items-center gap-8">
-        {/* Icon */}
+    <div className="relative min-h-dvh flex items-center justify-center bg-base-100 layout-padding py-12">
+      {/* Sfondo */}
+      <div className="absolute inset-0 z-0">
+        <Image src="/img/sfondo-2.jpg" alt="" fill className="object-cover" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-base-100/80 via-base-100/60 to-base-100" />
+      </div>
+
+      <div className="mt-3 relative z-10 w-full max-w-sm mx-auto text-center flex flex-col items-center gap-8">
+
+        {/* Logo */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl sm:text-3xl shadow-lg shadow-primary/20">
-            ✦
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-base-100/10 backdrop-blur-sm border border-white/15 shadow-lg shadow-primary/20 flex items-center justify-center overflow-hidden">
+            <Image
+              src="/img/logo.jpg"
+              alt="Logo MACASS Psy"
+              width={96}
+              height={96}
+              className="rounded-full object-cover w-full h-full"
+            />
           </div>
         </motion.div>
 
@@ -65,29 +79,14 @@ export default function FinalePage() {
             <p className="text-[0.6rem] text-base-content/40 uppercase tracking-widest">
               Le sei parole
             </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {STEPS.map((step, i) => (
-                <motion.span
-                  key={step.id}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20,
-                    delay: 0.3 + i * 0.12,
-                  }}
-                  className="px-3 py-1 rounded-full text-sm font-bold tracking-wider"
-                  style={{ backgroundColor: `${step.color}20`, color: step.color }}
-                >
-                  {step.word}
-                </motion.span>
-              ))}
-            </div>
-            <div className="divider my-1" />
-            <p className="text-lg md:text-xl font-light italic text-base-content/50 leading-relaxed">
-              &ldquo;{FULL_PHRASE}&rdquo;
-            </p>
+            <motion.p
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.3 }}
+              className="font-display text-3xl sm:text-4xl font-bold gradient-text leading-tight"
+            >
+              {FULL_PHRASE}
+            </motion.p>
           </div>
         </motion.div>
 
@@ -109,6 +108,14 @@ export default function FinalePage() {
             <span className="badge badge-outline badge-primary badge-sm">
               🧠 Scopri di più su te stesso
             </span>
+            <a
+              href="https://www.eventbrite.it/e/workshop-di-psicologia-la-voce-che-non-sapevo-di-avere-tickets-1994898708739?aff=odcleoeventsincollection&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleATZxDNwZG9mAmV4dG4DYWVtAjExAHNydGMGYXBwX2lkDzEyNDAyNDU3NDI4NzQxNAABpyUirsDJZsuy_51AvPpXyei0-a3KOotNKVz4aHf2IDpHqmfqqQXKvnsc0Pbx_aem_8J0rReqBjXRj-eE4a3KEZQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary rounded-full px-8 mt-1"
+            >
+              Registrati all&rsquo;evento →
+            </a>
           </div>
         </motion.div>
 

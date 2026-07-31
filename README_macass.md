@@ -30,12 +30,12 @@ Mappa illustrata della zona del festival con posizione precisa dei QR Code:
 
 | Tappa | Luogo |
 |-------|-------|
-| 1° | Libreria 100 Pagine |
+| 1° | Casa MAC |
 | 2° | Casa MAC |
-| 3° | San Giovanni |
-| 4° | Sala Teatro |
+| 3° | Casa MAC |
+| 4° | Libreria 100 Pagine |
 | 5° | Mostra |
-| 6° | MACASS |
+| 6° | Mostra |
 
 ---
 
@@ -45,7 +45,7 @@ Ogni tappa viene sbloccata solamente dopo aver scansionato il QR Code fisico cor
 Ogni QR Code identifica una sola tappa.
 
 ### Tappa 1 — "ASCOLTA"
-- **Luogo:** Libreria 100 Pagine
+- **Luogo:** Casa MAC
 - **Esperienza:** Una grande ruota delle emozioni che gira
 - **Interazione:** Una volta fatta girare la ruota e uscita l'emozione → esce la parola **"ASCOLTA"**
 
@@ -55,12 +55,12 @@ Ogni QR Code identifica una sola tappa.
 - **Interazione:** Una volta liberata l'agenda dagli impegni → esce la parola **"ACCETTA"**
 
 ### Tappa 3 — "RESPIRA"
-- **Luogo:** San Giovanni
+- **Luogo:** Casa MAC
 - **Esperienza:** Un peluche che chiede un abbraccio
 - **Interazione:** Una volta completato l'abbraccio → esce la parola **"RESPIRA"**
 
 ### Tappa 4 — "SEI"
-- **Luogo:** Sala Teatro
+- **Luogo:** Libreria 100 Pagine
 - **Esperienza:** Un piccolo gioco di memory
 - **Interazione:** Una volta completato il gioco → esce la parola **"SEI"**
 
@@ -70,7 +70,7 @@ Ogni QR Code identifica una sola tappa.
 - **Interazione:** Una volta che le navi si sono incontrate → esce la parola **"GIÀ"**
 
 ### Tappa 6 — "ABBASTANZA"
-- **Luogo:** MACASS
+- **Luogo:** Mostra
 - **Esperienza:** Una bilancia dove a sinistra ci sono i giudizi e a destra le qualità
 - **Interazione:** Una volta eliminati tutti i giudizi → esce la parola **"ABBASTANZA"**
 
@@ -88,11 +88,11 @@ Dopo aver completato tutte le sei tappe compare la schermata finale:
 
 | # | Parola | Luogo |
 |---|--------|-------|
-| 1 | ASCOLTA | Libreria 100 Pagine |
+| 1 | ASCOLTA | Casa MAC |
 | 2 | ACCETTA | Casa MAC |
-| 3 | RESPIRA | San Giovanni |
-| 4 | SEI | Sala Teatro |
+| 3 | RESPIRA | Casa MAC |
+| 4 | SEI | Libreria 100 Pagine |
 | 5 | GIÀ | Mostra |
-| 6 | ABBASTANZA | MACASS |
+| 6 | ABBASTANZA | Mostra |
 
 > Frase completa: **ASCOLTA ACCETTA RESPIRA SEI GIÀ ABBASTANZA**

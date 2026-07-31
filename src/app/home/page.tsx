@@ -34,7 +34,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            Il Percorso delle{" "}
+            Il Percorso delle{" "}<br />
             <span className="gradient-text">Sei Parole</span>
           </motion.h1>
           <motion.p
@@ -71,7 +71,7 @@ export default function HomePage() {
             <div className="card bg-base-200 border border-base-300/40 overflow-hidden image-full transition-all duration-300 active:scale-[0.98]">
               <figure className="relative h-36 sm:h-44">
                 <Image
-                  src="/images/map-bg.jpg"
+                  src="/img/mappa.png"
                   alt="Mappa del festival"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -83,6 +83,32 @@ export default function HomePage() {
                 <p className="text-xs text-base-content/50">Trova le 6 posizioni dei QR Code</p>
                 <span className="badge badge-outline badge-accent badge-sm mt-2 tracking-wide">
                   Vedi la mappa →
+                </span>
+              </div>
+            </div>
+          </Link>
+        </section>
+
+        {/* Il Libro card */}
+        <section className="w-full max-w-lg">
+          <SectionTitle size="sm" className="mb-3">
+            Il Libro
+          </SectionTitle>
+          <Link href="/libro" className="block group">
+            <div className="card bg-base-200 border border-base-300/40 overflow-hidden transition-all duration-300 group-active:scale-[0.98]">
+              <figure className="relative h-40 sm:h-48">
+                <Image
+                  src="/img/copertina-del-libro.jpg"
+                  alt="Copertina del libro"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 60vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-base-200/40 to-transparent" />
+              </figure>
+              <div className="card-body items-center text-center gap-1">
+                <span className="badge badge-outline badge-accent badge-sm mt-1 tracking-wide">
+                  Scopri il libro →
                 </span>
               </div>
             </div>

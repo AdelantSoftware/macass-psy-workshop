@@ -19,7 +19,7 @@ export default function WelcomePage() {
     <div className="relative h-dvh overflow-hidden bg-base-100">
       {/* Immagine di sfondo full-bleed */}
       <div className="absolute inset-0 z-0">
-        <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover" priority />
+        <Image src="/img/sfondo-1.jpg" alt="" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1a1410]/80 via-[#1a1410]/40 to-[#1a1410]/90" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#c9775e]/8 to-transparent" />
       </div>
@@ -39,8 +39,14 @@ export default function WelcomePage() {
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
             >
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
-                <span className="text-3xl sm:text-4xl text-[#e8ddd0]">✦</span>
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-base-100/10 backdrop-blur-sm border border-white/15 shadow-lg shadow-primary/20 flex items-center justify-center overflow-hidden">
+                <Image
+                  src="/img/logo.jpg"
+                  alt="Logo MACASS Psy"
+                  width={96}
+                  height={96}
+                  className="rounded-full object-cover w-full h-full"
+                />
               </div>
             </motion.div>
 
@@ -51,7 +57,7 @@ export default function WelcomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Il Percorso delle{" "}
+              Il Percorso delle{" "}<br />
               <span className="gradient-text">Sei Parole</span>
             </motion.h1>
 
@@ -62,7 +68,7 @@ export default function WelcomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              Ogni esperienza è una tappa del tuo viaggio.{" "}
+              Ogni esperienza è una tappa del tuo viaggio.{" "}<br />
               Scopri le sei parole esplorando il festival.
             </motion.p>
 
@@ -87,7 +93,7 @@ export default function WelcomePage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
             >
-              MACASS Psy Workshop
+              Il Percorso delle Sei Parole
             </motion.p>
           </motion.div>
         )}

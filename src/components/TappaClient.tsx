@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { STEPS } from "@/data/steps";
 import { useProgress } from "@/hooks/useProgress";
@@ -83,10 +84,11 @@ export default function TappaClient({ stepId }: { stepId: number }) {
             onClick: () => setShowScanner(true),
           }}
           secondaryAction={{
-            label: "📱 Non hai la camera? Inserisci codice manualmente",
+            label: "� Non hai la camera? Inserisci la parola segreta",
             render: (close) => (
               <ManualCodeForm
                 stepId={stepId}
+                secretWord={step.secretWord}
                 onSubmit={() => {
                   unlockStep(stepId);
                   close();
@@ -111,7 +113,13 @@ export default function TappaClient({ stepId }: { stepId: number }) {
   }
 
   return (
-    <div className="min-h-dvh bg-base-100 flex flex-col">
+    <div className="min-h-dvh bg-base-100 flex flex-col relative">
+      {/* Sfondo decorativo della tappa */}
+      <div className="absolute inset-0 z-0">
+        <Image src={step.image} alt="" fill className="object-cover opacity-[0.06]" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-base-100/70 to-base-100" />
+      </div>
+
       {/* Fixed header */}
       <div className="sticky top-0 z-20 bg-base-100/90 backdrop-blur-md border-b border-base-300/50">
         <div className="flex items-center gap-3 p-4 max-w-4xl mx-auto w-full">
@@ -136,8 +144,8 @@ export default function TappaClient({ stepId }: { stepId: number }) {
       </div>
 
       {/* Game content */}
-      <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="w-full max-w-4xl px-4 py-6 sm:px-8 sm:py-10">
+      <div className="flex-1 flex flex-col items-center justify-center relative z-10">
+        <div className="w-full max-w-4xl px-3 py-4 sm:px-8 sm:py-10">
           <AnimatePresence mode="wait">
             {!revealed ? (
               <motion.div
@@ -151,7 +159,7 @@ export default function TappaClient({ stepId }: { stepId: number }) {
                   {step.description}
                 </p>
                 <div className="card bg-base-200 border border-base-300/60 w-full max-w-2xl">
-                  <div className="card-body p-4 sm:p-6 md:p-8">
+                  <div className="card-body p-2.5 sm:p-6 md:p-8">
                     <Interaction onReveal={handleReveal} />
                   </div>
                 </div>

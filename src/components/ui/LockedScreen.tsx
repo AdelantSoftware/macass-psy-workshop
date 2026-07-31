@@ -46,25 +46,34 @@ export function LockedScreen({ icon = "🔒", title, description, primaryAction,
 
 interface ManualCodeFormProps {
   stepId: number;
+  secretWord: string;
   onSubmit: (code: number) => void;
   gateLocked: boolean;
 }
 
-export function ManualCodeForm({ stepId, onSubmit, gateLocked }: ManualCodeFormProps) {
+export function ManualCodeForm({ stepId, secretWord, onSubmit, gateLocked }: ManualCodeFormProps) {
   const [code, setCode] = useState("");
   const submit = () => {
     if (gateLocked) { alert("Devi prima completare la tappa precedente."); return; }
-    const num = Number(code);
-    if (num >= 1 && num <= 6 && num === stepId) onSubmit(num);
-    else alert("Codice non valido.");
+    if (code.trim().toUpperCase() === secretWord.toUpperCase()) onSubmit(stepId);
+    else alert("Parola non valida.");
   };
   return (
     <div className="card bg-base-200 border border-base-300">
       <div className="card-body gap-2">
-        <p className="text-xs text-base-content/60 text-left">Inserisci il numero della tappa (1-6):</p>
+        <p className="text-xs text-base-content/60 text-left">
+          Inserisci la parola segreta comunicata dall&rsquo;organizzatore:
+        </p>
         <div className="join">
-          <input type="number" min={1} max={6} value={code} onChange={e => setCode(e.target.value)} onKeyDown={e => e.key === "Enter" && submit()}
-            className="input input-bordered join-item flex-1 text-center text-lg font-bold" placeholder="?" />
+          <input
+            type="text"
+            value={code}
+            onChange={e => setCode(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && submit()}
+            autoCapitalize="characters"
+            className="input input-bordered join-item flex-1 text-center text-lg font-bold uppercase"
+            placeholder="parola segreta"
+          />
           <Button onClick={submit} variant="primary" size="md" className="join-item">OK</Button>
         </div>
       </div>

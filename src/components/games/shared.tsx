@@ -31,11 +31,10 @@ export function GameShell({
 }) {
   return (
     <div
-      className="relative min-h-[430px] overflow-hidden rounded-3xl p-5 sm:p-7 text-center"
+      className="relative min-h-[430px] overflow-hidden rounded-3xl p-3 sm:p-7 text-center"
       style={{
         background: `radial-gradient(circle at 50% 35%, ${accent}26, transparent 54%), linear-gradient(180deg, var(--color-on-dark-2), transparent)`,
-      }}
-    >
+      }}    >
       {children}
     </div>
   );

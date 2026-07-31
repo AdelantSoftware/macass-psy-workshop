@@ -9,12 +9,15 @@ import { PinMarker } from "@/components/ui/PinMarker";
 import { MapLegendItem } from "@/components/ui/MapLegendItem";
 
 const PIN_POSITIONS: ReadonlyArray<{ top: string; left: string }> = [
-  { top: "12%", left: "18%" },
-  { top: "28%", left: "72%" },
-  { top: "48%", left: "22%" },
-  { top: "44%", left: "82%" },
-  { top: "68%", left: "48%" },
-  { top: "78%", left: "28%" },
+  // 1-2-3 in basso a destra
+  { top: "78%", left: "72%" },
+  { top: "88%", left: "62%" },
+  { top: "88%", left: "82%" },
+  // 4 al centro, leggermente in alto
+  { top: "16%", left: "50%" },
+  // 5-6 in mezzo tra 1-2-3 e 4
+  { top: "50%", left: "44%" },
+  { top: "50%", left: "58%" },
 ];
 
 export default function MappaPage() {
@@ -26,11 +29,11 @@ export default function MappaPage() {
         backHref="/home"
       />
 
-      <div className="layout-padding mt-10">
+      <div className="layout-padding my-10">
         <div className="card bg-base-200 border border-base-300/60 overflow-hidden shadow-lg shadow-black/20">
           <figure className="relative h-[45vh] sm:h-[50vh] md:h-[60vh]">
             <Image
-              src="/images/map-bg.jpg"
+              src="/img/mappa.png"
               alt="Mappa del festival"
               fill
               className="object-cover"

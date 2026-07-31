@@ -8,6 +8,8 @@ export interface Step {
   interaction: string;
   image: string;
   color: string;
+  /** Parola segreta comunicata dall'organizzatore per sbloccare la tappa senza QR. */
+  secretWord: string;
 }
 
 export const STEPS: Step[] = [
@@ -15,12 +17,13 @@ export const STEPS: Step[] = [
     id: 1,
     title: "La Ruota delle Emozioni",
     word: "ASCOLTA",
-    location: "Libreria 100 Pagine",
+    location: "Casa MAC",
     description:
       "Una grande ruota delle emozioni che gira. Trova l'emozione giusta e scopri la parola nascosta.",
     interaction: "Gira la ruota per rivelare l'emozione",
     image: "/images/tappa1-wheel.jpg",
     color: "var(--color-accent-clay)",
+    secretWord: "EMOZIONI",
   },
   {
     id: 2,
@@ -32,28 +35,31 @@ export const STEPS: Step[] = [
     interaction: "Libera l'agenda dagli impegni",
     image: "/images/tappa2-planner.jpg",
     color: "var(--color-accent-ochre)",
+    secretWord: "IMPEGNI",
   },
   {
     id: 3,
     title: "L'Abbraccio",
     word: "RESPIRA",
-    location: "San Giovanni",
+    location: "Casa MAC",
     description:
       "Un peluche che chiede un abbraccio. Stringilo forte e scopri la parola.",
     interaction: "Abbraccia il peluche",
     image: "/images/tappa3-hug.jpg",
     color: "var(--color-accent-sand)",
+    secretWord: "PELUCHE",
   },
   {
     id: 4,
     title: "Il Memory",
     word: "SEI",
-    location: "Sala Teatro",
+    location: "Libreria 100 Pagine",
     description:
       "Un piccolo gioco di memory. Trova tutti i coppie e scopri la parola.",
     interaction: "Completa il memory",
     image: "/images/tappa4-memory.jpg",
     color: "var(--color-accent-sage)",
+    secretWord: "GIOCO",
   },
   {
     id: 5,
@@ -65,17 +71,19 @@ export const STEPS: Step[] = [
     interaction: "Incontra le navi nel porto",
     image: "/images/tappa5-ships.jpg",
     color: "var(--color-accent-lavender)",
+    secretWord: "INCONTRO",
   },
   {
     id: 6,
     title: "La Bilancia",
     word: "ABBASTANZA",
-    location: "MACASS",
+    location: "Mostra",
     description:
       "Una bilancia: a sinistra i giudizi, a destra le qualità. Elimina tutti i giudizi e scopri la parola.",
     interaction: "Elimina i giudizi dalla bilancia",
     image: "/images/tappa6-scale.jpg",
     color: "var(--color-accent-amber)",
+    secretWord: "EQUILIBRIO",
   },
 ];
 

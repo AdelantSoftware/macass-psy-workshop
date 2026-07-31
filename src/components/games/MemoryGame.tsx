@@ -108,7 +108,7 @@ export function MemoryGame({ onReveal }: GameProps) {
   const flip = (id: number) => {
     if (phase !== "active") return;
     const currentDeck = deckRef.current;
-    const card = currentDeck[id];
+    const card = currentDeck.find((c) => c.id === id);
     if (!card || card.flipped || card.matched) return;
     if (selectedRef.current.length === 2) return;
 
@@ -122,9 +122,9 @@ export function MemoryGame({ onReveal }: GameProps) {
       const nextMoves = moves + 1;
       setMoves(nextMoves);
       const [a, b] = nextSelected;
-      const aCard = nextDeck[a];
-      const bCard = nextDeck[b];
-      const isMatch = aCard.key === bCard.key;
+      const aCard = nextDeck.find((c) => c.id === a);
+      const bCard = nextDeck.find((c) => c.id === b);
+      const isMatch = !!aCard && !!bCard && aCard.key === bCard.key;
       window.setTimeout(() => {
         setDeck((prev) => {
           const next = prev.map((c) =>
