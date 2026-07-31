@@ -34,8 +34,8 @@ export default function TappaClient({ stepId }: { stepId: number }) {
         alert("Devi prima completare la tappa precedente.");
         return;
       }
-      const match = data.match(/\/tappa\/(\d)/);
-      if (match && Number(match[1]) === stepId) unlockStep(stepId);
+      const scanned = data.trim().toUpperCase();
+      if (scanned === step.secretWord.toUpperCase()) unlockStep(stepId);
       else alert("QR Code non valido.");
     },
     [stepId, unlockStep, canScan],

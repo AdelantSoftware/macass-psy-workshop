@@ -9,7 +9,6 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Button } from "@/components/ui/Button";
 
 const QR_KEY = "macass2026";
-const QR_BASE = "https://voce.adelant.tech/tappa";
 
 export default function QRPage() {
   const router = useRouter();
@@ -103,7 +102,7 @@ export default function QRPage() {
               <p className="text-sm text-base-content/50">📍 {step.location}</p>
               <div className="bg-white rounded-xl p-3 sm:p-4 inline-block mx-auto">
                 <QRCodeSVG
-                  value={`${QR_BASE}/${step.id}`}
+                  value={step.secretWord}
                   size={160}
                   bgColor="#ffffff"
                   fgColor={step.color.startsWith("#") ? step.color : "#c9775e"}
@@ -112,10 +111,10 @@ export default function QRPage() {
                 />
               </div>
               <p className="text-xs text-base-content/40 font-mono break-all">
-                {`${QR_BASE}/${step.id}`}
+                {step.secretWord}
               </p>
               <p className="text-sm font-semibold" style={{ color: step.color }}>
-                Parola: {step.word}
+                Parola: {step.secretWord}
               </p>
             </motion.div>
           ))}
