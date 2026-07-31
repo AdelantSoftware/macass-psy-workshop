@@ -5,19 +5,16 @@
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Outfit", system-ui, sans-serif;
 
-  /* Accenti per tappa — palette calda, terrosa, organica */
   --color-accent-clay: #c9775e;
   --color-accent-ochre: #b8926a;
   --color-accent-sand: #c4a87c;
   --color-accent-sage: #7fa87f;
   --color-accent-lavender: #9a7ea8;
   --color-accent-amber: #d4a85a;
-
   --color-accent-deep: #b86a4a;
   --color-accent-darker: #9a5a3e;
   --color-accent-soft: #c9775e33;
 
-  /* Tints per minigiochi — palette estesa */
   --color-tint-clay-pale: #e8b09e;
   --color-tint-clay-light: #e0a08c;
   --color-tint-clay-paler: #d6907a;
@@ -35,18 +32,15 @@
   --color-tint-clay-ring: #cca090;
   --color-tint-clay-edge: #b88a78;
   --color-tint-clay-text-soft: #b09888;
-
   --color-tint-ochre-pale: #e8d0b8;
   --color-tint-ochre-light: #dcc0a4;
   --color-tint-sage-pale: #c8e0c8;
   --color-tint-lavender-pale: #d0c0e0;
   --color-tint-amber-pale: #f0e0c0;
   --color-tint-amber-paler: #e8d4b8;
-
   --color-tint-ink: #1a1410;
   --color-tint-ink-pale: #14100c;
 
-  /* Scrims + shadows — caldi */
   --color-scrim-80: rgba(20, 16, 12, 0.8);
   --color-scrim-60: rgba(20, 16, 12, 0.6);
   --color-scrim-90: rgba(20, 16, 12, 0.9);
@@ -72,7 +66,6 @@
   --color-card-glass: rgba(42, 34, 28, 0.95);
   --color-card-glass-2: rgba(42, 34, 28, 0.8);
 
-  /* Gradienti — caldi, organici */
   --gradient-hero: linear-gradient(135deg, #c9775e 0%, #7fa87f 100%);
   --gradient-cta: linear-gradient(135deg, #c9775e 0%, #b86a4a 50%, #9a5a3e 100%);
   --gradient-progress: linear-gradient(90deg, #c9775e, #7fa87f);
@@ -80,7 +73,6 @@
   --gradient-overlay-top: linear-gradient(0deg, #1a1410, transparent);
 }
 
-/* DaisyUI custom theme override */
 [data-theme="macass"] {
   --color-primary: #c9775e;
   --color-primary-content: #e8ddd0;
@@ -104,15 +96,25 @@
   --color-error-content: #1a1410;
 }
 
+/* FIX: DaisyUI @layer bug su OpenNext */
+.card { --card-p: 1.5rem; --card-gap: 0.5rem; --card-fs: 0.875rem; }
+.card-body { padding: var(--card-p, 1.5rem); }
+.card-xs .card-body { --card-p: 0.5rem; --card-fs: 0.6875rem; }
+.card-sm .card-body { --card-p: 1rem; --card-fs: 0.75rem; }
+.card-md .card-body { --card-p: 1.5rem; --card-fs: 0.875rem; }
+.card-lg .card-body { --card-p: 2rem; --card-fs: 1rem; }
+.card-xl .card-body { --card-p: 2.5rem; --card-fs: 1.125rem; }
+
 :root {
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
   --ease-spring: cubic-bezier(0.12, 0.72, 0.12, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; box-sizing: border-box; }
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -120,9 +122,11 @@ html {
   scroll-behavior: smooth;
   overscroll-behavior: none;
   text-size-adjust: 100%;
+  height: 100%;
 }
 
 body {
+  height: 100%;
   min-height: 100dvh;
   overflow-x: hidden;
   overscroll-behavior: none;
@@ -135,6 +139,8 @@ body {
   flex-direction: column;
   background-color: var(--color-base-100);
   color: var(--color-base-content);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); text-wrap: balance; }
@@ -142,15 +148,15 @@ button, a, input { touch-action: manipulation; }
 button { -webkit-user-select: none; user-select: none; }
 input, select, textarea { font-size: 16px !important; }
 
-/* Safe areas + layout */
-.safe-top { padding-top: var(--safe-top); }
-.safe-bottom { padding-bottom: var(--safe-bottom); }
-.safe-inset {
-  padding-top: var(--safe-top);
-  padding-bottom: var(--safe-bottom);
-  padding-left: var(--safe-left);
-  padding-right: var(--safe-right);
+/* Mobile-app: scroll snap, overscroll, spring */
+.page-container {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
 }
+
+/* Layout spacing — mobile app feel */
 .layout-padding {
   padding-left: max(1.25rem, calc(var(--safe-left) + 1.25rem));
   padding-right: max(1.25rem, calc(var(--safe-right) + 1.25rem));
@@ -160,20 +166,32 @@ input, select, textarea { font-size: 16px !important; }
   padding-right: max(1.75rem, calc(var(--safe-right) + 1.75rem));
 }
 
+/* Fixed bottom footer — app-like */
 .app-footer {
-  margin-top: auto;
-  padding: 2rem 1.5rem;
-  border-top: 1px solid var(--color-on-dark-4);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1.5rem;
+  padding-bottom: max(0.75rem, calc(var(--safe-bottom) + 0.75rem));
   text-align: center;
+  background: linear-gradient(180deg, transparent, var(--color-base-100) 40%);
+  pointer-events: none;
+  z-index: 10;
 }
-
 .app-footer p {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: var(--color-base-content);
-  opacity: 0.35;
-  letter-spacing: 0.05em;
+  opacity: 0.25;
+  letter-spacing: 0.08em;
 }
 
+/* Card radius più morbido per mobile */
+.card {
+  border-radius: 16px !important;
+}
+
+/* Utility */
 .text-balance { text-wrap: balance; }
 .text-pretty { text-wrap: pretty; }
 .gradient-text {
@@ -185,7 +203,7 @@ input, select, textarea { font-size: 16px !important; }
 .text-shadow { text-shadow: 0 2px 12px var(--color-shadow-deep), 0 1px 3px var(--color-shadow-mid); }
 .text-shadow-soft { text-shadow: 0 1px 8px var(--color-shadow-soft); }
 
-/* Animazioni custom per minigiochi */
+/* Animazioni */
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
@@ -195,8 +213,8 @@ input, select, textarea { font-size: 16px !important; }
 .animate-spin-slow { animation: spinSlow 20s linear infinite; }
 .animate-float { animation: float 3s ease-in-out infinite; }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
+/* Scrollbar sottile */
+::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-on-dark-6); border-radius: 2px; }
 

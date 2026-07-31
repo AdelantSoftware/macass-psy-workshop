@@ -23,7 +23,7 @@ export default function FinalePage() {
 
   return (
     <div className="min-h-dvh flex items-center justify-center bg-base-100 layout-padding py-12">
-      <div className="max-w-lg mx-auto text-center flex flex-col items-center gap-10">
+      <div className="w-full max-w-sm mx-auto text-center flex flex-col items-center gap-8">
         {/* Icon */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
@@ -37,7 +37,7 @@ export default function FinalePage() {
 
         {/* Title */}
         <motion.h1
-          className="font-display text-3xl sm:text-5xl md:text-6xl font-bold"
+          className="font-display text-3xl sm:text-4xl font-bold"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -46,26 +46,26 @@ export default function FinalePage() {
         </motion.h1>
 
         <motion.p
-          className="text-base-content/50 text-base sm:text-lg font-light"
+          className="text-sm text-base-content/60"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          Hai completato tutte e sei le tappe del percorso.
+          Hai completato tutte e sei le tappe.
         </motion.p>
 
         {/* Words card */}
         <motion.div
-          className="card bg-base-200 border border-base-300/60 w-full"
+          className="card bg-base-200 border border-base-300/40 w-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <div className="card-body items-center gap-5 p-6 sm:p-8">
-            <p className="text-xs text-base-content/40 uppercase tracking-widest">
+          <div className="card-body items-center gap-4">
+            <p className="text-[0.6rem] text-base-content/40 uppercase tracking-widest">
               Le sei parole
             </p>
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            <div className="flex flex-wrap justify-center gap-2">
               {STEPS.map((step, i) => (
                 <motion.span
                   key={step.id}
@@ -77,7 +77,7 @@ export default function FinalePage() {
                     damping: 20,
                     delay: 0.3 + i * 0.12,
                   }}
-                  className="px-3 py-1.5 rounded-full text-sm sm:text-lg font-bold tracking-wider"
+                  className="px-3 py-1 rounded-full text-sm font-bold tracking-wider"
                   style={{ backgroundColor: `${step.color}20`, color: step.color }}
                 >
                   {step.word}
@@ -85,7 +85,7 @@ export default function FinalePage() {
               ))}
             </div>
             <div className="divider my-1" />
-            <p className="text-xl md:text-2xl font-light italic text-base-content/50 leading-relaxed">
+            <p className="text-lg md:text-xl font-light italic text-base-content/50 leading-relaxed">
               &ldquo;{FULL_PHRASE}&rdquo;
             </p>
           </div>
@@ -93,21 +93,17 @@ export default function FinalePage() {
 
         {/* Workshop CTA */}
         <motion.div
-          className="card bg-base-200 border border-primary/15 w-full"
+          className="card bg-base-200 border border-primary/10 w-full"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
         >
-          <div className="card-body items-center gap-4 p-6 sm:p-8">
-            <h2 className="card-title font-display text-2xl sm:text-3xl gradient-text">
+          <div className="card-body items-center gap-3">
+            <h2 className="card-title font-display text-xl sm:text-2xl gradient-text">
               Workshop di Psicologia
             </h2>
-            <p className="text-sm sm:text-base text-base-content/60 leading-relaxed">
-              Ti aspetto al{" "}
-              <span className="font-semibold text-base-content">
-                WORKSHOP DI PSICOLOGIA
-              </span>{" "}
-              per il{" "}
+            <p className="text-xs sm:text-sm text-base-content/60">
+              Ti aspetto al workshop per il{" "}
               <span className="text-primary">Muro della consapevolezza</span>.
             </p>
             <span className="badge badge-outline badge-primary badge-sm">
@@ -124,7 +120,7 @@ export default function FinalePage() {
         >
           <button
             onClick={() => router.push("/")}
-            className="link link-hover text-sm text-base-content/40 hover:text-base-content/60"
+            className="link link-hover text-xs text-base-content/30 hover:text-base-content/50"
           >
             ↻ Ricominciare il percorso
           </button>

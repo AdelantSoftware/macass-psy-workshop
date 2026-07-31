@@ -49,6 +49,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -66,10 +67,12 @@ export default function RootLayout({
         className={cn(
           cormorant.variable,
           outfit.variable,
-          "antialiased flex flex-col min-h-dvh",
+          "antialiased",
         )}
       >
-        {children}
+        <main className="page-container">
+          {children}
+        </main>
         <footer className="app-footer">
           <p>Made with love by Adelant</p>
         </footer>
