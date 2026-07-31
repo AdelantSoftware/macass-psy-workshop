@@ -41,7 +41,6 @@ const fmt = (s: number) => `${Math.floor(s / 60).toString().padStart(2, "0")}:${
 
 export function MemoryGame({ onReveal }: GameProps) {
   const [phase, setPhase] = useState<"preview" | "active" | "complete">("preview");
-  // All cards start face-up for preview, flip after 1.7s
   const [deck, setDeck] = useState<Card[]>(() =>
     buildDeck().map((c) => ({ ...c, flipped: true })),
   );
@@ -62,11 +61,12 @@ export function MemoryGame({ onReveal }: GameProps) {
   const deckRef = useRef<Card[]>(deck);
   deckRef.current = deck;
 
-  // Preview → active after 1.7s — durability: usa ref per timestamp
+  // Preview → active after 1.7s
   useEffect(() => {
     const id = setTimeout(() => {
       setDeck((prev) => {
         const next = prev.map((c) => ({ ...c, flipped: false }));
+        deckRef.current = next;
         return next;
       });
       setPhase("active");
@@ -107,13 +107,15 @@ export function MemoryGame({ onReveal }: GameProps) {
 
   const flip = (id: number) => {
     if (phase !== "active") return;
-    const card = deck[id];
+    const currentDeck = deckRef.current;
+    const card = currentDeck[id];
     if (!card || card.flipped || card.matched) return;
     if (selectedRef.current.length === 2) return;
 
-    const nextDeck = deck.map((c) => (c.id === id ? { ...c, flipped: true } : c));
+    const nextDeck = currentDeck.map((c) => (c.id === id ? { ...c, flipped: true } : c));
     const nextSelected = [...selectedRef.current, id];
     selectedRef.current = nextSelected;
+    deckRef.current = nextDeck;
     setDeck(nextDeck);
 
     if (nextSelected.length === 2) {
@@ -124,13 +126,15 @@ export function MemoryGame({ onReveal }: GameProps) {
       const bCard = nextDeck[b];
       const isMatch = aCard.key === bCard.key;
       window.setTimeout(() => {
-        setDeck((prev) =>
-          prev.map((c) =>
+        setDeck((prev) => {
+          const next = prev.map((c) =>
             c.id === a || c.id === b
               ? { ...c, flipped: isMatch ? true : false, matched: isMatch ? true : c.matched }
               : c,
-          ),
-        );
+          );
+          deckRef.current = next;
+          return next;
+        });
         selectedRef.current = [];
         if (isMatch && nextDeck.every((c) => c.matched || c.id === a || c.id === b)) {
           const finalElapsed = startTimeRef.current
@@ -143,7 +147,9 @@ export function MemoryGame({ onReveal }: GameProps) {
   };
 
   const reset = () => {
-    setDeck(buildDeck());
+    const newDeck = buildDeck();
+    deckRef.current = newDeck;
+    setDeck(newDeck);
     selectedRef.current = [];
     setMoves(0);
     setElapsed(0);
@@ -211,26 +217,18 @@ export function MemoryGame({ onReveal }: GameProps) {
           const showFace = card.flipped || card.matched;
           const concept = CONCEPTS.find((c) => c.key === card.key);
           return (
-            <motion.button
+            <button
               key={card.id}
-              layout
               onClick={() => flip(card.id)}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.03 }}
               className="relative aspect-square cursor-pointer perspective-800"
               disabled={phase === "preview"}
               aria-label={`Carta ${card.label}`}
             >
-              <motion.div
-                className="relative h-full w-full transform-style-3d"
-                animate={{
-                  rotateY: showFace ? 0 : 180,
-                  scale: card.matched ? [1, 1.08, 1] : 1,
-                }}
-                transition={{
-                  rotateY: { duration: 0.55, ease: [0.4, 0, 0.2, 1] },
-                  scale: { duration: 0.5 },
+              <div
+                className={`relative h-full w-full transform-style-3d ${showFace ? "rotate-y-0" : "rotate-y-180"}`}
+                style={{
+                  transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), scale 0.5s",
+                  scale: card.matched ? "1.08" : "1",
                 }}
               >
                 <div className="absolute inset-0 grid place-items-center rounded-xl border border-white/10 bg-gradient-to-br from-[var(--color-tint-ink-pale)] to-[var(--color-base-200)] backface-hidden rotate-y-180">
@@ -246,8 +244,8 @@ export function MemoryGame({ onReveal }: GameProps) {
                 >
                   {concept?.render()}
                 </div>
-              </motion.div>
-            </motion.button>
+              </div>
+            </button>
           );
         })}
       </div>
