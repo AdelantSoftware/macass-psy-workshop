@@ -52,8 +52,9 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
           },
           (decodedText: string) => {
             if (stopped) return;
-            onScanRef.current(decodedText);
+            stopped = true;
             html5QrCode.stop().catch(() => {});
+            onScanRef.current(decodedText);
           },
           () => {
             // ignore errors during scan

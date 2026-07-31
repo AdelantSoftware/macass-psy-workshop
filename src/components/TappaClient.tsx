@@ -35,10 +35,10 @@ export default function TappaClient({ stepId }: { stepId: number }) {
         return;
       }
       const scanned = data.trim().toUpperCase();
-      if (scanned === step.secretWord.toUpperCase()) unlockStep(stepId);
+      if (step && scanned === step.secretWord.toUpperCase()) unlockStep(stepId);
       else alert("QR Code non valido.");
     },
-    [stepId, unlockStep, canScan],
+    [stepId, step, unlockStep, canScan],
   );
 
   if (!step) {
