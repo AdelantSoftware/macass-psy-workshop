@@ -142,6 +142,27 @@ export default function HomePage() {
           </motion.div>
         </section>
 
+        {/* Scansiona QR Code */}
+        <section className="w-full max-w-lg">
+          <SectionTitle size="sm" className="mb-3">
+            Scansiona
+          </SectionTitle>
+          <Link href="/tappa/1" className="block group">
+            <div className="card bg-base-200 border border-base-300/40 overflow-hidden transition-all duration-300 group-active:scale-[0.98]">
+              <div className="card-body items-center text-center gap-1 py-6">
+                <span className="text-3xl mb-1">📷</span>
+                <h3 className="card-title text-lg font-display">Scansiona QR Code</h3>
+                <p className="text-xs text-base-content/50">
+                  Inquadra un QR Code per sbloccare la prossima tappa
+                </p>
+                <span className="badge badge-outline badge-accent badge-sm mt-2 tracking-wide">
+                  Apri scanner →
+                </span>
+              </div>
+            </div>
+          </Link>
+        </section>
+
         {/* Reset */}
         {completedCount > 0 && (
           <Button
