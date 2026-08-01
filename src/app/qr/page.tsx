@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
@@ -9,6 +9,36 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Button } from "@/components/ui/Button";
 
 const QR_KEY = "macass2026";
+
+const COLOR_MAP: Record<string, string> = {
+  "var(--color-accent-clay)": "#c9775e",
+  "var(--color-accent-ochre)": "#b8926a",
+  "var(--color-accent-sand)": "#c4a87c",
+  "var(--color-accent-sage)": "#7fa87f",
+  "var(--color-accent-lavender)": "#9a7ea8",
+  "var(--color-accent-amber)": "#d4a85a",
+};
+
+function resolveHex(cssVar: string): string {
+  return COLOR_MAP[cssVar] ?? "#c9775e";
+}
+
+function downloadQR(index: number) {
+  const svgEl = document.getElementById(`qr-svg-${index}`);
+  if (!svgEl) return;
+  const cloned = svgEl.cloneNode(true) as SVGElement;
+  // Add quiet-zone padding (10px white border)
+  cloned.setAttribute("style", "padding:10px;background:#fff;border-radius:8px;");
+  const serializer = new XMLSerializer();
+  const svgStr = serializer.serializeToString(cloned);
+  const blob = new Blob([svgStr], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `qr-tappa-${index + 1}.svg`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 export default function QRPage() {
   const router = useRouter();
@@ -81,46 +111,54 @@ export default function QRPage() {
             },
           }}
         >
-          {STEPS.map((step) => (
-            <motion.div
-              key={step.id}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0 },
-              }}
-              className="card bg-base-200 border border-base-300/60 p-4 sm:p-6 text-center gap-3"
-            >
-              <div className="flex justify-center">
-                <div
-                  className="badge rounded-full p-2 text-white font-bold"
-                  style={{ backgroundColor: step.color }}
-                >
-                  {step.id}
+          {STEPS.map((step) => {
+            const hex = resolveHex(step.color);
+            return (
+              <motion.div
+                key={step.id}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0 },
+                }}
+                className="card bg-base-200 border border-base-300/60 p-4 sm:p-6 text-center gap-3"
+              >
+                <div className="flex justify-center">
+                  <div
+                    className="badge rounded-full p-2 text-white font-bold"
+                    style={{ backgroundColor: step.color }}
+                  >
+                    {step.id}
+                  </div>
                 </div>
-              </div>
-              <h3 className="font-bold text-lg">{step.title}</h3>
-              <p className="text-sm text-base-content/50">📍 {step.location}</p>
-              <div className="bg-white rounded-xl p-3 sm:p-4 inline-block mx-auto">
-                <QRCodeSVG
-                  value={step.secretWord}
-                  size={160}
-                  bgColor="#ffffff"
-                  fgColor={step.color.startsWith("#") ? step.color : "#c9775e"}
-                  level="H"
-                  includeMargin={false}
-                />
-              </div>
-              <p className="text-xs text-base-content/40 font-mono break-all">
-                {step.secretWord}
-              </p>
-              <p className="text-sm font-semibold" style={{ color: step.color }}>
-                Parola: {step.secretWord}
-              </p>
-            </motion.div>
-          ))}
+                <h3 className="font-bold text-lg">{step.title}</h3>
+                <p className="text-sm text-base-content/50">📍 {step.location}</p>
+                <div className="bg-white rounded-xl p-4 inline-block mx-auto">
+                  <QRCodeSVG
+                    id={`qr-svg-${step.id - 1}`}
+                    value={step.secretWord}
+                    size={200}
+                    bgColor="#ffffff"
+                    fgColor={hex}
+                    level="H"
+                    includeMargin={true}
+                  />
+                </div>
+                <p className="text-xs text-base-content/40 font-mono break-all">
+                  {step.secretWord}
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => downloadQR(step.id - 1)}
+                >
+                  ⬇ Scarica QR
+                </Button>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
-        <div className="mt-8 text-center">
+        <div className="my-16 text-center">
           <Button onClick={() => window.print()} size="lg" className="rounded-full">
             🖨️ Stampa tutti i QR Code
           </Button>
