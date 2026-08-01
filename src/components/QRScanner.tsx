@@ -110,6 +110,9 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
       scannerRef.current = null;
     }
 
+    // Reset per permettere al nuovo scanner di funzionare
+    stoppedRef.current = false;
+
     const nextIndex = (currentCameraIdxRef.current + 1) % cameras.length;
     currentCameraIdxRef.current = nextIndex;
 
