@@ -59,12 +59,14 @@ export function HugGame({ onReveal }: GameProps) {
   };
 
   // Auto-progress to "complete" once the bar fills.
-  // The rAF loop is the single source of truth for `progress`; this
-  // effect only watches it for the one-shot transition to "complete"
-  // (guarded by a ref so we never re-schedule the side effects).
   useEffect(() => {
     if (progress >= 100 && phase === "active" && !revealCalled.current) {
       revealCalled.current = true;
+      // Stop vibration immediately
+      if (vibrateRef.current !== null) {
+        clearInterval(vibrateRef.current);
+        vibrateRef.current = null;
+      }
       const id = window.setTimeout(() => {
         setPhase("complete");
         setPressing(false);
@@ -81,6 +83,7 @@ export function HugGame({ onReveal }: GameProps) {
     if (phase === "intro") setPhase("active");
     setPressing(true);
     tryVibrate(20);
+    if (vibrateRef.current !== null) clearInterval(vibrateRef.current);
     vibrateRef.current = window.setInterval(() => tryVibrate(12), 1100);
   };
   const endPress = () => {
