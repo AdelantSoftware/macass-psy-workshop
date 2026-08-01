@@ -147,7 +147,7 @@ export default function HomePage() {
           <SectionTitle size="sm" className="mb-3">
             Scansiona
           </SectionTitle>
-          <Link href="/tappa/1" className="block group">
+          <Link href="/scan" className="block group">
             <div className="card bg-base-200 border border-base-300/40 overflow-hidden transition-all duration-300 group-active:scale-[0.98]">
               <div className="card-body items-center text-center gap-1 py-6">
                 <span className="text-3xl mb-1">📷</span>
